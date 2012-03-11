@@ -1,0 +1,30 @@
+How to use git:
+
+1. goto your own branch
+	git checkout your-branch
+2. make some changes
+	ajsdl;jfa;lks
+3. add, commit , push to your own branch
+	git commit (to check which files have changed)
+	git add ...
+	git commit -m "commit-message"
+	git push
+4. update your local master from from the remote repo
+	git checkout master
+	git pull
+5. pull in the changes from master into your branch
+	git checkout your-branch
+	git merge master
+6. push those changes to your remote branch
+	git push
+7. update the master branch with your changes
+	git checkout master
+	git merge your-branch
+	git push
+	
+Note: Periodically update your branch with the master branch
+	git checkout master
+	git pull
+	git checkout your-branch
+	git merge master
+	git push
