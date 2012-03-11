@@ -1,0 +1,40 @@
+Models
+
+Course
+  title
+  teachers?
+  division?
+  number?
+  :has-many Books
+Book
+  title
+  pictures?
+  comments/other
+  default_price?
+  :has-many Postings
+Posting
+  seller_email
+  seller_name
+  price
+  location
+  posting
+  edition
+  :has-one Book
+
+
+
+Views
+
+index                (Index_controller)
+pick_courses         (Courses_controller)
+required_books       (Courses_controller)
+enter_book_info	     (Books_contorller)
+show_book_listings   (Books_controller)
+enter_contact_info   (Postings_controller)
+
+Controllers
+
+Courses_controller
+Books_controller
+Postings_controller
+Index_controller
