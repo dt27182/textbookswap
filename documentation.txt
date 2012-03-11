@@ -27,14 +27,14 @@ Views
 
 index                (Index_controller)
 pick_courses         (Courses_controller)
-required_books       (Courses_controller)
+required_books       (Courses_controller)q
 enter_book_info	     (Books_contorller)
 show_book_listings   (Books_controller)
 enter_contact_info   (Postings_controller)
 
 Controllers
 
-Courses_controller
-Books_controller
-Postings_controller
-Index_controller
+CoursesController
+BooksController
+PostingsController
+IndexController
