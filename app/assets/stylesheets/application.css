@@ -7,11 +7,16 @@
 */
 
 #top {
-	margin: 0;
-	padding: 0;
-	text-transform: uppercase;
-	font-family: 'Oswald', sans-serif;
-	font-weight: normal;
-	color: #2483A6;
-	font-size: 2em;
+	width: 500px;
+	height: 100px;
+	margin: auto;
 }
+
+#logo {
+  padding: 20px;
+	color: #444444;
+	margin: auto;
+  text-align: center;
+}
+
+ 
