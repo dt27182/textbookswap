@@ -5,3 +5,13 @@
  *= require_self
  *= require_tree . 
 */
+
+#top {
+	margin: 0;
+	padding: 0;
+	text-transform: uppercase;
+	font-family: 'Oswald', sans-serif;
+	font-weight: normal;
+	color: #2483A6;
+	font-size: 2em;
+}
