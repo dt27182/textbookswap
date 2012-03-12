@@ -11,20 +11,20 @@ How to use git:
 	git push origin your-branch
 4. update your local master from from the remote repo
 	git checkout master
-	git pull
+	git pull origin master
 5. pull in the changes from master into your branch
 	git checkout your-branch
 	git merge master
 6. push those changes to your remote branch
-	git push
+	git push origin your-branch
 7. update the master branch with your changes
 	git checkout master
 	git merge your-branch
-	git push
+	git push origin master
 	
 Note: Periodically update your branch with the master branch
 	git checkout master
-	git pull
+	git pull origin master
 	git checkout your-branch
 	git merge master
-	git push
+	git push origin your-branch
