@@ -1,10 +1,11 @@
 Models
 
 Course
-  title
-  teachers?
-  division?
-  number?
+  number
+  department
+  teacher
+  year
+  term
   :has-many Books
 Book
   title

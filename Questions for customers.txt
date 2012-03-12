@@ -2,3 +2,4 @@ Questions for 3/23 meeting:
 How to trade contact info.
 Let buyers post what they are looking to buy?
 Have sellers enter names?
+Keep multiple semesters in database?
