@@ -12,14 +12,13 @@ Book
   pictures?
   comments/other
   default_price?
+  edition
   :has-many Postings
 Posting
   seller_email
   seller_name
   price
   location
-  posting
-  edition
   :has-one Book
 
 
