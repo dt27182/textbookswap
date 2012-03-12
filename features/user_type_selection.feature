@@ -10,8 +10,14 @@ Background: movies have been added to database
   
 Scenario: User wants to sell a textbook
 
-
+  Then I should see "Sell"
+  Then I can press the Sell button
+  When I press "Sell"
+  Then I should be on the Sell Class Selection page
 
 Scenario: User wants to buy a textbook
 
-
+  Then I should see "Buy"
+  Then I can press the Buy button
+  When I press "Buy"
+  Then I should be on the Buy Class Selection page
