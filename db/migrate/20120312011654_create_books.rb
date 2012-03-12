@@ -9,7 +9,7 @@ class CreateBooks < ActiveRecord::Migration
 			t.string :comments
 			t.string :condition
 			t.timestamps
-			t.integer :couse_id
+			t.integer :course_id
 		end
   end
 
