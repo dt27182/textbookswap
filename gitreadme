@@ -21,6 +21,7 @@ How to use git:
 	git checkout master
 	git merge your-branch
 	git push origin master
+	git checkout your-branch
 	
 Note: Periodically update your branch with the master branch
 	git checkout master

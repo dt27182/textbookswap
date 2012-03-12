@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#button_choice {
+  margin: auto;
+  width: 500px;
+}
+
 .buyer_button {
 	-moz-box-shadow:inset 0px 1px 0px -1px #bbdaf7;
 	-webkit-box-shadow:inset 0px 1px 0px -1px #bbdaf7;
