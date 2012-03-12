@@ -8,7 +8,7 @@ How to use git:
 	git commit (to check which files have changed)
 	git add ...
 	git commit -m "commit-message"
-	git push
+	git push origin your-branch
 4. update your local master from from the remote repo
 	git checkout master
 	git pull
