@@ -6,6 +6,7 @@ class CreatePostings < ActiveRecord::Migration
 			t.integer :price
 			t.integer :location
 			t.datetime :date_posted
+			t.string :condition
 			t.timestamps
 			t.integer :book_id
 		end
