@@ -1,7 +1,7 @@
 Textbookswap::Application.routes.draw do
   get "postings/show"
 
-  get "books/show"
+  post "books/show"
 
   get "courses/show"
 
@@ -9,6 +9,7 @@ Textbookswap::Application.routes.draw do
   # first created -> highest priority.
 
   match '/' => 'index#index'
+  match '/courses/input/:term/:year' => 'courses#input'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
