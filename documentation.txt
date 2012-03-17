@@ -2,7 +2,8 @@ Models
 
 Course
   number
-  department
+  department_short
+  department_long
   teacher
   year
   term
