@@ -2,6 +2,7 @@ class CreateCourses < ActiveRecord::Migration
   def up
     create_table :courses do |t|
       t.string :number
+      t.string :name
       t.string :department_short
       t.string :department_long
       t.string :teacher
