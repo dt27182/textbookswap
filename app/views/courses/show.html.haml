@@ -1,0 +1,11 @@
+%h1 Find your course
+
+= form_tag '/books/show/', :method => :post do
+
+  = label :course, :department, 'Department'
+  = select :course, :department, @departments
+
+  = label :course, :number, 'Number'
+  = select :course, :number, @numbers
+
+  = submit_tag 'Go choose a book'

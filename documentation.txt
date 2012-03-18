@@ -2,8 +2,11 @@ Models
 
 Course
   number
-  department
+  name
+  department_short
+  department_long
   teacher
+  section
   year
   term
   :has-many Books

@@ -1,16 +1,15 @@
 Textbookswap::Application.routes.draw do
   get "postings/show"
 
-  get "books/show"
+  post "books/show"
 
   get "courses/show"
-
-  get "index/index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
   match '/' => 'index#index'
+  match '/courses/input/:term/:year' => 'courses#input'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

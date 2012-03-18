@@ -26,8 +26,11 @@ ActiveRecord::Schema.define(:version => 20120312012827) do
 
   create_table "courses", :force => true do |t|
     t.string   "number"
-    t.string   "department"
+    t.string   "name"
+    t.string   "department_short"
+    t.string   "department_long"
     t.string   "teacher"
+    t.string   "section"
     t.integer  "year"
     t.string   "term"
     t.datetime "created_at"
