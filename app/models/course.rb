@@ -1,4 +1,5 @@
 class Course < ActiveRecord::Base
+	has_and_belongs_to_many :books
   #Validates the same course isn't added twice
   validates :term, :uniqueness => { :scope => [ :number, :name, :department_short, :department_long, :teacher, :section, :year ] }
 

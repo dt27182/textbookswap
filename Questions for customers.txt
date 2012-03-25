@@ -1,5 +1,9 @@
 Questions for 3/23 meeting:
-How to trade contact info.
-Let buyers post what they are looking to buy?
-Have sellers enter names?
-Keep multiple semesters in database?
+Q: How to trade contact info.
+A: buyer posts a messege + email on site, site sends info to seller
+Q: Let buyers post what they are looking to buy?
+A: no
+Q: Have sellers enter names?
+A: no
+Q: Keep multiple semesters in database?
+A: no for now; roll over in the middle of semester
