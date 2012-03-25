@@ -23,18 +23,18 @@ module NavigationHelpers
     #     user_profile_path(User.find_by_login($1))
     
     when /^the Sell Course Selection page$/
-      return sell_path
+      return show_courses_path("sell")
       
     when /^the Buy Course Selection page$/
-      return buy_path
+      return show_courses_path("buy")
       
     when /^the Sell Required Books page for course number "(.*)" in the "(.*)" department$/
       course = Course.find_by_number_and_department_long($1, $2)
-      return sell_path(course.id)
+      return show_books_path("sell", course.id)
     
     when /^the Buy Required Books page for course number "(.*)" in the "(.*)" department$/
       course = Course.find_by_number_and_department_long($1, $2)
-      return buy_path(course.id)
+      return show_books_path("buy", course.id)
       
 
     else
