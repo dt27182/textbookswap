@@ -11,11 +11,11 @@ Background: User is on the home page
 Scenario: User wants to sell a textbook
 
   Then I should see "Sell"
-  When I press "Sell"
+  When I follow "seller_button"
   Then I should be on the Sell Course Selection page
 
 Scenario: User wants to buy a textbook
 
   Then I should see "Buy"
-  When I press "Buy"
+  When I follow "buyer_button"
   Then I should be on the Buy Course Selection page

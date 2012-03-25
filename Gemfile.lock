@@ -101,6 +101,7 @@ GEM
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (~> 0.0, >= 0.0.9)
     mime-types (1.17.2)
+    minitest (2.11.4)
     multi_json (1.1.0)
     net-http-digest_auth (1.2)
     net-http-persistent (2.5.2)
@@ -214,6 +215,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   mechanize
+  minitest (~> 2.11.4)
   pg
   rails (= 3.1.0)
   rspec-rails

@@ -7,12 +7,14 @@ Feature: Buyers can select the class of the textbook they wish to purchase
 Background: User has pressed Buy on the previous page
 
   Given I am on the Buy Course Selection page
-  Given "CS 169" is a course
+  Given the "Computer Science" department is offering course number "169"
   
 Scenario: User wants to select the course they will be taking
 
   Then I should see "Select Course"
-  Then I should see "Course Search Box"
-  When I fill in "Course Search Box" with "CS 169"
+  Then I should see "course_department"
+  Then I should see "course_number"
+  When I select "Computer Science" from "course_department"
+  When I select "169" from "course_number"
   When I press "Search"
-  Then I should be on the Buy Required Books page for "CS 169"
+  Then I should be on the Buy Required Books page for course number "169" in the "Computer Science" department 

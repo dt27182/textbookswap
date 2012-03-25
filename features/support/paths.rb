@@ -28,10 +28,13 @@ module NavigationHelpers
     when /^the Buy Course Selection page$/
       return buy_path
       
-    when /^the Sell Required Books page for "([a-zA-Z]*)\s?(\d*)"$/ do |course, num|
-      course = Course.find_by_department_short_and_number(course, num)
+    when /^the Sell Required Books page for course number "(.*)" in the "(.*)" department$/
+      course = Course.find_by_number_and_department_long($1, $2)
       return sell_path(course.id)
-    end
+    
+    when /^the Buy Required Books page for course number "(.*)" in the "(.*)" department$/
+      course = Course.find_by_number_and_department_long($1, $2)
+      return buy_path(course.id)
       
 
     else
