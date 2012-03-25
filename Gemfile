@@ -28,7 +28,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'ZenTest'
-  gem 'minitest'
+  gem 'minitest', "~> 2.11.4"
 end
 
 group :production do
