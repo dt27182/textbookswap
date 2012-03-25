@@ -1,5 +1,3 @@
-
-
 FactoryGirl.define do
   factory :course do
     term 'spring'
