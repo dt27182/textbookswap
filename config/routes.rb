@@ -5,8 +5,14 @@ Textbookswap::Application.routes.draw do
   match '/' => 'index#index'
   match '/courses/input/:term/:year' => 'courses#input'
 	match '/:transaction_type/course/show' => 'courses#show', :as => :show_courses
-	match '/:transaction_type/courses/:id/book/show' => 'courses#list_books', :as => :show_books
-	match '
+	match '/:transaction_type/courses/:id/book/show' => 'courses#show_books', :as => :show_books
+	get '/courses/:id/book/new' => 'books#display_new', :as => :display_new_book
+	put '/courses/:id/book/new' => 'books#create_new', :as => :create_new_book
+	match '/books/:id/posting/show' => 'books#show_postings', :as => :show_postings
+	get '/courses/:course_id/books/:book_id/posting/new' => 'postings#display_new', :as => :display_new_posting
+	post '/courses/:course_id/books/:book_id/posting/new' => 'postings#create_new', :as => :create_new_posting
+	get '/courses/:course_id/books/:book_id/postings/:posting_id' => 'posting#display_buy_page', :as => :display_buy_posting
+	post '/courses/:course_id/books/:book_id/postings/:posting_id' => 'posting#commit_buy', :as => :commit_buy_posting
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
