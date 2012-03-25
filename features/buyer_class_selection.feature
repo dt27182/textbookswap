@@ -11,7 +11,7 @@ Background: User has pressed Buy on the previous page
 Scenario: User wants to select the course they will be taking
 
   Then I should see "Select Course"
-  Then I should see "Course Textfield"
-  When I fill in "Course Textfield" with "CS 169"
+  Then I should see "Course Search Box"
+  When I fill in "Course Search Box" with "CS 169"
   When I press "Search"
   Then I should be on the Buy Required Books page for "CS 169"
