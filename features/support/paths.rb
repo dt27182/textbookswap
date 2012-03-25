@@ -21,6 +21,18 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+    
+    when /^the Sell Course Selection page$/
+      return sell_path
+      
+    when /^the Buy Course Selection page$/
+      return buy_path
+      
+    when /^the Sell Required Books page for "([a-zA-Z]*)\s?(\d*)"$/ do |course, num|
+      course = Course.find_by_department_short_and_number(course, num)
+      return sell_path(course.id)
+    end
+      
 
     else
       begin
