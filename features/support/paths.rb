@@ -36,6 +36,18 @@ module NavigationHelpers
       course = Course.find_by_number_and_department_long($1, $2)
       return show_books_path("buy", course.id)
       
+    when /^the Book Postings page for the "(.*)" edition of the book "(.*)"$/
+      book = Book.find_by_name_and_edition($1, $2)
+      return show_posting_path(book.id)
+    
+    when /^the Sell Book Information page for the "(.*)" edition of the book "(.*)"$/
+      book = Book.find_by_name_and_edition($1, $2)
+      return display_new_posting_path(book.id)
+      
+    when /^the Textbook Information page for course number "(.*)" in the "(.*)" department$/
+      course =  Course.find_by_number_and_department_long($1, $2)
+      return display_new_book_path(course.id)
+      
 
     else
       begin

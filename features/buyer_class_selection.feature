@@ -15,6 +15,6 @@ Scenario: User wants to select the course they will be taking
   Then I should see "course_department"
   Then I should see "course_number"
   When I select "Computer Science" from "course_department"
-  When I select "169" from "course_number"
-  When I press "Search"
+  When I fill in "course_number" with "169"
+  When I press "search"
   Then I should be on the Buy Required Books page for course number "169" in the "Computer Science" department 
