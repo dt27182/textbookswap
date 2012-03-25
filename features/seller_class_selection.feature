@@ -7,6 +7,7 @@ Feature: Sellers can select the class of the textbook they wish to post
 Background: User has pressed Sell on the previous page
 
   Given I am on the Sell Course Selection page
+  Given "CS 169" is a course
   
 Scenario: User wants to select the course corresponding to the book they want to sell
 
