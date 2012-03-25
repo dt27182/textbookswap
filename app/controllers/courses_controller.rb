@@ -16,5 +16,7 @@ class CoursesController < ApplicationController
     get_courses_for(parmas[:term], params[:year].to_i)
     redirect_to '/'
   end
-
+  
+  def show_books
+  end
 end
