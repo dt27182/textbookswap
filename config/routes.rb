@@ -4,9 +4,9 @@ Textbookswap::Application.routes.draw do
 
   match '/' => 'index#index'
   match '/courses/input/:term/:year' => 'courses#input'
-	match '/:transaction_type/course/show' => 'courses#show', :as => :show_courses_path
-	match '/:transaction_type/courses/:id/book/show' => 'courses#list_books', :as => :show_books_path
-
+	match '/:transaction_type/course/show' => 'courses#show', :as => :show_courses
+	match '/:transaction_type/courses/:id/book/show' => 'courses#list_books', :as => :show_books
+	match '
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
