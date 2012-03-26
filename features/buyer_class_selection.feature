@@ -1,8 +1,8 @@
-Feature: Buyers can select the class of the textbook they wish to purchase
+Feature: Buyers can select the course of the textbook they wish to purchase
 
   As a buyer
   So the website will show all the relevant books for that course
-  I want to select a class that I am taking
+  I want to select a course that I am taking
   
 Background: User has pressed Buy on the previous page
 

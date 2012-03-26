@@ -13,6 +13,6 @@ Background: User selected Computer Science 169 on the previous page
   
 Scenario: User wants to select an unrequired book
 
-  Then I should see "Armando Fox Autobiography"
+  Then I should see "Armando Fox Autobiography" in "Unrequired"
   When I follow "Armando Fox Autobiography (10th Edition)"
   Then I should be on the Book Postings page for the "10th Edition" edition of the book "Armando Fox Autobiography"
