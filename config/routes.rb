@@ -6,16 +6,18 @@ Textbookswap::Application.routes.draw do
   match '/' => 'index#index'
   #page to input courses into db
   match '/courses/input/:term/:year' => 'courses#input'
-  #page to select course on buy side
-	match '/:transaction_type/course/show' => 'courses#show', :as => :show_courses
-	#page to select course on sell side
-	match '/:transaction_type/courses/:id/book/show' => 'courses#show_books', :as => :show_books
+  #page to select a course
+	get '/:transaction_type/course/show' => 'courses#show', :as => :show_courses
+	#page to find the course id from a long department name and number
+	post '/:transaction_type/course/find' => 'courses#find', :as => :find_course
+	#page to show the books that belong to a course
+	get '/:transaction_type/courses/:id/book/show' => 'courses#show_books', :as => :show_books
 	#page to input details for a unlisted book
 	get '/courses/:id/book/new' => 'books#display_new', :as => :display_new_book
 	#page to insert unlisted book into db
 	put '/courses/:id/book/new' => 'books#create_new', :as => :create_new_book
 	#page to show all the postings for a book
-	match '/books/:id/posting/show' => 'books#show_postings', :as => :show_postings
+	get '/books/:id/posting/show' => 'books#show_postings', :as => :show_postings
 	#page to input details of a new posting
 	get '/books/:book_id/posting/new' => 'postings#display_new', :as => :display_new_posting
 	#page to submit a new posting

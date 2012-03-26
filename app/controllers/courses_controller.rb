@@ -19,4 +19,7 @@ class CoursesController < ApplicationController
   
   def show_books
   end
+  
+  def find
+  end
 end
