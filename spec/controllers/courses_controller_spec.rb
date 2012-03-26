@@ -161,8 +161,10 @@ describe CoursesController do
     		get :show_books, {:transaction_type => 'buy', :id => '1'}
     	end
     	describe "sucess path" do
+    		
     	end
     	describe "fail path" do
+    		
     	end
     end
   end
