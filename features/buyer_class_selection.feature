@@ -11,8 +11,8 @@ Background: User has pressed Buy on the previous page
   
 Scenario: User wants to select the course they will be taking
 
-  Then I should see "course_department"
-  Then I should see "course_number"
+  Then I should see "Department"
+  Then I should see "Number"
   When I select "Computer Science" from "course_department"
   When I fill in "course_number" with "169"
   When I press "search"
@@ -20,8 +20,8 @@ Scenario: User wants to select the course they will be taking
   
 Scenario: User tries to select a course that is not offered
 
-  Then I should see "course_department"
-  Then I should see "course_number"
+  Then I should see "Department"
+  Then I should see "Number"
   When I select "Computer Science" from "course_department"
   When I fill in "course_number" with "999"
   When I press "search"
