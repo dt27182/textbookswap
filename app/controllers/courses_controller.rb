@@ -1,9 +1,9 @@
 class CoursesController < ApplicationController
   def show
-    @temp = Course.select("department_short").uniq
+    @temp = Course.select("department_long").uniq
     @departments = []
     @temp.each do |dept|
-      @departments << dept.department_short unless dept.department_short == ""
+      @departments << dept.department_long unless dept.department_long == ""
     end
     @temp = Course.select("number").uniq
     @numbers = []

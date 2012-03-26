@@ -3,8 +3,15 @@ require 'spec_helper'
 describe CoursesController do
 
   before :each do
-    @fake_course = mock('Course', :id => '1', :department_long => "CS", :number => "169")
+    @fake_course = mock('Course', :id => '1', :department_long => "Computer Science", :number => "169")
     @fake_book = mock('Book', :id => '1', :title => "a book")
+    @fake_list_one = ['Computer Science']
+    @fake_list_two = ['169']
+    @for_each_one = ['Computer Science']
+    @for_each_two = ['169']
+    @answer_one = ['Computer Science']
+    @answer_two = ['169']
+    
   end
   
   describe "check if it is on the right page" do
@@ -23,19 +30,19 @@ describe CoursesController do
   
   describe "show method" do
   
-    it "should do select methods" do
-      Course.stub(:select).with("department_short").and_return(@fake_list_one)
+    it "should call select methods with the Course model" do
+      Course.stub(:select).with("department_long").and_return(@fake_list_one)
       @fake_list_one.stub(:uniq).and_return(@for_each_one)
       @for_each_one.stub(:each).and_return(@answer_one)
       Course.stub(:select).with("number").and_return(@fake_list_two)
       @fake_list_two.stub(:uniq).and_return(@for_each_two)
       @for_each_two.stub(:each).and_return(@answer_two)
       Course.should_receive(:select).with(anything()).exactly(2).times
-      get :show, {:transaction_type => "buy", :department_short => "CS", :number => "169"}
+      get :show, {:transaction_type => "buy", :department_short => "Computer Science", :number => "169"}
     end
     
-    it "should do uniq methods" do
-      Course.stub(:select).with("department_short").and_return(@fake_list_one)
+    it "should do call uniq methods with what the select returns" do
+      Course.stub(:select).with("department_long").and_return(@fake_list_one)
       @fake_list_one.stub(:uniq).and_return(@for_each_one)
       @for_each_one.stub(:each).and_return(@answer_one)
       Course.stub(:select).with("number").and_return(@fake_list_two)
@@ -43,39 +50,41 @@ describe CoursesController do
       @for_each_two.stub(:each).and_return(@answer_two)
       @fake_list_one.should_receive(:uniq)
       @fake_list_two.should_receive(:uniq)
-      get :show, {:transaction_type => "buy", :department_short => "CS", :number => "169"}
+      get :show, {:transaction_type => "buy", :department_short => "Computer Science", :number => "169"}
     end
     
-    it "should have departments" do
-      Course.stub(:select).with("department_short").and_return(@fake_list_one)
+    it "should set the @departments in the CoursesController to list of departments" do
+      Course.stub(:select).with("department_long").and_return(@fake_list_one)
       @fake_list_one.stub(:uniq).and_return(@for_each_one)
       @for_each_one.stub(:each).and_return(@answer_one)
       Course.stub(:select).with("number")
       stub(:uniq)
       stub(:each)
-      get :show, {:transaction_type => "buy", :department_short => "CS", :number => "169"}
+      get :show, {:transaction_type => "buy", :department_short => "Computer Science", :number => "169"}
+      assigns(:departments).should == @answer_one
     end
     
-    it "should have numbers" do
+=begin    
+    it "should set the @numbers in the CoursesController to list of numbers" do
       Course.stub(:select).with("department_short")
       stub(:uniq)
       stub(:each)
       Course.stub(:select).with("number").and_return(@fake_list_two)
       @fake_list_two.stub(:uniq).and_return(@for_each_two)
       @for_each_two.stub(:each).and_return(@answer_two)
-      get :show, {:transaction_type => "buy", :department_short => "CS", :number => "169"}
+      get :show, {:transaction_type => "buy", :department_short => "Computer Science", :number => "169"}
+      assigns(:numbers).should == @answer_two
     end
-    
-    it "should work" do
-      Course.should_receive(:select).with("department_short").and_return(@fake_list_one)
+=end  
+ 
+    it "should call select, unique, each for departments and numbers" do
+      Course.should_receive(:select).with("department_long").and_return(@fake_list_one)
       @fake_list_one.should_receive(:uniq).and_return(@for_each_one)
       @for_each_one.should_receive(:each).and_return(@answer_one)
       Course.should_receive(:select).with("number").and_return(@fake_list_two)
       @fake_list_two.should_receive(:uniq).and_return(@for_each_two)
       @for_each_two.should_receive(:each).and_return(@answer_two)
-      get :show, {:transaction_type => "buy", :department_short => "CS", :number => "169"}
-      assigns(:departments).should == []
-      assigns(:numbers).should == []
+      get :show, {:transaction_type => "buy", :department_short => "Computer Science", :number => "169"}
     end
     
   end
