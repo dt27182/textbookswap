@@ -11,7 +11,7 @@ class Course < ActiveRecord::Base
     list_of_course_objects = courses_page.root.css('body td td label')
     list_of_course_objects.each_slice(3) do |course_tuple|
       course = {}
-      course[:departmen_short] = course_tuple[0].content
+      course[:department_short] = course_tuple[0].content
       course[:number] = course_tuple[1].content[3..-1]
       course[:name] = course_tuple[2].content
       course[:term] = term
