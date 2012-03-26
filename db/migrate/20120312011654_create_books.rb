@@ -7,7 +7,6 @@ class CreateBooks < ActiveRecord::Migration
 			t.integer :isbn
 			t.integer :suggested_price
 			t.timestamps
-			t.integer :course_id
 		end
   end
 

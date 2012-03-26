@@ -4,6 +4,7 @@ describe CoursesController do
 
   before :each do
     @fake_course = mock('Course', :id => '1', :department_long => "CS", :number => "169")
+    @fake_book = mock('Book', :id => '1', :title => "a book")
   end
 	describe "find" do  
   	describe "after buyer chooses a course and course number" do
@@ -86,13 +87,37 @@ describe CoursesController do
     		Course.should_receive(:find_required_and_unrequired_books).with('1')
     		get :show_books, {:transaction_type => 'buy', :id => '1'}
     	end
-    	describe "sucess path" do
-    		
+    	it "should render the buy side list of books template" do
+    			Course.stub(:find_by_id).and_return(@fake_course)
+    			Course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
+    			response.should render_template("show_books")
+    			get :show_books, {:transaction_type => 'buy', :id => '1'}
     	end
-    	describe "fail path" do
+    end
+    describe "sell path" do   		
+    	it "should call the CoursesController's show_books method" do
+    		CoursesController.should_receive(:show_books)
+      	get :show_books, {:transaction_type => 'sell', :id => '1'}
+    	end
     		
+    	it "should call the find_by_id method in the Course model" do
+    		Course.should_receive(:find_by_id).with('1')
+      	get :show_books, {:transaction_type => 'sell', :id => '1'}
+    	end
+    		
+    	it "should call the find_required_and_unrequired_books method in the Course model" do
+    		Course.stub(:find_by_id).and_return(@fake_course)
+    		Course.should_receive(:find_required_and_unrequired_books).with('1')
+    		get :show_books, {:transaction_type => 'sell', :id => '1'}
+    	end
+    	it "should render the sell side list of books template" do
+    			Course.stub(:find_by_id).and_return(@fake_course)
+    			Course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
+    			response.should render_template("show_books")
+    			get :show_books, {:transaction_type => 'sell', :id => '1'}
     	end
     end
   end
   
 end
+
