@@ -9,32 +9,13 @@ describe IndexController do
     end
   end
   
-  describe "clicking the buy button" do
+  describe "Index Page" do
     
-    it "should redirect to the Buy Pick Course Page" do
-      get "buy"
-      response.should render_template('/buy/course')
+    it "index method should be on the index page" do
+      get "index"
+      response.should render_template('/')
     end
-    
-    it "should not redirect to the Sell Pick Course Page" do 
-      get "buy"
-      response.should_not render_template('/sell/course')
-    end
-    
-  end
-  
-  describe "clicking the sell button" do
-  
-    it "should redirect to the Sell Pick Course Page" do
-      get "sell"
-      response.should render_template('/sell/course')
-    end
-  
-    it "should not redirect to the Buy Pick Course Page" do 
-      get "sell"
-      response.should_not render_template('/buy/course')
-    end
-  
+
   end
 
 end
