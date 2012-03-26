@@ -28,11 +28,11 @@ module NavigationHelpers
     when /^the Buy Course Selection page$/
       return show_courses_path("buy")
       
-    when /^the Sell Required Books page for course number "(.*)" in the "(.*)" department$/
+    when /^the Sell Books page for course number "(.*)" in the "(.*)" department$/
       course = Course.find_by_number_and_department_long($1, $2)
       return show_books_path("sell", course.id)
     
-    when /^the Buy Required Books page for course number "(.*)" in the "(.*)" department$/
+    when /^the Buy Books page for course number "(.*)" in the "(.*)" department$/
       course = Course.find_by_number_and_department_long($1, $2)
       return show_books_path("buy", course.id)
       
