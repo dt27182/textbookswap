@@ -30,7 +30,6 @@ group :development, :test do
   gem 'ZenTest'
   gem 'minitest', "~> 2.11.4"
   gem 'factory_girl'
-  gem 'factor_girl_rails'
 end
 
 group :production do
