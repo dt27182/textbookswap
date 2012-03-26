@@ -1,4 +1,5 @@
 class Book < ActiveRecord::Base
 	has_many :postings
-	has_and_belongs_to_many :courses
+	has_many :requirements
+	has_many :courses, :through => :requirements
 end

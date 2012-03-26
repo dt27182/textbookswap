@@ -29,6 +29,8 @@ group :development, :test do
   gem 'simplecov'
   gem 'ZenTest'
   gem 'minitest', "~> 2.11.4"
+  gem 'factory_girl'
+  gem 'factor_girl_rails'
 end
 
 group :production do

@@ -1,7 +1,5 @@
-
-
 FactoryGirl.define do
-  factory :course do
+  factory :Course do
     term 'spring'
     number '169'
     name 'Software Engineer'
