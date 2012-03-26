@@ -92,22 +92,22 @@ describe CoursesController do
   		end
   		describe "success path" do
     		it "should redirect to the buyer's show books page" do
-      		response.should redirect_to(show_books_path('buy','1'))
       		Course.stub(:find_by_deparement_long_and_number).and_return(@fake_course)
       		post :find, {:transaction_type => 'buy', :department_long => 'Computer Science', :number => '169'}
+      		response.should redirect_to(show_books_path('buy','1'))
     		end
     		
     		it "should not redirect to the seller's book listings page" do
-      		response.should_not redirect_to(show_books_path('sell','1'))
       		Course.stub(:find_by_deparement_long_and_number).and_return(@fake_course)
       		post :find, {:transaction_type => 'buy', :department_long => 'Computer Science', :number => '169'}
+      		response.should_not redirect_to(show_books_path('sell','1'))
     		end
   		end
   		describe "fail path" do
   			it "should redirect to the select a course page" do
-  				response.should redirect_to(show_courses_path('buy'))
       		Course.stub(:find_by_deparement_long_and_number).and_return(nil)
       		post :find, {:transaction_type => 'buy', :department_long => 'Computer Science', :number => '169'}
+      		response.should redirect_to(show_courses_path('buy'))
   			end
   		end
   	end
@@ -123,22 +123,22 @@ describe CoursesController do
   		end
   		describe "success path" do
     		it "should redirect to the seller's show books page" do
-      		response.should redirect_to(show_books_path('sell','1'))
       		Course.stub(:find_by_deparement_long_and_number).and_return(@fake_course)
       		post :find, {:transaction_type => 'sell', :department_long => 'Computer Science', :number => '169'}
+      		response.should redirect_to(show_books_path('sell','1'))
     		end
     		
     		it "should not redirect to the buyer's book listings page" do
-      		response.should_not redirect_to(show_books_path('sell','1'))
       		Course.stub(:find_by_deparement_long_and_number).and_return(@fake_course)
       		post :find, {:transaction_type => 'sell', :department_long => 'Computer Science', :number => '169'}
+      		response.should_not redirect_to(show_books_path('sell','1'))
     		end
   		end
   		describe "fail path" do
-  			it "should redirect to the select a course page" do
-  				response.should redirect_to(show_courses_path('sell'))
+  			it "should redirect to the select a course page" do				
       		Course.stub(:find_by_deparement_long_and_number).and_return(nil)
       		post :find, {:transaction_type => 'sell', :department_long => 'Computer Science', :number => '169'}
+      		response.should redirect_to(show_courses_path('sell'))
   			end
   		end
   	end
@@ -162,10 +162,10 @@ describe CoursesController do
     		get :show_books, {:transaction_type => 'buy', :id => '1'}
     	end
     	it "should render the buy side list of books template" do
-    			Course.stub(:find_by_id).and_return(@fake_course)
-    			Course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
-    			response.should render_template("show_books")
-    			get :show_books, {:transaction_type => 'buy', :id => '1'}
+    		Course.stub(:find_by_id).and_return(@fake_course)
+    		Course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
+    		get :show_books, {:transaction_type => 'buy', :id => '1'}
+    		response.should render_template("show_books")
     	end
     end
     describe "sell path" do   		
@@ -185,10 +185,10 @@ describe CoursesController do
     		get :show_books, {:transaction_type => 'sell', :id => '1'}
     	end
     	it "should render the sell side list of books template" do
-    			Course.stub(:find_by_id).and_return(@fake_course)
-    			Course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
-    			response.should render_template("show_books")
-    			get :show_books, {:transaction_type => 'sell', :id => '1'}
+    		Course.stub(:find_by_id).and_return(@fake_course)
+    		Course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
+    		get :show_books, {:transaction_type => 'sell', :id => '1'}
+    		response.should render_template("show_books")
     	end
     end
   end
