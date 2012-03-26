@@ -6,6 +6,80 @@ describe CoursesController do
     @fake_course = mock('Course', :id => '1', :department_long => "CS", :number => "169")
     @fake_book = mock('Book', :id => '1', :title => "a book")
   end
+  
+  describe "check if it is on the right page" do
+  
+    it "should be on the buy course page" do
+      get :show, {:transaction_type => "buy"}
+      response.should be_success
+    end
+    
+    it "should be on the sell course page" do
+      get :show, {:transaction_type => "sell"}
+      response.should be_success
+    end
+  
+  end
+  
+  describe "show method" do
+  
+    it "should do select methods" do
+      Course.stub(:select).with("department_short").and_return(@fake_list_one)
+      @fake_list_one.stub(:uniq).and_return(@for_each_one)
+      @for_each_one.stub(:each).and_return(@answer_one)
+      Course.stub(:select).with("number").and_return(@fake_list_two)
+      @fake_list_two.stub(:uniq).and_return(@for_each_two)
+      @for_each_two.stub(:each).and_return(@answer_two)
+      Course.should_receive(:select).with(anything()).exactly(2).times
+      get :show, {:transaction_type => "buy", :department_short => "CS", :number => "169"}
+    end
+    
+    it "should do uniq methods" do
+      Course.stub(:select).with("department_short").and_return(@fake_list_one)
+      @fake_list_one.stub(:uniq).and_return(@for_each_one)
+      @for_each_one.stub(:each).and_return(@answer_one)
+      Course.stub(:select).with("number").and_return(@fake_list_two)
+      @fake_list_two.stub(:uniq).and_return(@for_each_two)
+      @for_each_two.stub(:each).and_return(@answer_two)
+      @fake_list_one.should_receive(:uniq)
+      @fake_list_two.should_receive(:uniq)
+      get :show, {:transaction_type => "buy", :department_short => "CS", :number => "169"}
+    end
+    
+    it "should have departments" do
+      Course.stub(:select).with("department_short").and_return(@fake_list_one)
+      @fake_list_one.stub(:uniq).and_return(@for_each_one)
+      @for_each_one.stub(:each).and_return(@answer_one)
+      Course.stub(:select).with("number")
+      stub(:uniq)
+      stub(:each)
+      get :show, {:transaction_type => "buy", :department_short => "CS", :number => "169"}
+    end
+    
+    it "should have numbers" do
+      Course.stub(:select).with("department_short")
+      stub(:uniq)
+      stub(:each)
+      Course.stub(:select).with("number").and_return(@fake_list_two)
+      @fake_list_two.stub(:uniq).and_return(@for_each_two)
+      @for_each_two.stub(:each).and_return(@answer_two)
+      get :show, {:transaction_type => "buy", :department_short => "CS", :number => "169"}
+    end
+    
+    it "should work" do
+      Course.should_receive(:select).with("department_short").and_return(@fake_list_one)
+      @fake_list_one.should_receive(:uniq).and_return(@for_each_one)
+      @for_each_one.should_receive(:each).and_return(@answer_one)
+      Course.should_receive(:select).with("number").and_return(@fake_list_two)
+      @fake_list_two.should_receive(:uniq).and_return(@for_each_two)
+      @for_each_two.should_receive(:each).and_return(@answer_two)
+      get :show, {:transaction_type => "buy", :department_short => "CS", :number => "169"}
+      assigns(:departments).should == []
+      assigns(:numbers).should == []
+    end
+    
+  end
+  
 	describe "find" do  
   	describe "after buyer chooses a course and course number" do
     	it "should call the find method in the courses controller" do
