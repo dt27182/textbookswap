@@ -17,7 +17,9 @@ Given /^the "(.*)" edition of the book "(.*)" is a required book for course numb
 
   course = Course.find_by_number_and_department_long(num, dept)
   book = Book.find_by_title_and_edition(name, edi)
-  ###book.required = True
+  req = Requirement(:course_id => course.id, :book_id => book.id, :is_required => true)
+  course.requirements << req
+  book.requirements << req
   course.books << book
 end
 
@@ -25,6 +27,20 @@ Given /^the "(.*)" edition of the book "(.*)" is an unrequired book for course n
 
   course = Course.find_by_number_and_department_long(num, dept)
   book = Book.find_by_title_and_edition(name, edi)
-  ###book.required = False
+  req = Requirement(:course_id => course.id, :book_id => book.id, :is_required => false)
+  course.requirements << req
+  book.requirements << req
   course.books << book
+end
+
+Then /^(?:|I )should see "([^"]*)" in "([^"]*)"$/ do |regexp, parent|
+  with_scope(parent) do
+    regexp = Regexp.new(regexp)
+
+    if page.respond_to? :should
+      page.should have_xpath('//*', :text => regexp)
+    else
+      assert page.has_xpath?('//*', :text => regexp)
+    end
+  end
 end
