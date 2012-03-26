@@ -11,6 +11,11 @@ describe IndexController do
   
   describe "Index Page" do
     
+    it "IndexConroller calls the index method" do
+      IndexController.should_receive(:index)
+      get :index
+    end
+    
     it "index method should be on the index page" do
       get "index"
       response.should render_template('/')
