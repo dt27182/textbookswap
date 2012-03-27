@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120325205613) do
     t.integer  "suggested_price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "course_id"
     t.boolean  "reserved",        :default => false
   end
 
