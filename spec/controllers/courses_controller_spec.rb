@@ -101,7 +101,8 @@ describe CoursesController do
   describe "find" do
     describe "after buyer chooses a course and course number" do
       it "should call the find method in the courses controller" do
-        pending "Do we really need this test, because it just tests routes? (And I can't get it to work)"
+        #basically rails creates a new instance of the CoursesController for each request, thus I don't think you can stub it
+        pending "Do we really need this test, because it just tests routes? (And I can't get it to work) (see comment in code)"
         CoursesController.should_receive(:find)
         Course.stub(:find).and_return(@fake_course)
         post :find, {:transaction_type => 'buy', :course => { :department => 'Computer Science', :number => '169', :section => "001" } }
@@ -134,30 +135,31 @@ describe CoursesController do
 
     describe "after seller chooses a course and course number" do
       it "should call the find method in the courses controller" do
+        pending "Stubing the controllers doesn't seem to work"
         CoursesController.should_receive(:find)
-        post :find, {:transaction_type => 'sell', :department_long => 'Computer Science', :number => '169'}
+        post :find, {:transaction_type => 'sell', :course => { :department => 'Computer Science', :number => '169', :section => "001" } }
       end
       it "should call the find_by_department_long_and_number method in the Course model" do
-        Course.should_receive(:find_by_department_long_and_number).with('Computer Science', '169')
-        post :find, {:transaction_type => 'sell', :department_long => 'Computer Science', :number => '169'}
+        Course.should_receive(:find).with(:first, :conditions => {:term => "spring", :year => 2012, :department_long => "Computer Science", :number => "169", :section => "001"}).and_return(@fake_course)
+        post :find, {:transaction_type => 'sell', :course => { :department => 'Computer Science', :number => '169', :section => "001" } }
       end
       describe "success path" do
         it "should redirect to the seller's show books page" do
-          Course.stub(:find_by_deparement_long_and_number).and_return(@fake_course)
-          post :find, {:transaction_type => 'sell', :department_long => 'Computer Science', :number => '169'}
+          Course.stub(:find).and_return(@fake_course)
+          post :find, {:transaction_type => 'sell', :course => { :department => 'Computer Science', :number => '169', :section => "001" } }
           response.should redirect_to(show_books_path('sell','1'))
         end
 
         it "should not redirect to the buyer's book listings page" do
-          Course.stub(:find_by_deparement_long_and_number).and_return(@fake_course)
-          post :find, {:transaction_type => 'sell', :department_long => 'Computer Science', :number => '169'}
-          response.should_not redirect_to(show_books_path('sell','1'))
+          Course.stub(:find).and_return(@fake_course)
+          post :find, {:transaction_type => 'sell', :course => { :department => 'Computer Science', :number => '169', :section => "001" } }
+          response.should_not redirect_to(show_books_path('buy','1'))
         end
       end
       describe "fail path" do
         it "should redirect to the select a course page" do
-          Course.stub(:find_by_deparement_long_and_number).and_return(nil)
-          post :find, {:transaction_type => 'sell', :department_long => 'Computer Science', :number => '169'}
+          Course.stub(:find).and_return(nil)
+          post :find, {:transaction_type => 'sell', :course => { :department => 'Computer Science', :number => '169', :section => "001" } }
           response.should redirect_to(show_courses_path('sell'))
         end
       end
@@ -167,6 +169,7 @@ describe CoursesController do
   describe "show_books" do
     describe "buy path" do
       it "should call the CoursesController's show_books method" do
+        pending "Same problem as above"
         CoursesController.should_receive(:show_books)
         get :show_books, {:transaction_type => 'buy', :id => '1'}
       end
