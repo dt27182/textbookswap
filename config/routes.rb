@@ -10,6 +10,8 @@ Textbookswap::Application.routes.draw do
   get '/:transaction_type/course/show' => 'courses#show', :as => :show_courses
   #page to find the course id from a long department name and number
   post '/:transaction_type/course/find' => 'courses#find', :as => :find_course
+  #page to submit form to look up the books for a course
+  post '/:transaction_type/courses/book/find' => 'courses#find_books', :as => :find_books
   #page to show the books that belong to a course
   get '/:transaction_type/courses/:id/book/show' => 'courses#show_books', :as => :show_books
   #page to input details for a unlisted book
