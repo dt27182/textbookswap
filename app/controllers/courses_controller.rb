@@ -22,7 +22,7 @@ class CoursesController < ApplicationController
     redirect_to '/'
   end
 
-  def find_books
+  def find
     course_term = "spring"
     course_year = 2012
     course = Course.find(:first, :conditions => { :term => course_term,
@@ -30,12 +30,18 @@ class CoursesController < ApplicationController
                            :department_long => params[:course][:department],
                            :number => params[:course][:number],
                            :section => params[:course][:section] } )
+    if course.nil?
+      redirect_to show_courses_path(params[:transaction_type]) and return
+    end
     redirect_to show_books_path(params[:transaction_type], course.id)
   end
 
   def show_books
+    course = Course.find_by_id(params[:id])
+    @required_books
+    @unrequired_books
+    course.books.each do |book|
+    end
   end
 
-  def find
-  end
 end

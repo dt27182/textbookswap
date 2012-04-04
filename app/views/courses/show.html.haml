@@ -1,6 +1,6 @@
 %h1 Find your course
 
-= form_tag find_books_path("#{params[:transaction_type]}"), :method => :post do
+= form_tag find_course_path("#{params[:transaction_type]}"), :method => :post do
 
   = label :course, :department, 'Department'
   = select :course, :department, @departments
