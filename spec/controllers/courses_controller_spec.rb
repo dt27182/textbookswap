@@ -4,6 +4,7 @@ describe CoursesController do
 
   before :each do
     @fake_course = mock('Course', :id => '1', :department_long => "Computer Science", :number => "169", :section => "001", :term => "spring", :year => 2012)
+    @fake_course_list = [@fake_course]
     @fake_book = mock('Book', :id => '1', :title => "a book")
     @fake_list_one = ['Computer Science']
     @fake_list_two = ['169']
@@ -64,35 +65,21 @@ describe CoursesController do
     end
 
     it "should set the @departments in the CoursesController to list of departments" do
-      Course.stub(:select).with("department_long").and_return(@fake_list_one)
-      @fake_list_one.stub(:uniq).and_return(@for_each_one)
-      Course.stub(:select).with("number").and_return(@fake_list_two)
-      Course.stub(:select).with("section").and_return(@fake_list_two)
-      @fake_list_two.stub(:uniq).and_return(@for_each_two)
+      Course.stub(:select).and_return([@fake_course])
       get :show, {:transaction_type => "buy"}
       assigns(:departments).should == @answer_one
     end
 
-=begin
     it "should set the @numbers in the CoursesController to list of numbers" do
-      Course.stub(:select).with("department_short")
-      stub(:uniq)
-      stub(:each)
-      Course.stub(:select).with("number").and_return(@fake_list_two)
-      @fake_list_two.stub(:uniq).and_return(@for_each_two)
-      @for_each_two.stub(:each).and_return(@answer_two)
-      get :show, {:transaction_type => "buy", :department_short => "Computer Science", :number => "169"}
+      Course.stub(:select).and_return([@fake_course])
+      get :show, {:transaction_type => "buy"}
       assigns(:numbers).should == @answer_two
     end
-=end
 
     it "should call select, unique, each for departments and numbers" do
-      Course.should_receive(:select).with("department_long").and_return(@fake_list_one)
-      @fake_list_one.should_receive(:uniq).and_return(@for_each_one)
-      @for_each_one.should_receive(:each).and_return(@answer_one)
-      Course.should_receive(:select).with("number").and_return(@fake_list_two)
-      @fake_list_two.should_receive(:uniq).and_return(@for_each_two)
-      @for_each_two.should_receive(:each).and_return(@answer_two)
+      Course.should_receive(:select).with(anything()).exactly(3).times.and_return(@fake_course_list)
+      @fake_course_list.should_receive(:uniq).exactly(3).times.and_return(@fake_course_list)
+      @fake_course_list.should_receive(:each).exactly(3).times
       get :show, {:transaction_type => "buy"}
     end
 
