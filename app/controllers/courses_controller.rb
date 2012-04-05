@@ -38,10 +38,7 @@ class CoursesController < ApplicationController
 
   def show_books
     course = Course.find_by_id(params[:id])
-    @required_books
-    @unrequired_books
-    course.books.each do |book|
-    end
+    @required_books, @unrequired_books = course.find_required_and_unrequired_books
   end
 
 end

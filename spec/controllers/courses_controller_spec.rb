@@ -175,41 +175,44 @@ describe CoursesController do
       end
 
       it "should call the find_by_id method in the Course model" do
-        Course.should_receive(:find_by_id).with('1')
+        Course.should_receive(:find_by_id).with('1').and_return(@fake_course)
+        @fake_course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
         get :show_books, {:transaction_type => 'buy', :id => '1'}
       end
 
       it "should call the find_required_and_unrequired_books method in the Course model" do
         Course.stub(:find_by_id).and_return(@fake_course)
-        Course.should_receive(:find_required_and_unrequired_books).with('1')
+        @fake_course.should_receive(:find_required_and_unrequired_books)
         get :show_books, {:transaction_type => 'buy', :id => '1'}
       end
       it "should render the buy side list of books template" do
         Course.stub(:find_by_id).and_return(@fake_course)
-        Course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
+        @fake_course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
         get :show_books, {:transaction_type => 'buy', :id => '1'}
         response.should render_template("show_books")
       end
     end
     describe "sell path" do
       it "should call the CoursesController's show_books method" do
+        pending "Same problem as above"
         CoursesController.should_receive(:show_books)
         get :show_books, {:transaction_type => 'sell', :id => '1'}
       end
 
       it "should call the find_by_id method in the Course model" do
-        Course.should_receive(:find_by_id).with('1')
+        Course.should_receive(:find_by_id).with('1').and_return(@fake_course)
+        @fake_course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
         get :show_books, {:transaction_type => 'sell', :id => '1'}
       end
 
       it "should call the find_required_and_unrequired_books method in the Course model" do
         Course.stub(:find_by_id).and_return(@fake_course)
-        Course.should_receive(:find_required_and_unrequired_books).with('1')
+        @fake_course.should_receive(:find_required_and_unrequired_books)
         get :show_books, {:transaction_type => 'sell', :id => '1'}
       end
       it "should render the sell side list of books template" do
         Course.stub(:find_by_id).and_return(@fake_course)
-        Course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
+        @fake_course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
         get :show_books, {:transaction_type => 'sell', :id => '1'}
         response.should render_template("show_books")
       end

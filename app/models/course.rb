@@ -52,7 +52,7 @@ class Course < ActiveRecord::Base
   end
 
   #returns the required books and unrequired books of the course with :id == id as an array of 2 arrays eg [[list of required books][list of unrequired books]]
-  def find_required_and_unrequired_books(id)
+  def find_required_and_unrequired_books
 
   end
 end
