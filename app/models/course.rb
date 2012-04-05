@@ -53,6 +53,17 @@ class Course < ActiveRecord::Base
 
   #returns the required books and unrequired books of the course with :id == id as an array of 2 arrays eg [[list of required books][list of unrequired books]]
   def find_required_and_unrequired_books
-
+    all_books = self.books
+    required_books = []
+    unrequired_books = []
+    all_books.each do |book|
+      book_course_req = Requirement.find(:first, :conditions => { :course_id => self.id, :book_id => book.id } )
+      if book_course_req.is_required
+        required_books << book
+      else
+        unrequired_books << book
+      end
+    end
+    return [required_books, unrequired_books]
   end
 end
