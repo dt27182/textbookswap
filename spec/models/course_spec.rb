@@ -9,14 +9,14 @@ describe Course do
     course_three = FactoryGirl.build(:course, :term => "fall")
   end
 
-  describe "Course model methods" do 
-    
+  describe "Course model methods" do
+
     describe "get_term_acronym method" do
-    
+
       if "should return the right term acronym for spring" do
         get_term_acronym(course_one.term).should == "SP"
       end
-    
+
       if "should return the right term acronym for summer" do
         get_term_acronym(course_two.term).should == "SU"
       end
@@ -24,7 +24,7 @@ describe Course do
       if "should return the right term acronym for fall" do
         get_term_acronym(course_three.term).should == "FA"
       end
-    end    
+    end
   end
 =end
 
@@ -32,34 +32,34 @@ describe Course do
     before do
       @course1 = Course.create!(:number => '169')
       @course1.save!
-			@book1 = Book.create!(:title => 'Engineering Long Lasting Software')
-			@book1.save!
-			@book2 = Book.create!(:title => 'Armando Fox Autobiography')
-			@book2.save!
-			@book3 = Book.create!(:title => 'David Patterson Autobiography')
-			@book3.save!
-			@requirement1 = Requirement.create!(:course_id => @course1.id, :book_id => @book1.id, :is_required => true)
-			@requirement1.save!
-			@requirement2 = Requirement.create!(:course_id => @course1.id, :book_id => @book2.id, :is_required => false)
-			@requirement2.save!
-			@requirement3 = Requirement.create!(:course_id => @course1.id, :book_id => @book3.id, :is_required => false)
-			@requirement3.save!
+      @book1 = Book.create!(:title => 'Engineering Long Lasting Software')
+      @book1.save!
+      @book2 = Book.create!(:title => 'Armando Fox Autobiography')
+      @book2.save!
+      @book3 = Book.create!(:title => 'David Patterson Autobiography')
+      @book3.save!
+      @requirement1 = Requirement.create!(:course_id => @course1.id, :book_id => @book1.id, :is_required => true)
+      @requirement1.save!
+      @requirement2 = Requirement.create!(:course_id => @course1.id, :book_id => @book2.id, :is_required => false)
+      @requirement2.save!
+      @requirement3 = Requirement.create!(:course_id => @course1.id, :book_id => @book3.id, :is_required => false)
+      @requirement3.save!
     end
-    
+
     it 'should find required books' do
-      textbooks = @course1.find_required_and_unrequired_books(@course1.id)
+      textbooks = @course1.find_required_and_unrequired_books
       textbooks[0].member?(@book1).should == true
       textbooks[0].member?(@book2).should == false
       textbooks[0].member?(@book3).should == false
     end
-    
+
     it 'should find unrequired books' do
-      textbooks = @course1.find_required_and_unrequired_books(@course1.id)
+      textbooks = @course1.find_required_and_unrequired_books
       textbooks[1].member?(@book1).should == false
       textbooks[1].member?(@book2).should == true
       textbooks[1].member?(@book3).should == true
     end
   end
-      
+
 end
 
