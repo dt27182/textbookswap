@@ -26,7 +26,7 @@ class CoursesController < ApplicationController
     course_term = "spring"
     course_year = 2012
     course = Course.find(:first, :conditions => { :term => course_term,
-                           :year => 2012,
+                           :year => course_year,
                            :department_long => params[:course][:department],
                            :number => params[:course][:number],
                            :section => params[:course][:section] } )

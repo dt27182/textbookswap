@@ -5,7 +5,7 @@
 #for deptartment_long entries only!
 Given /^the "(.*)" department is offering course number "(.*)"$/ do |dept, num|
 
-  Course.create!(:number => num, :department_long => dept)
+  Course.create!(:number => num, :department_long => dept, :section => "001", :term => "spring", :year => 2012)
 end
 
 Given /^the "(.*)" edition of the book "(.*)" exists$/ do |edi, name|
@@ -17,7 +17,7 @@ Given /^the "(.*)" edition of the book "(.*)" is a required book for course numb
 
   course = Course.find_by_number_and_department_long(num, dept)
   book = Book.find_by_title_and_edition(name, edi)
-  req = Requirement(:course_id => course.id, :book_id => book.id, :is_required => true)
+  req = Requirement.create!(:course_id => course.id, :book_id => book.id, :is_required => true)
   course.requirements << req
   book.requirements << req
   course.books << book
@@ -27,7 +27,8 @@ Given /^the "(.*)" edition of the book "(.*)" is an unrequired book for course n
 
   course = Course.find_by_number_and_department_long(num, dept)
   book = Book.find_by_title_and_edition(name, edi)
-  req = Requirement(:course_id => course.id, :book_id => book.id, :is_required => false)
+  req = Requirement.create!(:course_id => course.id, :book_id => book.id, :is_required => false)
+  req.save!
   course.requirements << req
   book.requirements << req
   course.books << book
