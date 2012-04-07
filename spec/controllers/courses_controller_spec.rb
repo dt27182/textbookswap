@@ -75,25 +75,22 @@ describe CoursesController do
       get :show, {:transaction_type => "buy"}
       assigns(:numbers).should == @answer_two
     end
-
+		
+		it "should set the @sections in the CoursesController to the list of sections" do
+			Course.stub(:select).and_return([@fake_course])
+			get :show, {:transaction_type => "buy"}
+			assigns(:sections).should == @answer_three
+		end
     it "should call select, unique, each for departments and numbers" do
       Course.should_receive(:select).with(anything()).exactly(3).times.and_return(@fake_course_list)
       @fake_course_list.should_receive(:uniq).exactly(3).times.and_return(@fake_course_list)
       @fake_course_list.should_receive(:each).exactly(3).times
       get :show, {:transaction_type => "buy"}
     end
-
   end
 
   describe "find" do
     describe "after buyer chooses a course and course number" do
-      it "should call the find method in the courses controller" do
-        #basically rails creates a new instance of the CoursesController for each request, thus I don't think you can stub it
-        pending "Do we really need this test, because it just tests routes? (And I can't get it to work) (see comment in code)"
-        CoursesController.should_receive(:find)
-        Course.stub(:find).and_return(@fake_course)
-        post :find, {:transaction_type => 'buy', :course => { :department => 'Computer Science', :number => '169', :section => "001" } }
-      end
       it "should call the find method in the Course model" do
         Course.should_receive(:find).with(:first, :conditions => {:term => "spring", :year => 2012, :department_long => "Computer Science", :number => "169", :section => "001"}).and_return(@fake_course)
         post :find, {:transaction_type => 'buy', :course => { :department => 'Computer Science', :number => '169', :section => "001" } }
@@ -121,11 +118,6 @@ describe CoursesController do
     end
 
     describe "after seller chooses a course and course number" do
-      it "should call the find method in the courses controller" do
-        pending "Stubing the controllers doesn't seem to work"
-        CoursesController.should_receive(:find)
-        post :find, {:transaction_type => 'sell', :course => { :department => 'Computer Science', :number => '169', :section => "001" } }
-      end
       it "should call the find_by_department_long_and_number method in the Course model" do
         Course.should_receive(:find).with(:first, :conditions => {:term => "spring", :year => 2012, :department_long => "Computer Science", :number => "169", :section => "001"}).and_return(@fake_course)
         post :find, {:transaction_type => 'sell', :course => { :department => 'Computer Science', :number => '169', :section => "001" } }
@@ -155,12 +147,6 @@ describe CoursesController do
 
   describe "show_books" do
     describe "buy path" do
-      it "should call the CoursesController's show_books method" do
-        pending "Same problem as above"
-        CoursesController.should_receive(:show_books)
-        get :show_books, {:transaction_type => 'buy', :id => '1'}
-      end
-
       it "should call the find_by_id method in the Course model" do
         Course.should_receive(:find_by_id).with('1').and_return(@fake_course)
         @fake_course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
@@ -180,12 +166,6 @@ describe CoursesController do
       end
     end
     describe "sell path" do
-      it "should call the CoursesController's show_books method" do
-        pending "Same problem as above"
-        CoursesController.should_receive(:show_books)
-        get :show_books, {:transaction_type => 'sell', :id => '1'}
-      end
-
       it "should call the find_by_id method in the Course model" do
         Course.should_receive(:find_by_id).with('1').and_return(@fake_course)
         @fake_course.stub(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
