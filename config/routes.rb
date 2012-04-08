@@ -5,7 +5,7 @@ Textbookswap::Application.routes.draw do
   #homepage
   match '/' => 'index#index', :as => :index
   #page to input courses into db
-  match '/courses/input/:term/:year' => 'courses#input'
+  get '/admin/courses/input/:term/:year' => 'courses#input', :as => :course_input
   #page to select a course
   get '/:transaction_type/course/show' => 'courses#show', :as => :show_courses
   #page to find the course id from a long department name and number
