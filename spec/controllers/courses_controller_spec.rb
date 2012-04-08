@@ -75,12 +75,12 @@ describe CoursesController do
       get :show, {:transaction_type => "buy"}
       assigns(:numbers).should == @answer_two
     end
-		
-		it "should set the @sections in the CoursesController to the list of sections" do
-			Course.stub(:select).and_return([@fake_course])
-			get :show, {:transaction_type => "buy"}
-			assigns(:sections).should == @answer_three
-		end
+
+    it "should set the @sections in the CoursesController to the list of sections" do
+      Course.stub(:select).and_return([@fake_course])
+      get :show, {:transaction_type => "buy"}
+      assigns(:sections).should == @answer_three
+    end
     it "should call select, unique, each for departments and numbers" do
       Course.should_receive(:select).with(anything()).exactly(3).times.and_return(@fake_course_list)
       @fake_course_list.should_receive(:uniq).exactly(3).times.and_return(@fake_course_list)
@@ -183,6 +183,28 @@ describe CoursesController do
         get :show_books, {:transaction_type => 'sell', :id => '1'}
         response.should render_template("show_books")
       end
+    end
+  end
+
+  describe "inputing courses into the database" do
+    it "should but a course into the database" do
+      @fake_agent, @fake_course_page, @fake_object = "", "", ""
+      @num, @name, @dep_long, @department = "", "", "", ""
+      @department.stub(:content).and_return("COMPSCI")
+      @num.stub(:content).and_return("   61B")
+      @name.stub(:content).and_return("Data Structures")
+      @dep_long.stub(:content).and_return("Computer Science")
+      @fake_list = [@department, @num, @name]
+      @fake_list_2 = ["", "", "", @dep_long]
+      Mechanize.stub(:new).and_return(@fake_agent)
+      @fake_agent.stub(:get).and_return(@fake_course_page)
+      @fake_course_page.stub(:root).and_return(@fake_object)
+      @fake_object.stub(:css).with('body td td label').and_return(@fake_list)
+      @fake_object.stub(:css).with("body td td font").and_return(@fake_list_2)
+      Course.stub(:get_teacher).and_return([["Fox", "001"], ["Patterson", "002"]])
+      get :input, {:term => "spring", :year => "2012"}
+      Course.find_by_teacher("Fox").name.should == "Data Structures"
+      Course.find_by_teacher("Patterson").number.should == "61B"
     end
   end
 

@@ -19,7 +19,7 @@ class CoursesController < ApplicationController
   end
 
   def input
-    get_courses_for(parmas[:term], params[:year].to_i)
+    Course.get_courses_for(params[:term], params[:year].to_i)
     redirect_to '/'
   end
 
@@ -62,5 +62,12 @@ class CoursesController < ApplicationController
     end
     
   end
-
+  
+  #needs to return json
+	def find_course_numbers
+	end
+	
+	#needs to return json
+	def find_course_sections
+	end
 end
