@@ -1,0 +1,16 @@
+%h1 Not Required Books
+
+- @unreq_books.each do |book|
+  %ul
+  
+    %li
+      Title:
+      = book.title
+    %li
+      Author:
+      = book.author
+    %li
+      Edition:
+      = book.edition
+      
+    %br
