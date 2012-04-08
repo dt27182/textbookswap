@@ -7,8 +7,13 @@
     = csrf_meta_tags
 
   %body
-    %h1.title#top 
-      #logo TextBook Swap!
+    #top 
+      %h1.title
+        #logo TextBook Swap
+      #phrase Selling TextBooks Was Never Easier!
+    
+    %br  
+    
     #main
       - if flash[:notice]
         #notice.message= flash[:notice]

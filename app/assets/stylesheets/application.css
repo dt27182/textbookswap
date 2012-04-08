@@ -6,6 +6,8 @@
  *= require_tree . 
 */
 
+
+/*
 #top {
 	width: 500px;
 	height: 100px;
@@ -16,6 +18,33 @@
   padding: 20px;
 	color: #444444;
 	margin: auto;
+  text-align: center;
+}
+*/
+
+#top {
+  background: #2C84AF url('banner.jpg') top left no-repeat;
+	color: #FFFFFF;
+	height: 130px;
+	position: relative;
+	padding: 40px;
+	border-radius: 10px;
+	border-top: solid 1px #96D0F7;
+	border-bottom: solid 1px #0C3459;
+}
+
+#logo {
+  font-family: "Courier New", Courier, monospace;
+	color: #FFFFFF;
+	margin: auto;
+  text-align: center;
+}
+
+#phrase {
+	color: #FFFFFF;
+  font-family: "Courier New", Courier, monospace;
+	font-size: 10px
+  margin: auto;
   text-align: center;
 }
 
@@ -29,4 +58,5 @@
   background-position: 10px center;
   color: #D8000C;
   background-color: #FFBABA;
+  background-image: url('error.png');
 }
