@@ -56,6 +56,15 @@ class CoursesController < ApplicationController
   
   #needs to return json
 	def find_course_numbers
+		department = params[:department]
+		courses = Course.find_all_by_department_long(department)
+		@numbers = []
+		courses.each do |course|
+			@numbers << course.number
+		end
+		respond_to do |format|
+			format.json { render :json => @numbers }
+		end
 	end
 	
 	#needs to return json
