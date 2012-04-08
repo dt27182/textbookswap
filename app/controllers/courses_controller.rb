@@ -25,12 +25,17 @@ class CoursesController < ApplicationController
   def find
     course_term = "spring"
     course_year = 2012
+    if params[:course].nil?
+    	flash[:notice] = "No course was selected"
+    	redirect_to show_courses_path(params[:transaction_type]) and return
+    end
     course = Course.find(:first, :conditions => { :term => course_term,
                            :year => course_year,
                            :department_long => params[:course][:department],
                            :number => params[:course][:number],
                            :section => params[:course][:section] } )
     if course.nil?
+    	flash[:notice] = "No course was selected"
       redirect_to show_courses_path(params[:transaction_type]) and return
     end
     redirect_to show_books_path(params[:transaction_type], course.id)
