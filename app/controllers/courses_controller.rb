@@ -73,5 +73,15 @@ class CoursesController < ApplicationController
 	
 	#needs to return json
 	def find_course_sections
+		department = params[:department]
+		number = params[:number]
+		courses = Course.find_all_by_department_long_and_number(department, number)
+		@sections = []
+		courses.each do |course|
+			@sections << course.section unless course.section == "" or @sections.include?(course.section)
+		end
+		respond_to do |format|
+			format.json { render :json => @sections }
+		end
 	end
 end
