@@ -12,3 +12,7 @@
   = select :course, :section, @sections
 
   = submit_tag 'Go choose a book', :name => 'search'
+  
+  = render :partial => "courses/required"
+  
+  = render :partial => "courses/unrequired"

@@ -15,6 +15,12 @@ class CoursesController < ApplicationController
     temp.each do |sec|
       @sections << sec.section unless sec.section == ""
     end
+    
+    #FOR TESTING THE VIEW (DELETE LATER)
+    
+    @req_books = [Book.create!(:title => 'this book', :author => 'person a', :edition => '1'), Book.create!(:title => 'that book', :author => 'person b', :edition => '2')]
+    @unreq_books = [Book.create!(:title => 'which book', :author => 'person c', :edition => '3'), Book.create!(:title => 'what book', :author => 'person d', :edition => '4')]
+    
   end
 
   def input
