@@ -23,27 +23,27 @@
       <img src="./assets/0.5.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2012-04-07T17:59:26-07:00">2012-04-07T17:59:26-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2012-04-07T21:18:56-07:00">2012-04-07T21:18:56-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">86.24%</span></span>
+    (<span class="covered_percent"><span class="yellow">85.0%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.31
+         1.29
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>14</b> files in total.
-    <b>109</b> relevant lines. 
-    <span class="green"><b>94</b> lines covered</span> and
-    <span class="red"><b>15</b> lines missed </span>
+    <b>120</b> relevant lines. 
+    <span class="green"><b>102</b> lines covered</span> and
+    <span class="red"><b>18</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -81,22 +81,22 @@
       
       <tr>
         <td class="strong"><a href="#50cdf700f891ce16492fd9f0345729cea3e09726" class="src_link" title="app/controllers/courses_controller.rb">app/controllers/courses_controller.rb</a></td>
-        <td class="green strong">100.0 %</td>
-        <td>44</td>
-        <td>27</td>
-        <td>27</td>
-        <td>0</td>
-        <td>5.2</td>
+        <td class="green strong">91.89 %</td>
+        <td>64</td>
+        <td>37</td>
+        <td>34</td>
+        <td>3</td>
+        <td>4.6</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#a4b3440158051fbab9757105c5a25b9261ff802e" class="src_link" title="app/controllers/index_controller.rb">app/controllers/index_controller.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>5</td>
-        <td>2</td>
-        <td>2</td>
+        <td>7</td>
+        <td>3</td>
+        <td>3</td>
         <td>0</td>
-        <td>1.0</td>
+        <td>1.3</td>
       </tr>
       
       <tr>
@@ -208,20 +208,20 @@
           <div class="file_list_container" id="Controllers">
   <h2>
     <span class="group_name">Controllers</span>
-    (<span class="covered_percent"><span class="green">100.0%</span></span>
+    (<span class="covered_percent"><span class="green">94.23%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.84
+         1.78
        </span>
     </span> hits/line)
   </h2>
   <a name="Controllers"></a>
   <div>
     <b>5</b> files in total.
-    <b>41</b> relevant lines. 
-    <span class="green"><b>41</b> lines covered</span> and
-    <span class="red"><b>0</b> lines missed </span>
+    <b>52</b> relevant lines. 
+    <span class="green"><b>49</b> lines covered</span> and
+    <span class="red"><b>3</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -259,22 +259,22 @@
       
       <tr>
         <td class="strong"><a href="#50cdf700f891ce16492fd9f0345729cea3e09726" class="src_link" title="app/controllers/courses_controller.rb">app/controllers/courses_controller.rb</a></td>
-        <td class="green strong">100.0 %</td>
-        <td>44</td>
-        <td>27</td>
-        <td>27</td>
-        <td>0</td>
-        <td>5.2</td>
+        <td class="green strong">91.89 %</td>
+        <td>64</td>
+        <td>37</td>
+        <td>34</td>
+        <td>3</td>
+        <td>4.6</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#a4b3440158051fbab9757105c5a25b9261ff802e" class="src_link" title="app/controllers/index_controller.rb">app/controllers/index_controller.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>5</td>
-        <td>2</td>
-        <td>2</td>
+        <td>7</td>
+        <td>3</td>
+        <td>3</td>
         <td>0</td>
-        <td>1.0</td>
+        <td>1.3</td>
       </tr>
       
       <tr>
@@ -712,11 +712,11 @@
         <div class="source_table" id="50cdf700f891ce16492fd9f0345729cea3e09726">
   <div class="header">
     <h3>app/controllers/courses_controller.rb</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
+    <h4><span class="green">91.89 %</span> covered</h4>
     <div>
-      <b>27</b> relevant lines. 
-      <span class="green"><b>27</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <b>37</b> relevant lines. 
+      <span class="green"><b>34</b> lines covered</span> and
+      <span class="red"><b>3</b> lines missed.</span>
     </div>
   </div>
   
@@ -738,250 +738,370 @@
         <li class="covered" data-hits="8" data-linenumber="3">
           <span class="hits">8</span>
           
-          <code class="ruby">    temp = Course.select(&quot;department_long&quot;).uniq</code>
+          <code class="ruby">    flash[:notice] = nil</code>
         </li>
       
         <li class="covered" data-hits="8" data-linenumber="4">
           <span class="hits">8</span>
           
-          <code class="ruby">    @departments = []</code>
+          <code class="ruby">    temp = Course.select(&quot;department_long&quot;).uniq</code>
         </li>
       
         <li class="covered" data-hits="8" data-linenumber="5">
           <span class="hits">8</span>
           
+          <code class="ruby">    @departments = []</code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="6">
+          <span class="hits">8</span>
+          
           <code class="ruby">    temp.each do |dept|</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="6">
+        <li class="covered" data-hits="3" data-linenumber="7">
           <span class="hits">3</span>
           
           <code class="ruby">    @departments &lt;&lt; dept.department_long unless dept.department_long == &quot;&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="7">
+        <li class="never" data-hits="" data-linenumber="8">
           
           
           <code class="ruby">    end</code>
-        </li>
-      
-        <li class="covered" data-hits="8" data-linenumber="8">
-          <span class="hits">8</span>
-          
-          <code class="ruby">    temp = Course.select(&quot;number&quot;).uniq</code>
         </li>
       
         <li class="covered" data-hits="8" data-linenumber="9">
           <span class="hits">8</span>
           
-          <code class="ruby">    @numbers = []</code>
+          <code class="ruby">    temp = Course.select(&quot;number&quot;).uniq</code>
         </li>
       
         <li class="covered" data-hits="8" data-linenumber="10">
           <span class="hits">8</span>
           
+          <code class="ruby">    @numbers = []</code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="11">
+          <span class="hits">8</span>
+          
           <code class="ruby">    temp.each do |num|</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="11">
+        <li class="covered" data-hits="3" data-linenumber="12">
           <span class="hits">3</span>
           
           <code class="ruby">      @numbers &lt;&lt; num.number unless num.number == &quot;&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="12">
+        <li class="never" data-hits="" data-linenumber="13">
           
           
           <code class="ruby">    end</code>
-        </li>
-      
-        <li class="covered" data-hits="8" data-linenumber="13">
-          <span class="hits">8</span>
-          
-          <code class="ruby">    temp = Course.select(&quot;section&quot;).uniq</code>
         </li>
       
         <li class="covered" data-hits="8" data-linenumber="14">
           <span class="hits">8</span>
           
-          <code class="ruby">    @sections = []</code>
+          <code class="ruby">    temp = Course.select(&quot;section&quot;).uniq</code>
         </li>
       
         <li class="covered" data-hits="8" data-linenumber="15">
           <span class="hits">8</span>
           
+          <code class="ruby">    @sections = []</code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="16">
+          <span class="hits">8</span>
+          
           <code class="ruby">    temp.each do |sec|</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="16">
+        <li class="covered" data-hits="3" data-linenumber="17">
           <span class="hits">3</span>
           
           <code class="ruby">      @sections &lt;&lt; sec.section unless sec.section == &quot;&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="17">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="18">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end    </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="19">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="20">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="20">
           
-          <code class="ruby">  def input</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="21">
           <span class="hits">1</span>
           
-          <code class="ruby">    Course.get_courses_for(params[:term], params[:year].to_i)</code>
+          <code class="ruby">  def input</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="22">
           <span class="hits">1</span>
           
-          <code class="ruby">    redirect_to '/'</code>
+          <code class="ruby">    Course.get_courses_for(params[:term], params[:year].to_i)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="23">
+        <li class="covered" data-hits="1" data-linenumber="23">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    redirect_to '/'</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="24">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="25">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="25">
+        <li class="covered" data-hits="1" data-linenumber="26">
           <span class="hits">1</span>
           
           <code class="ruby">  def find</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="26">
+        <li class="covered" data-hits="8" data-linenumber="27">
           <span class="hits">8</span>
           
           <code class="ruby">    course_term = &quot;spring&quot;</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="27">
+        <li class="covered" data-hits="8" data-linenumber="28">
           <span class="hits">8</span>
           
           <code class="ruby">    course_year = 2012</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="28">
+        <li class="covered" data-hits="8" data-linenumber="29">
           <span class="hits">8</span>
           
-          <code class="ruby">    course = Course.find(:first, :conditions =&gt; { :term =&gt; course_term,</code>
+          <code class="ruby">    if params[:course].nil?</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="29">
+        <li class="missed" data-hits="0" data-linenumber="30">
           
           
-          <code class="ruby">                           :year =&gt; course_year,</code>
+          <code class="ruby">    	flash[:notice] = &quot;No course was selected&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="30">
+        <li class="missed" data-hits="0" data-linenumber="31">
           
           
-          <code class="ruby">                           :department_long =&gt; params[:course][:department],</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="31">
-          
-          
-          <code class="ruby">                           :number =&gt; params[:course][:number],</code>
+          <code class="ruby">    	redirect_to show_courses_path(params[:transaction_type]) and return</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="32">
           
           
-          <code class="ruby">                           :section =&gt; params[:course][:section] } )</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="covered" data-hits="8" data-linenumber="33">
           <span class="hits">8</span>
           
-          <code class="ruby">    if course.nil?</code>
+          <code class="ruby">    course = Course.find(:first, :conditions =&gt; { :term =&gt; course_term,</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="34">
-          <span class="hits">2</span>
+        <li class="never" data-hits="" data-linenumber="34">
           
-          <code class="ruby">      redirect_to show_courses_path(params[:transaction_type]) and return</code>
+          
+          <code class="ruby">                           :year =&gt; course_year,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="35">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">                           :department_long =&gt; params[:course][:department],</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="36">
-          <span class="hits">6</span>
+        <li class="never" data-hits="" data-linenumber="36">
           
-          <code class="ruby">    redirect_to show_books_path(params[:transaction_type], course.id)</code>
+          
+          <code class="ruby">                           :number =&gt; params[:course][:number],</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="37">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">                           :section =&gt; params[:course][:section] } )</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="38">
+        <li class="covered" data-hits="8" data-linenumber="38">
+          <span class="hits">8</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">    if course.nil?</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="39">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="39">
+          <span class="hits">2</span>
           
-          <code class="ruby">  def show_books</code>
+          <code class="ruby">    	flash[:notice] = &quot;No course was selected&quot;</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="40">
+        <li class="covered" data-hits="2" data-linenumber="40">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      redirect_to show_courses_path(params[:transaction_type]) and return</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="41">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="42">
           <span class="hits">6</span>
           
-          <code class="ruby">    course = Course.find_by_id(params[:id])</code>
-        </li>
-      
-        <li class="covered" data-hits="6" data-linenumber="41">
-          <span class="hits">6</span>
-          
-          <code class="ruby">    @required_books, @unrequired_books = course.find_required_and_unrequired_books</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="42">
-          
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    redirect_to show_books_path(params[:transaction_type], course.id)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="43">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="44">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="45">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def show_books</code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="46">
+          <span class="hits">6</span>
+          
+          <code class="ruby">    @course = Course.find_by_id(params[:id])</code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="47">
+          <span class="hits">6</span>
+          
+          <code class="ruby">    @transaction_type = params[:transaction_type]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="48">
+          
+          
+          <code class="ruby">        </code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="49">
+          <span class="hits">6</span>
+          
+          <code class="ruby">    @required_books, @unrequired_books = @course.find_required_and_unrequired_books</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="50">
+          
+          
+          <code class="ruby">    </code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="51">
+          <span class="hits">6</span>
+          
+          <code class="ruby">    if @required_books.empty?</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="52">
+          
+          
+          <code class="ruby">      flash[:notice] = &quot;This class has no required books&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="53">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="54">
+          
+          
+          <code class="ruby">    </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="55">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="56">
+          
+          
+          <code class="ruby">  </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
+          
+          
+          <code class="ruby">  #needs to return json</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="58">
+          <span class="hits">1</span>
+          
+          <code class="ruby">	def find_course_numbers</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="59">
+          
+          
+          <code class="ruby">	end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="60">
+          
+          
+          <code class="ruby">	</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="61">
+          
+          
+          <code class="ruby">	#needs to return json</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="62">
+          <span class="hits">1</span>
+          
+          <code class="ruby">	def find_course_sections</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="63">
+          
+          
+          <code class="ruby">	end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="64">
           
           
           <code class="ruby">end</code>
@@ -996,8 +1116,8 @@
     <h3>app/controllers/index_controller.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>2</b> relevant lines. 
-      <span class="green"><b>2</b> lines covered</span> and
+      <b>3</b> relevant lines. 
+      <span class="green"><b>3</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -1011,25 +1131,37 @@
           <code class="ruby">class IndexController &lt; ApplicationController</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="2">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def index</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="3">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="4">
+        <li class="never" data-hits="" data-linenumber="2">
           
           
           <code class="ruby"></code>
         </li>
       
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def index</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="4">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    flash[:notice] = nil</code>
+        </li>
+      
         <li class="never" data-hits="" data-linenumber="5">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="6">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="7">
           
           
           <code class="ruby">end</code>
@@ -1422,13 +1554,13 @@
         <li class="covered" data-hits="1" data-linenumber="13">
           <span class="hits">1</span>
           
-          <code class="ruby">    list_of_course_objects.each_slice(3) do |course_tuple|</code>
+          <code class="ruby">    course = {}</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="14">
           <span class="hits">1</span>
           
-          <code class="ruby">      course = {}</code>
+          <code class="ruby">    list_of_course_objects.each_slice(3) do |course_tuple|</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="15">
@@ -1626,7 +1758,7 @@
         <li class="missed" data-hits="0" data-linenumber="47">
           
           
-          <code class="ruby">    page_elements.each_conts(8) do |elements|</code>
+          <code class="ruby">    page_elements.each_cons(8) do |elements|</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="48">
@@ -1638,19 +1770,19 @@
         <li class="missed" data-hits="0" data-linenumber="49">
           
           
-          <code class="ruby">        if elements[1] =~ /(LEC)|(SEM)/</code>
+          <code class="ruby">        if elements[1].content =~ /LEC|SEM/</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="50">
           
           
-          <code class="ruby">          teacher = elements[7]</code>
+          <code class="ruby">          teacher = elements[7].content</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="51">
           
           
-          <code class="ruby">          section = elements[1].gsub(/\s+/, &quot;&quot;)[-6..-4]</code>
+          <code class="ruby">          section = elements[1].content.gsub(/\s+/, &quot;&quot;)[-6..-4]</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="52">

@@ -155,7 +155,7 @@ describe CoursesController do
 
       it "should call the find_required_and_unrequired_books method in the Course model" do
         Course.stub(:find_by_id).and_return(@fake_course)
-        @fake_course.should_receive(:find_required_and_unrequired_books)
+        @fake_course.should_receive(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
         get :show_books, {:transaction_type => 'buy', :id => '1'}
       end
       it "should render the buy side list of books template" do
@@ -174,7 +174,7 @@ describe CoursesController do
 
       it "should call the find_required_and_unrequired_books method in the Course model" do
         Course.stub(:find_by_id).and_return(@fake_course)
-        @fake_course.should_receive(:find_required_and_unrequired_books)
+        @fake_course.should_receive(:find_required_and_unrequired_books).and_return([[@fake_book],[@fake_book]])
         get :show_books, {:transaction_type => 'sell', :id => '1'}
       end
       it "should render the sell side list of books template" do

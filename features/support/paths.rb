@@ -21,33 +21,33 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
-    
+
     when /^the Sell Course Selection page$/
       return show_courses_path("sell")
-      
+
     when /^the Buy Course Selection page$/
       return show_courses_path("buy")
-      
+
     when /^the Sell Books page for course number "(.*)" in the "(.*)" department$/
       course = Course.find_by_number_and_department_long($1, $2)
       return show_books_path("sell", course.id)
-    
+
     when /^the Buy Books page for course number "(.*)" in the "(.*)" department$/
       course = Course.find_by_number_and_department_long($1, $2)
       return show_books_path("buy", course.id)
-      
+
     when /^the Book Postings page for the "(.*)" edition of the book "(.*)"$/
-      book = Book.find_by_name_and_edition($1, $2)
-      return show_posting_path(book.id)
-    
+      book = Book.find_by_title_and_edition($2, $1)
+      return show_postings_path(book.id)
+
     when /^the Sell Book Information page for the "(.*)" edition of the book "(.*)"$/
-      book = Book.find_by_name_and_edition($1, $2)
+      book = Book.find_by_title_and_edition($2, $1)
       return display_new_posting_path(book.id)
-      
+
     when /^the Textbook Information page for course number "(.*)" in the "(.*)" department$/
       course =  Course.find_by_number_and_department_long($1, $2)
       return display_new_book_path(course.id)
-      
+
 
     else
       begin
