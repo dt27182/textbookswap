@@ -1,13 +1,19 @@
 %h1 Required Books
 
-- @req_books.each do |book|
+- @required_books.each do |book|
   %ul
+  
     %li
       Title:
-      = book.title
+      - if @transaction_type == 'buy'
+        = link_to "#{book.title}", show_postings_path(book.id)
+      - else
+        = link_to "#{book.title}", display_new_posting_path(book.id)
+        
     %li
       Author:
       = book.author
+      
     %li
       Edition:
       = book.edition

@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   def show
+    flash[:notice] = nil
     temp = Course.select("department_long").uniq
     @departments = []
     temp.each do |dept|
@@ -14,13 +15,7 @@ class CoursesController < ApplicationController
     @sections = []
     temp.each do |sec|
       @sections << sec.section unless sec.section == ""
-    end
-    
-    #FOR TESTING THE VIEW (DELETE LATER)
-    
-    @req_books = [Book.create!(:title => 'this book', :author => 'person a', :edition => '1'), Book.create!(:title => 'that book', :author => 'person b', :edition => '2')]
-    @unreq_books = [Book.create!(:title => 'which book', :author => 'person c', :edition => '3'), Book.create!(:title => 'what book', :author => 'person d', :edition => '4')]
-    
+    end    
   end
 
   def input
@@ -49,7 +44,23 @@ class CoursesController < ApplicationController
 
   def show_books
     course = Course.find_by_id(params[:id])
+    @transaction_type = params[:transaction_type]
+    
+    #FOR TESTING PURPOSE ONLY! DELETE THESE LATER
+    
+    #---------------------------------------------------------------------------------------
+    
+    @required_books = [Book.create!(:title => 'this book', :author => 'person a', :edition => '1'), Book.create!(:title => 'that book', :author => 'person b', :edition => '2')]
+    @unrequired_books = [Book.create!(:title => 'which book', :author => 'person c', :edition => '3'), Book.create!(:title => 'what book', :author => 'person d', :edition => '4')]
+    
+    #---------------------------------------------------------------------------------------
+    
     @required_books, @unrequired_books = course.find_required_and_unrequired_books
+    
+    if @required_books.empty?
+      flash[:notice] = "This class has no required books"
+    end
+    
   end
 
 end
