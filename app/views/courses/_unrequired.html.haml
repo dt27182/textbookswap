@@ -1,11 +1,14 @@
 %h1 Not Required Books
 
-- @unreq_books.each do |book|
+- @unrequired_books.each do |book|
   %ul
   
     %li
       Title:
-      = book.title
+      - if @transaction_type == 'buy'
+        = link_to "#{book.title}", show_postings_path(book.id)
+      - else
+        = link_to "#{book.title}", display_new_posting_path(book.id)
     %li
       Author:
       = book.author
