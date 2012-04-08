@@ -1,6 +1,5 @@
 class CoursesController < ApplicationController
   def show
-    flash[:notice] = nil
     temp = Course.select("department_long")
     @departments = []
     temp.each do |dept|
@@ -41,7 +40,7 @@ class CoursesController < ApplicationController
                            :number => params[:course][:number],
                            :section => params[:course][:section] } )
     if course.nil?
-      flash[:notice] = "No course was selected"
+      flash[:notice] = "No course was found"
       redirect_to show_courses_path(params[:transaction_type]) and return
     end
     redirect_to show_books_path(params[:transaction_type], course.id)
