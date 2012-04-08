@@ -23,7 +23,7 @@
 */
 
 #top {
-  background: #2C84AF url(img03.jpg) top left no-repeat;
+  background: #2C84AF url('banner.jpg') top left no-repeat;
 	color: #FFFFFF;
 	height: 130px;
 	position: relative;
