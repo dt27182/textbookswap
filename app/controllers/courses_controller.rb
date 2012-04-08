@@ -45,5 +45,12 @@ class CoursesController < ApplicationController
     course = Course.find_by_id(params[:id])
     @required_books, @unrequired_books = course.find_required_and_unrequired_books
   end
-
+  
+  #needs to return json
+	def find_course_numbers
+	end
+	
+	#needs to return json
+	def find_course_sections
+	end
 end

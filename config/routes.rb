@@ -17,15 +17,20 @@ Textbookswap::Application.routes.draw do
   #page to insert unlisted book into db
   put '/courses/:id/book/new' => 'books#create_new', :as => :create_new_book
   #page to show all the postings for a book
-  get '/books/:id/posting/show' => 'books#show_postings', :as => :show_postings
+  get '/books/:book_id/posting/show' => 'books#show_postings', :as => :show_postings
   #page to input details of a new posting
   get '/books/:book_id/posting/new' => 'postings#display_new', :as => :display_new_posting
   #page to submit a new posting
   post '/books/:book_id/posting/new' => 'postings#create_new', :as => :create_new_posting
   #page to let the buyer enter a msg and contact info
-  get '/books/:book_id/postings/:posting_id' => 'posting#show', :as => :show_posting
-  #page finalize a buy
-  post '/books/:book_id/postings/:posting_id' => 'posting#commit_buy', :as => :commit_buy_posting
+  get '/books/:book_id/postings/:posting_id' => 'postings#show', :as => :show_posting
+  #page to finalize a buy
+  post '/books/:book_id/postings/:posting_id' => 'postings#commit_buy', :as => :commit_buy_posting
+  
+  #route to find the course numbers offered by a department
+  get '/course/find_course_numbers' => 'courses#find_course_numbers', :as => :find_course_numbers
+  #route to find the sections of a course given a department and a number
+  get '/course/find_course_sections' => 'courses#find_course_sections', :as => :find_course_sections
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
