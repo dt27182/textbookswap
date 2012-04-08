@@ -3,3 +3,7 @@
 = render :partial => "courses/required"
 
 = render :partial => "courses/unrequired"
+
+- if @transaction_type == 'sell'
+
+  = button_to 'Enter Unlisted Book', display_new_book_path(@course), :action => "display_new", :method => :get

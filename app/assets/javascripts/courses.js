@@ -1,11 +1,11 @@
 $("#course_department").change(function(){
 	$.getJSON(
 		"/course/find_course_numbers", 
-		{department: $("#course_department").val()},
+		{department : $("#course_department").val()},
 		function(json){
-			$("#course_department").empty()
+			$("#course_number").empty();
 			$.each(json, function(val)){
-				$("#course_department").append('<option value="' + val + '">' + val + '</option>');
+				$("#course_number").append('<option value="' + val + '">' + val + '</option>');
 			};	
 		}
 	);
