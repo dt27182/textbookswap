@@ -64,7 +64,7 @@ class CoursesController < ApplicationController
 		courses = Course.find_all_by_department_long(department)
 		@numbers = []
 		courses.each do |course|
-			@numbers << course.number
+			@numbers << course.number unless course.number == "" or @numbers.include?(course.number)
 		end
 		respond_to do |format|
 			format.json { render :json => @numbers }
