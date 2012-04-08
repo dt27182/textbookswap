@@ -43,7 +43,7 @@ class CoursesController < ApplicationController
   end
 
   def show_books
-    course = Course.find_by_id(params[:id])
+    @course = Course.find_by_id(params[:id])
     @transaction_type = params[:transaction_type]
     
     #FOR TESTING PURPOSE ONLY! DELETE THESE LATER
@@ -55,7 +55,7 @@ class CoursesController < ApplicationController
     
     #---------------------------------------------------------------------------------------
     
-    @required_books, @unrequired_books = course.find_required_and_unrequired_books
+    @required_books, @unrequired_books = @course.find_required_and_unrequired_books
     
     if @required_books.empty?
       flash[:notice] = "This class has no required books"
