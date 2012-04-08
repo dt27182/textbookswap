@@ -1,22 +1,24 @@
 %h1 Not Required Books
 
-- @unrequired_books.each do |book|
+#Unrequired
 
-  %ul
+  - @unrequired_books.each do |book|
+
+    %ul
   
-    %li
-      Title:
-      - if @transaction_type == 'buy'
-        = link_to "#{book.title}", show_postings_path(book.id)
-      - else
-        = link_to "#{book.title}", display_new_posting_path(book.id)
+      %li
+        Title:
+        - if @transaction_type == 'buy'
+          = link_to "#{book.title}", show_postings_path(book.id)
+        - else
+          = link_to "#{book.title}", display_new_posting_path(book.id)
         
-    %li
-      Author:
-      = book.author
+     %li
+        Author:
+        = book.author
       
-    %li
-      Edition:
-      = book.edition
+     %li
+       Edition:
+       = book.edition
       
-    %br
+     %br
