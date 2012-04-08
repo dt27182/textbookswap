@@ -18,7 +18,7 @@ class CoursesController < ApplicationController
   end
 
   def input
-    get_courses_for(parmas[:term], params[:year].to_i)
+    Course.get_courses_for(params[:term], params[:year].to_i)
     redirect_to '/'
   end
 
