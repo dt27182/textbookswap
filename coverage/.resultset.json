@@ -54,10 +54,6 @@
         8,
         8,
         8,
-        3,
-        null,
-        8,
-        8,
         8,
         3,
         null,
@@ -66,6 +62,11 @@
         8,
         3,
         null,
+        8,
+        8,
+        8,
+        3,
+        null,
         null,
         null,
         1,
@@ -77,11 +78,16 @@
         8,
         8,
         8,
+        0,
+        0,
+        null,
+        8,
         null,
         null,
         null,
         null,
         8,
+        2,
         2,
         null,
         6,
@@ -91,6 +97,20 @@
         6,
         6,
         null,
+        6,
+        null,
+        6,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
         null,
         null
       ],
@@ -172,7 +192,9 @@
       ],
       "/home/saasbook/Documents/textbookswap/app/controllers/index_controller.rb": [
         1,
+        null,
         1,
+        2,
         null,
         null,
         null
@@ -205,6 +227,6 @@
         null
       ]
     },
-    "timestamp": 1333846766
+    "timestamp": 1333858736
   }
 }

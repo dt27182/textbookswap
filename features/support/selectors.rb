@@ -16,6 +16,12 @@ module HtmlSelectorsHelpers
     when "the page"
       "html > body"
 
+    when "Required"
+      [:xpath, "//*[@id='Required']"]
+
+    when "Unrequired"
+      [:xpath, "//*[@id='Unrequired']"]
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
