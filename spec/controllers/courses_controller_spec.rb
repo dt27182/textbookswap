@@ -35,32 +35,13 @@ describe CoursesController do
   describe "show method" do
 
     it "should call select methods with the Course model" do
-      Course.stub(:select).with("department_long").and_return(@fake_list_one)
-      @fake_list_one.stub(:uniq).and_return(@for_each_one)
+      Course.stub(:select).with("department_long").and_return(@for_each_one)
       @for_each_one.stub(:each).and_return(@answer_one)
-      Course.stub(:select).with("number").and_return(@fake_list_two)
-      @fake_list_two.stub(:uniq).and_return(@for_each_two)
+      Course.stub(:select).with("number").and_return(@for_each_two)
       @for_each_two.stub(:each).and_return(@answer_two)
-      Course.stub(:select).with("section").and_return(@fake_list_three)
-      @fake_list_three.stub(:uniq).and_return(@for_each_three)
+      Course.stub(:select).with("section").and_return(@for_each_three)
       @for_each_three.stub(:each).and_return(@answer_three)
       Course.should_receive(:select).with(anything()).exactly(3).times
-      get :show, {:transaction_type => "buy"}
-    end
-
-    it "should do call uniq methods with what the select returns" do
-      Course.stub(:select).with("department_long").and_return(@fake_list_one)
-      @fake_list_one.stub(:uniq).and_return(@for_each_one)
-      @for_each_one.stub(:each).and_return(@answer_one)
-      Course.stub(:select).with("number").and_return(@fake_list_two)
-      @fake_list_two.stub(:uniq).and_return(@for_each_two)
-      @for_each_two.stub(:each).and_return(@answer_two)
-      Course.stub(:select).with("section").and_return(@fake_list_three)
-      @fake_list_three.stub(:uniq).and_return(@for_each_three)
-      @for_each_three.stub(:each).and_return(@answer_three)
-      @fake_list_one.should_receive(:uniq)
-      @fake_list_two.should_receive(:uniq)
-      @fake_list_three.should_receive(:uniq)
       get :show, {:transaction_type => "buy"}
     end
 
@@ -83,7 +64,6 @@ describe CoursesController do
     end
     it "should call select, unique, each for departments and numbers" do
       Course.should_receive(:select).with(anything()).exactly(3).times.and_return(@fake_course_list)
-      @fake_course_list.should_receive(:uniq).exactly(3).times.and_return(@fake_course_list)
       @fake_course_list.should_receive(:each).exactly(3).times
       get :show, {:transaction_type => "buy"}
     end
