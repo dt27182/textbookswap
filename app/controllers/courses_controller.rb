@@ -15,6 +15,12 @@ class CoursesController < ApplicationController
     temp.each do |sec|
       @sections << sec.section unless sec.section == ""
     end
+    
+    #FOR TESTING THE VIEW (DELETE LATER)
+    
+    @req_books = [Book.create!(:title => 'this book', :author => 'person a', :edition => '1'), Book.create!(:title => 'that book', :author => 'person b', :edition => '2')]
+    @unreq_books = [Book.create!(:title => 'which book', :author => 'person c', :edition => '3'), Book.create!(:title => 'what book', :author => 'person d', :edition => '4')]
+    
   end
 
   def input
@@ -25,12 +31,17 @@ class CoursesController < ApplicationController
   def find
     course_term = "spring"
     course_year = 2012
+    if params[:course].nil?
+    	flash[:notice] = "No course was selected"
+    	redirect_to show_courses_path(params[:transaction_type]) and return
+    end
     course = Course.find(:first, :conditions => { :term => course_term,
                            :year => course_year,
                            :department_long => params[:course][:department],
                            :number => params[:course][:number],
                            :section => params[:course][:section] } )
     if course.nil?
+    	flash[:notice] = "No course was selected"
       redirect_to show_courses_path(params[:transaction_type]) and return
     end
     redirect_to show_books_path(params[:transaction_type], course.id)
@@ -40,5 +51,12 @@ class CoursesController < ApplicationController
     course = Course.find_by_id(params[:id])
     @required_books, @unrequired_books = course.find_required_and_unrequired_books
   end
-
+  
+  #needs to return json
+	def find_course_numbers
+	end
+	
+	#needs to return json
+	def find_course_sections
+	end
 end

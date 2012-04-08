@@ -1,0 +1,15 @@
+%h1 Required Books
+
+- @req_books.each do |book|
+  %ul
+    %li
+      Title:
+      = book.title
+    %li
+      Author:
+      = book.author
+    %li
+      Edition:
+      = book.edition
+      
+    %br
