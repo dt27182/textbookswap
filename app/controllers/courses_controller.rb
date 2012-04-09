@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   def show
+  	@transaction_type = params[:transaction_type]
     temp = Course.select("department_long")
     @departments = []
     temp.each do |dept|

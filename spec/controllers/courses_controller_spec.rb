@@ -44,7 +44,11 @@ describe CoursesController do
       Course.should_receive(:select).with(anything()).exactly(3).times
       get :show, {:transaction_type => "buy"}
     end
-
+		it "should set the @transaction_type variable to the correct type" do
+			Course.stub(:select).and_return([@fake_course])
+      get :show, {:transaction_type => "buy"}
+      assigns(:transaction_type).should == "buy"
+		end
     it "should set the @departments in the CoursesController to list of departments" do
       Course.stub(:select).and_return([@fake_course])
       get :show, {:transaction_type => "buy"}
@@ -67,6 +71,7 @@ describe CoursesController do
       @fake_course_list.should_receive(:each).exactly(3).times
       get :show, {:transaction_type => "buy"}
     end
+    
   end
 
   describe "find" do
