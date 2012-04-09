@@ -1,6 +1,6 @@
 class AddReservedColumn < ActiveRecord::Migration
   def up
-  	add_column :books, :reserved, :boolean, :default => 0
+  	add_column :books, :reserved, :boolean, :default => false
   end
 
   def down
