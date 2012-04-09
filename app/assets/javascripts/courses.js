@@ -4,6 +4,7 @@ function find_course_numbers(){
 		$.each(json, function(key, val){
 			$("#course_number").append('<option value="' + val + '">' + val + '</option>');
 		});
+		find_course_sections();
 	});
 }
 

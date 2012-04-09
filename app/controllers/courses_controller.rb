@@ -58,7 +58,7 @@ class CoursesController < ApplicationController
 
   end
 
-  #needs to return json
+  #returns json for ajax request from /:transaction_type/course/show
 	def find_course_numbers
 		department = params[:department]
 		courses = Course.find_all_by_department_long(department)
@@ -71,7 +71,7 @@ class CoursesController < ApplicationController
 		end
 	end
 	
-	#needs to return json
+	#returns json for ajax request from /:transaction_type/course/show
 	def find_course_sections
 		department = params[:department]
 		number = params[:number]

@@ -15,7 +15,7 @@ describe CoursesController do
     @answer_one = ['Computer Science']
     @answer_two = ['169']
     @answer_three = ['001']
-
+		
   end
 
   describe "check if it is on the right page" do
@@ -187,6 +187,53 @@ describe CoursesController do
       Course.find_by_teacher("Patterson").number.should == "61B"
     end
   end
-
+	
+	describe "returning json for course number dropbox on /:transaction_type/course/show" do
+		before :each do
+			@fake_department = "Computer Science"
+			@fake_course2 = mock('Course', :id => '1', :department_long => "Computer Science", :number => "169", :section => "002", :term => "spring", :year => 2012)
+			@fake_course3 = mock('Course', :id => '1', :department_long => "Computer Science", :number => "", :section => "002", :term => "spring", :year => 2012)
+		end
+		it "should find the courses with the selected department_long" do
+			Course.should_receive(:find_all_by_department_long).with(@fake_department).and_return([@fake_course])
+			get :find_course_numbers, {:department => @fake_department}
+		end
+		it "should put the course numbers of the matching courses into the @numbers variable" do
+			Course.stub(:find_all_by_department_long).and_return([@fake_course])
+			get :find_course_numbers, {:department => @fake_department}
+			assigns(:numbers).should == [@fake_course.number]
+		end
+		it "should not have repeating or blank elements in @numbers" do
+			Course.stub(:find_all_by_department_long).and_return([@fake_course, @fake_course2, @fake_course3])
+			get :find_course_numbers, {:department => @fake_department}
+			assigns(:numbers).should == [@fake_course.number]
+		end
+		it "should render @numbers in json format" do
+			Course.stub(:find_all_by_department_long).and_return([@fake_course])
+			get :find_course_numbers, :department => @fake_department, :format => :json
+			response.body.should == [@fake_course.number].to_json
+		end
+	end
+	
+	describe "returning json for the course section dropbox on /:transaction_type/course/show" do
+		before :each do
+			@fake_department = "Computer Science"
+			@fake_number = "169"
+		end
+		it "should find the courses with the selected department_long and number" do
+			Course.should_receive(:find_all_by_department_long_and_number).with(@fake_department, @fake_number).and_return([@fake_course])
+			get :find_course_sections, {:department => @fake_department, :number => @fake_number}
+		end
+		it "should put the section numbers of the matching courses into the @sections variable" do
+			Course.stub(:find_all_by_department_long_and_number).and_return([@fake_course])
+			get :find_course_sections, {:department => @fake_department, :number => @fake_number}
+			assigns(:sections).should == [@fake_course.section]
+		end
+		it "should render @sections in json format" do
+			Course.stub(:find_all_by_department_long_and_number).and_return([@fake_course])
+			get :find_course_sections, :department => @fake_department, :number => @fake_number, :format => :json
+			response.body.should == [@fake_course.section].to_json
+		end
+	end
 end
 

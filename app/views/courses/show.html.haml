@@ -1,4 +1,7 @@
-%h1 Find your course
+- if @transaction_type == 'buy'
+  %h1 Choose the class you are buying books for:
+- else
+  %h1 Choose the class you are selling books for:
 
 = form_tag find_course_path("#{params[:transaction_type]}"), :method => :post do
 
