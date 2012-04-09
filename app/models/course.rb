@@ -35,6 +35,8 @@ class Course < ActiveRecord::Base
     return term_acronyms[term]
   end
 
+#This is a method used to load course info into the database, its not actually a part of the app
+=begin Comment
   def self.get_teacher(course_page, course)
     agent = Mechanize.new
     form = course_page.form
@@ -55,6 +57,7 @@ class Course < ActiveRecord::Base
     end
     return teacher_pairs
   end
+=end
 
   #returns the required books and unrequired books of the course with :id == id as an array of 2 arrays eg [[list of required books][list of unrequired books]]
   def find_required_and_unrequired_books
