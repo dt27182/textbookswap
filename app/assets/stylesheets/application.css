@@ -22,15 +22,24 @@
 }
 */
 
+#wrapper {
+	position: relative;
+	margin: 20px auto 0 auto;
+	width: 1000px;
+}
+
 #top {
   background: #2C84AF url('banner.jpg') top left no-repeat;
-	color: #FFFFFF;
-	height: 130px;
+  color: #FFFFFF;
+	height: 120px;
 	position: relative;
-	padding: 40px;
+	padding: 20px 0px 20px 0px;
+	margin-bottom: 10px;
 	border-radius: 10px;
 	border-top: solid 1px #96D0F7;
+  border-left: solid 1px #96D0F7;
 	border-bottom: solid 1px #0C3459;
+  border-right: solid 1px #0C3459;
 }
 
 #logo {
@@ -61,9 +70,28 @@
   background-image: url('error.png');
 }
 
+#main {
+  background: #FFFFFF;
+  color: #000000;
+	height: auto;
+	position: relative;
+	padding: 20px 10px 100px 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	border-top: solid 1px #000000;
+	border-right: solid 1px #000000;
+  border-left: solid 1px #000000;
+	border-bottom: solid 1px #000000;
+}
+
 body {
 	background: #6B7C93 top center no-repeat;
 	line-height: 1.75em;
 	font-size: 12.5pt;
+}
+
+#footer {
+  font-size: 12px;
+  text-align: right;
 }
 

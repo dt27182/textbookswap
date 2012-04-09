@@ -6,18 +6,26 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
 
-  %body
-    #top 
-      %h1.title
-        #logo TextBook Swap
-      #phrase Buying and Selling TextBooks Has Never Been Easier!
-    
-    %br  
-    
-    #main
-      - if flash[:notice]
-        #notice.message= flash[:notice]
-      - elsif flash[:warning]
-        #warning.message= flash[:warning]
+  #wrapper
 
-      = yield
+    %body
+      #top 
+        %h1.title
+          #logo TextBook Swap
+        #phrase Buying and Selling TextBooks Has Never Been Easier! 
+    
+      #main
+        - if flash[:notice]
+          #notice.message= flash[:notice]
+        - elsif flash[:warning]
+          #warning.message= flash[:warning]
+
+        = yield
+        
+    #footer
+      Copyright © 2012 CS169SP12G15 |
+      = link_to "About Us"
+      | 
+      = link_to "Contact Us"
+      |
+      
