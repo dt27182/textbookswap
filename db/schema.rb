@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413193124) do
+ActiveRecord::Schema.define(:version => 20120413232329) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(:version => 20120413193124) do
     t.integer  "suggested_price"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "reserved",        :default => false
   end
 
   create_table "courses", :force => true do |t|
@@ -46,6 +45,8 @@ ActiveRecord::Schema.define(:version => 20120413193124) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "book_id"
+    t.boolean  "reserved",     :default => false
+    t.string   "comments"
   end
 
   create_table "requirements", :force => true do |t|
