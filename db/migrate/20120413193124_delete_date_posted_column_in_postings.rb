@@ -4,5 +4,6 @@ class DeleteDatePostedColumnInPostings < ActiveRecord::Migration
   end
 
   def down
+  	add_column :postings, :date_posted, :datetime
   end
 end

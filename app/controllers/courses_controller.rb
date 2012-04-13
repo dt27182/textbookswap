@@ -29,7 +29,9 @@ class CoursesController < ApplicationController
   end
 
   def find
+  	#probably needs to be moved into db
     course_term = "spring"
+    #probably needs to be moved into db
     course_year = 2012
     if params[:course].nil?
       flash[:notice] = "No course was selected"

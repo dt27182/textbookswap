@@ -14,14 +14,14 @@ Textbookswap::Application.routes.draw do
   get '/:transaction_type/courses/:id/book/show' => 'courses#show_books', :as => :show_books
   #page to input details for a unlisted book
   get '/courses/:id/book/new' => 'books#display_new', :as => :display_new_book
-  #page to insert unlisted book into db
+  #route to insert unlisted book into db
   put '/courses/:id/book/new' => 'books#create_new', :as => :create_new_book
   #page to show all the postings for a book
   get '/books/:book_id/posting/show' => 'books#show_postings', :as => :show_postings
   #page to input details of a new posting
   get '/books/:book_id/posting/new' => 'postings#display_new', :as => :display_new_posting
-  #page to submit a new posting
-  post '/books/:book_id/posting/new' => 'postings#create_new', :as => :create_new_posting
+  #route to submit a new posting
+  put '/books/:book_id/posting/new' => 'postings#create_new', :as => :create_new_posting
   #page to let the buyer enter a msg and contact info
   get '/books/:book_id/postings/:posting_id' => 'postings#show', :as => :show_posting
   #page to finalize a buy
