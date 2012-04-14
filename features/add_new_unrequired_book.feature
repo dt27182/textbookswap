@@ -17,3 +17,11 @@ Scenario: User wants to post information on a new unrequired book
   When I fill in "ISBN" with "1-84356-028-3"
   When I press "Next"
   Then I should be on the Sell Book Information page for the "10th Edition" edition of the book "Armando Fox Autobiography"
+  
+Scenario: User enters information incorrectly
+  When I fill in "Title" with ""
+  When I fill in "Author" with "David Patterson"
+  When I fill in "Edition" with "10th Edition"
+  When I fill in "ISBN" with "1-84356-028-3"
+  When I press "Next"
+  Then I should be on the the Textbook Information page for course number "169" in the "Computer Science" department
