@@ -23,9 +23,9 @@ Textbookswap::Application.routes.draw do
   #route to submit a new posting
   put '/books/:book_id/posting/new' => 'postings#create_new', :as => :create_new_posting
   #page to let the buyer enter a msg and contact info
-  get '/books/:book_id/postings/:posting_id' => 'postings#show', :as => :show_posting
+  get '/postings/:posting_id' => 'postings#show', :as => :show_posting
   #page to finalize a buy
-  post '/books/:book_id/postings/:posting_id' => 'postings#commit_buy', :as => :commit_buy_posting
+  post '/postings/:posting_id' => 'postings#commit_buy', :as => :commit_buy_posting
   
   #route to find the course numbers offered by a department
   get '/course/find_course_numbers' => 'courses#find_course_numbers', :as => :find_course_numbers

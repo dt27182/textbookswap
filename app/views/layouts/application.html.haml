@@ -12,9 +12,10 @@
       #top 
         %h1.title
           #logo TextBook Swap
-        #phrase Buying and Selling TextBooks Has Never Been Easier! 
+        #phrase Buying and Selling TextBooks Has Never Been Easier
     
       #main
+      
         - if flash[:notice]
           #notice.message= flash[:notice]
         - elsif flash[:warning]
