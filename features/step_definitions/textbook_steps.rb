@@ -45,3 +45,10 @@ Then /^(?:|I )should see "([^"]*)" in "([^"]*)"$/ do |regexp, parent|
     end
   end
 end
+
+Given /^somebody named "(.*)" with the e-mail "(.*)" posted the "(.*)" edition of the book "(.*)" for "(.*)" in "(.*)" condition at "(.*)"$/ do |name, email, bookEdi, bookTitle, cost, condit, loc|
+
+  book = Book.find_by_title_and_edition(bookTitle, bookEdi)
+  posting = Posting.create!(:seller_email => email, :seller_name => name, :price => cost, :location => loc, :condition => condit, :book_id => book.id)
+  posting.save!
+end

@@ -13,14 +13,15 @@ Background: User has indicated the book they want to sell
   
 Scenario: User wants to create a posting for the book they want to sell
 
-  When I fill in "Price" with "$99"
+  When I fill in "Price" with "99"
   When I select "Excellent" from "Condition"
   When I fill in "Comments" with "Only threw up on it twice"
   When I fill in "Email" with "student@failing169.edu"
-  When I fill in "Name" with "Fyodore Dostoevsky"
+  When I fill in "Name" with "Fyodor Dostoevsky"
   When I fill in "Location" with "Soviet Russia"
-  When I press "Post"
+  When I press "Finalize Post"
   Then I should be on the home page
+  Then I should see "Book Posting Submitted! We Will E-Mail You If Someone Wishes To Buy Your Book!"
   
   When I press "buyer_button"
   Then I should be on the Buy Course Selection page
@@ -31,6 +32,11 @@ Scenario: User wants to create a posting for the book they want to sell
   Then I should see "Armando Fox Autobiography" in "Unrequired"
   When I follow "Armando Fox Autobiography (10th Edition)"
   Then I should be on the Book Postings page for the "10th Edition" edition of the book "Armando Fox Autobiography"
-  Then I should see "$99"
+  Then I should see "99"
   Then I should see "Excellent"
   Then I should see "Soviet Russia"
+  When I follow "99 / Excellent / Soviet Russia"
+  Then I should be on the Buy Additional Information page for the "99" dollar "Excellent" quality "10th Edition" edition of the book "Armando Fox Autobiography" posted by "Fyodor Dostoevsky" at "student@failing169.edu" at "Soviet Russia"
+  Then I should see "Only threw up on it twice"
+  Then I should see "student@failing169.edu"
+  Then I should see "Fyodor Dostoevsky"
