@@ -1,7 +1,7 @@
 Feature: Buyers can view details and select a posting for the book they wish to buy
 
   As a buyer, once I have selected which book I am buying
-  So that I can pick the one I want
+  So that I can pick the offer I want
   I want to be able to view a listing of all the offers for that book
 
 Background: 

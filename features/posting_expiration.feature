@@ -1,8 +1,8 @@
 Feature: Postings expire and are removed after a certain time period which is set by an admin
 
-  As an admin,
-  So that the website remains free of clutter and outdated posts,
-  I want to see old posts be removed.
+  As an buyer,
+  So that I can look at relevant offers more efficiently,
+  I don't want to see expired posts.
   
 Background: Admin has already set an expiration time and old posts exist on the site.
 
