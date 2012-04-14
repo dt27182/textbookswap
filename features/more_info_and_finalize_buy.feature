@@ -20,3 +20,12 @@ Scenario: User wants to purchase the book offered by the posting
   When I press "Finalize Purchase"
   Then I should be on the home page
   Then I should see "Buy Request Submitted! We Have Emailed The Seller Your Message & Contact Information!"
+  
+Scenario: User fails to fill out forms properly
+
+  When I fill in "Name" with "Not too smart"
+  When I fill in "Email" with ""
+  When I fill in "Message" with "I GIVE NOBODY MY EMAIL"
+  When I press "Finalize Purchase"
+  Then I should be on the Buy Additional Information page for the "99" dollar "Excellent" quality "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "David Patterson" at "david@patterson.gov" at "Black Market"
+  Then I should see "Please fill in the required fields"
