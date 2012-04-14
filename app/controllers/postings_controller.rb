@@ -1,4 +1,5 @@
 class PostingsController < ApplicationController
+  
   def show
   end
 
@@ -10,4 +11,5 @@ class PostingsController < ApplicationController
 	
 	def create_new
 	end
+	
 end
