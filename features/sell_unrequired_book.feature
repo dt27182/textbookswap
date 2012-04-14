@@ -18,5 +18,6 @@ Scenario: User wants to sell an unrequired book that has been previously posted 
   Then I should be on the Sell Book Information page for the "10th Edition" edition of the book "Armando Fox Autobiography"
 
 Scenario: User wants to sell an unrequired book that has never been previously posted by a user
+
   When I press "Enter Unlisted Book"
   Then I should be on the Textbook Information page for course number "169" in the "Computer Science" department
