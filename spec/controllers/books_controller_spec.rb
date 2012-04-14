@@ -18,12 +18,14 @@ describe BooksController do
 		describe 'success path' do
 			it 'should render the display_new view' do
 				Course.stub(:find).and_return(@fake_course)
+				get :display_new, {:id => @fake_course.id}
 				response.should render_template("display_new")
 			end
 		end
 		describe 'fail path' do
 			it 'should redirect to the home page' do
 				Course.stub(:find).and_raise(ActiveRecord::RecordNotFound)
+				get :display_new, {:id => @fake_course.id}
 				response.should redirect_to(index_path)
 			end
 		end
@@ -102,29 +104,38 @@ describe BooksController do
 	end
 	
 	describe 'show_postings' do
-		it 'should call the find method in the Book model to find the book refered to by the id param' do
-			Book.should_receive(:find).with(@fake_book.id).and_return(@fake_book)
-			Book.stub(:find).and_return(@fake_book)
-			get :show_postings, {:book_id => @fake_book.id}
+		describe 'success path' do
+			it 'should call the find method in the Book model to find the book refered to by the id param' do
+				Book.should_receive(:find).with(@fake_book.id).and_return(@fake_book)
+				Book.stub(:find).and_return(@fake_book)
+				get :show_postings, {:book_id => @fake_book.id}
+			end
+			it "should make the list of this book's non-expired postings available to the view in the @postings variable" do
+				Book.stub(:find).and_return(@fake_book)
+				@fake_book.should_receive(:postings).and_return(@postings)
+				BooksController.stub(:expire_period).and_return(2.days)
+				get :show_postings, {:book_id => @fake_book.id}
+				assigns(:postings).should == @non_expired_postings
+			end
+			it "should make the book available to the view in the @book variable" do
+				Book.stub(:find).and_return(@fake_book)
+				@fake_book.stub(:postings).and_return(@postings)
+				get :show_postings, {:book_id => @fake_book.id}
+				assigns(:book).should == @fake_book
+			end
+			it 'should render the show_postings view' do
+				Book.stub(:find).and_return(@fake_book)
+				@fake_book.stub(:postings).and_return(@postings)
+				get :show_postings, {:book_id => @fake_book.id}
+				response.should render_template("show_postings")
+			end
 		end
-		it "should make the list of this book's non-expired postings available to the view in the @postings variable" do
-			Book.stub(:find).and_return(@fake_book)
-			@fake_book.should_receive(:postings).and_return(@postings)
-			BooksController.stub(:expire_period).and_return(2.days)
-			get :show_postings, {:book_id => @fake_book.id}
-			assigns(:postings).should == @non_expired_postings
-		end
-		it "should make the book available to the view in the @book variable" do
-			Book.stub(:find).and_return(@fake_book)
-			@fake_book.stub(:postings).and_return(@postings)
-			get :show_postings, {:book_id => @fake_book.id}
-			assigns(:book).should == @fake_book
-		end
-		it 'should render the show_postings view' do
-			Book.stub(:find).and_return(@fake_book)
-			@fake_book.stub(:postings).and_return(@postings)
-			get :show_postings, {:book_id => @fake_book.id}
-			response.should render_template("show_postings")
+		describe 'fail fath' do
+			it 'should redirect to the home page if the given book does not exist' do
+				Book.stub(:find).and_raise(ActiveRecord::RecordNotFound)
+				get :show_postings, {:book_id => @fake_book.id}
+				response.should redirect_to(index_path)
+			end
 		end
 	end
 end
