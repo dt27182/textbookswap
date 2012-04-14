@@ -7,3 +7,8 @@ Q: Have sellers enter names?
 A: no
 Q: Keep multiple semesters in database?
 A: no for now; roll over in the middle of semester
+
+Questions for 4/23 meeting:
+Q: Back buttons on pages?
+Q: Expire based on post date or update date?
+
