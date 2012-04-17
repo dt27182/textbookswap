@@ -6,26 +6,46 @@
  *= require_tree . 
 */
 
-
-/*
-#top {
-	width: 500px;
-	height: 100px;
-	margin: auto;
+html {
+	height: 100%;
+	background-image: url('back.jpg');
+	background-repeat:no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	font-family: ‘Arial Narrow’, sans-serif;
 }
 
-#logo {
-  padding: 20px;
-	color: #444444;
-	margin: auto;
-  text-align: center;
-}
-*/
-
-#wrapper {
+#wrapper.home {
 	position: relative;
-	margin: 20px auto 0 auto;
-	width: 1000px;
+	margin: 0 auto 0 auto;
+	width: 800px;
+}
+
+#homepage_comment {
+  position: absolute;
+  width: 675px;
+  background: #FFFFFF;
+  color: #000000;
+	height: auto;
+	padding: 10px 10px 10px 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	border-top: solid 1px #000000;
+	border-right: solid 1px #000000;
+  border-left: solid 1px #000000;
+	border-bottom: solid 1px #000000;
+}
+
+#wrapper.other {
+  margin: 0 auto 0 auto;
+	position: relative;
+	width: 900px;
+}
+
+#sign {
+  padding-top: 5px;
+  margin-left: -10px;
+  margin-bottom: 5px;
 }
 
 #top {
@@ -43,7 +63,6 @@
 }
 
 #logo {
-  font-family: "Courier New", Courier, monospace;
 	color: #FFFFFF;
 	margin: auto;
   text-align: center;
@@ -51,7 +70,6 @@
 
 #phrase {
 	color: #FFFFFF;
-  font-family: "Courier New", Courier, monospace;
 	font-size: 10px
   margin: auto;
   text-align: center;
@@ -75,7 +93,7 @@
   color: #000000;
 	height: auto;
 	position: relative;
-	padding: 20px 10px 100px 10px;
+	padding: 20px 10px 10px 10px;
 	margin-bottom: 10px;
 	border-radius: 10px;
 	border-top: solid 1px #000000;
@@ -84,14 +102,14 @@
 	border-bottom: solid 1px #000000;
 }
 
-body {
-	background: #6B7C93 top center no-repeat;
-	line-height: 1.75em;
+#yielding {
+  line-height: 1.75em;
 	font-size: 12.5pt;
 }
 
 #footer {
-  font-size: 12px;
-  text-align: right;
+  margin-top: 100px;
+  font-size: 10pt;
+  text-align: center;
 }
 
