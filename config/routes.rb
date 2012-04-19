@@ -26,7 +26,6 @@ Textbookswap::Application.routes.draw do
   get '/postings/:posting_id' => 'postings#show', :as => :show_posting
   #page to finalize a buy
   post '/postings/:posting_id' => 'postings#commit_buy', :as => :commit_buy_posting
-  
   #route to find the course numbers offered by a department
   get '/course/find_course_numbers' => 'courses#find_course_numbers', :as => :find_course_numbers
   #route to find the sections of a course given a department and a number
