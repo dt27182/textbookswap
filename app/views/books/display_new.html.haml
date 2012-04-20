@@ -1,13 +1,6 @@
 %h2 Enter in details about your book
 
-
-
-/ We need to add params[:course_id]
-/ = form_tag create_new_book_path("#{params[:course_id]}"), :method => :put do
-
-
-
-= form_tag create_new_book_path(), :method => :put do
+= form_tag create_new_book_path("#{@course.id}"), :method => :put do
 
   %p
     = label :book, :title, 'Title:'
