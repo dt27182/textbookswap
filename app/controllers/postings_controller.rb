@@ -32,7 +32,9 @@ class PostingsController < ApplicationController
     if params[:posting][:seller_email] == ""
       redirect_to display_new_posting_path('1') and return
     end
-    Posting.create(params[:posting])
+    new_posting = params[:posting]
+    new_posting[:book_id] = book.id
+    Posting.create(new_posting)
     redirect_to index_path and return
   end
 
