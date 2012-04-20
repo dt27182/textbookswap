@@ -1,17 +1,21 @@
 - if @transaction_type == 'buy'
-  %h1 Choose the class you are buying books for:
+  %h2 Choose the class you are buying books for:
 - else
-  %h1 Choose the class you are selling books for:
+  %h2 Choose the class you are selling books for:
 
 = form_tag find_course_path("#{params[:transaction_type]}"), :method => :post do
 
-  = label :course, :department, 'Department'
-  = select :course, :department, @departments
+  %p
+    = label :course, :department, 'Department'
+    = select :course, :department, @departments
 
-  = label :course, :number, 'Number'
-  = select :course, :number, @numbers
+  %p
+    = label :course, :number, 'Number'
+    = select :course, :number, @numbers
 
-  = label :course, :section, 'Section'
-  = select :course, :section, @sections
+  %p
+    = label :course, :section, 'Section'
+    = select :course, :section, @sections
 
-  = submit_tag 'Go choose a book', :name => 'search'
+  %p
+    = submit_tag 'Go choose a book', :name => 'search'
