@@ -10,8 +10,8 @@ describe PostingsController do
 #  end
 
   before :each do
-    @fake_post = Posting.create({:seller_email => "abc@abc.com", :seller_name => "Seller", :price => "30", :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :book_id => '1'})
-    @fake_book = Book.create({:title => "Book", :author => "Professor", :edition => "1"})
+    @fake_post = Posting.create!({:seller_email => "abc@abc.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false, :book_id => '1'})
+    @fake_book = Book.create!({:title => "Book", :author => "Professor", :edition => "1", :isbn => 9780812500482})
   end
 
   describe "The route" do

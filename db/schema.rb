@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120420195925) do
     t.integer  "suggested_price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "course_id"
   end
 
   create_table "courses", :force => true do |t|
