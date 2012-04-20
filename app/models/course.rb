@@ -43,6 +43,9 @@ class Course < ActiveRecord::Base
     form.p_dept = course[:department_short]
     form.p_course = course[:number]
     form.p_title = course[:name]
+    if course[:name][-3..-1] == "..."
+      form.p_title = course[:name][0..-4]
+    end
     detailed_course_page = agent.submit(form)
     page_elements = detailed_course_page.root.css('body table tr td')
     teacher_pairs = []

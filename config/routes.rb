@@ -21,12 +21,11 @@ Textbookswap::Application.routes.draw do
   #page to input details of a new posting
   get '/books/:book_id/posting/new' => 'postings#display_new', :as => :display_new_posting
   #route to submit a new posting
-  put '/books/:book_id/posting/new' => 'postings#create_new', :as => :create_new_posting
+  post '/books/:book_id/posting/new' => 'postings#create_new', :as => :create_new_posting
   #page to let the buyer enter a msg and contact info
   get '/postings/:posting_id' => 'postings#show', :as => :show_posting
   #page to finalize a buy
   post '/postings/:posting_id' => 'postings#commit_buy', :as => :commit_buy_posting
-  
   #route to find the course numbers offered by a department
   get '/course/find_course_numbers' => 'courses#find_course_numbers', :as => :find_course_numbers
   #route to find the sections of a course given a department and a number
