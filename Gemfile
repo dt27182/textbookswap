@@ -8,7 +8,7 @@ gem 'rails', '3.1.0'
 gem 'jquery-rails'
 gem 'haml'
 gem 'mechanize'
-
+gem 'isbn_validation'
 # Use unicorn as the web server
 # gem 'unicorn'
 
