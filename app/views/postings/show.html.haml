@@ -1,33 +1,34 @@
 %h2 Posting Info
 
-%ul
+%p
+  Contact e-mail:
+  = @posting.seller_email
+       
+- if not @posting.seller_name.nil?
+  %p
+    Contact person:
+    = @posting.seller_name
+    
+%p
+  Price:
+  = @posting.price
   
-  %li
-    Contact Information:
-    = @posting.seller_email
-     
-    - if not @posting.seller_name.nil?
-      = posting.seller_name
-    
-  %li
-    Price:
-    = @posting.price
+%p
+  Condition:
+  = @posting.condition   
+
+%p
+  Posted on:
+  = @posting.created_at
   
-  %li
-    Condition:
-    = @posting.condition
-    
-  %li
-    Posted on:
-    = @posting.created_at
-    
-  %li
-    Best Location:
-    = @posting.location
-    
-  %li
-    Comment:
-    = @posting.comments
+%p
+  Best Location:
+  = @posting.location
+
+%p
+  Comment:
+  = @posting.comments
    
 = render :partial => "postings/email_form"
+
 
