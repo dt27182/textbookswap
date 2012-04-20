@@ -2,7 +2,8 @@ class Course < ActiveRecord::Base
   has_many :requirements
   has_many :books, :through => :requirements
   #Validates the same course isn't added twice
-  validates :term, :uniqueness => { :scope => [ :number, :name, :department_short, :department_long, :teacher, :section, :year ] }
+  validates :term, :uniqueness => { :scope => [ :number, :name, :department_short, :department_long, :teacher, :section, :year ]}
+  validates :number, :name, :department_short, :department_long, :teacher, :section, :year, :term, :presence => true
 
   def self.get_courses_for(term, year)
     term_acronym = get_term_acronym(term)

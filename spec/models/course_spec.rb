@@ -30,13 +30,13 @@ describe Course do
 
   describe 'test ability to find required and unrequired book IDs' do
     before do
-      @course1 = Course.create!(:number => '169')
+      @course1 = Course.create!(:number => '169', :name => "Software Engineering", :department_short => "CompSci", :department_long => "Computer Science", :teacher => "Armando Fox", :section => "001", :year => 2012, :term => "spring")
       @course1.save!
-      @book1 = Book.create!(:title => 'Engineering Long Lasting Software')
+      @book1 = Book.create!(:title => 'Engineering Long Lasting Software', :author => "Armando Fox", :edition => "First", :isbn => 1234567890)
       @book1.save!
-      @book2 = Book.create!(:title => 'Armando Fox Autobiography')
+      @book2 = Book.create!(:title => 'Armando Fox Autobiography', :author => "Dave Patterson", :edition => "Second", :isbn => 1234567899)
       @book2.save!
-      @book3 = Book.create!(:title => 'David Patterson Autobiography')
+      @book3 = Book.create!(:title => 'David Patterson Autobiography', :author => "Us", :edition => "Thrid", :isbn => 1234567888)
       @book3.save!
       @requirement1 = Requirement.create!(:course_id => @course1.id, :book_id => @book1.id, :is_required => true)
       @requirement1.save!
