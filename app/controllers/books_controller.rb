@@ -3,6 +3,7 @@ class BooksController < ApplicationController
     if Course.find_by_id(params[:id]).nil?
       redirect_to index_path and return
     end
+    @course= Course.find_by_id(params[:id])
   end
 
   def create_new

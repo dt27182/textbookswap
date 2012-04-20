@@ -1,11 +1,11 @@
 class PostingsController < ApplicationController
 
   def show
-    @post = Posting.find_by_id(params[:posting_id])
-    if @post.nil?
+    @posting = Posting.find_by_id(params[:posting_id])
+    if @posting.nil?
       redirect_to index_path() and return
     end
-    @book = Book.find_by_id(@post.book_id)
+    @book = Book.find_by_id(@posting.book_id)
   end
 
   def commit_buy
@@ -35,6 +35,7 @@ class PostingsController < ApplicationController
     new_posting = params[:posting]
     new_posting[:book_id] = book.id
     Posting.create(new_posting)
+    flash[:notice] = "Posting Successful"
     redirect_to index_path and return
   end
 

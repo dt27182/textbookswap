@@ -34,7 +34,7 @@ class CoursesController < ApplicationController
     #probably needs to be moved into db
     course_year = 2012
     if params[:course].nil?
-      flash[:notice] = "No course was selected"
+      flash[:warning] = "No course was selected"
       redirect_to show_courses_path(params[:transaction_type]) and return
     end
     course = Course.find(:first, :conditions => { :term => course_term,
@@ -43,7 +43,7 @@ class CoursesController < ApplicationController
                            :number => params[:course][:number],
                            :section => params[:course][:section] } )
     if course.nil?
-      flash[:notice] = "No course was found"
+      flash[:warning] = "No course was found"
       redirect_to show_courses_path(params[:transaction_type]) and return
     end
     redirect_to show_books_path(params[:transaction_type], course.id)
@@ -56,7 +56,7 @@ class CoursesController < ApplicationController
     @required_books, @unrequired_books = @course.find_required_and_unrequired_books
 
     if @required_books.empty?
-      flash[:notice] = "This class has no required books"
+      flash[:warning] = "This class has no required books"
     end
 
   end
