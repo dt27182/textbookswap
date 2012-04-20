@@ -9,23 +9,24 @@ class BooksController < ApplicationController
     if Course.find_by_id(params[:id]).nil?
       redirect_to index_path and return
     end
-    new_book = Book.create(params[:new_book])
+    new_book = Book.create(params[:book])
     if new_book.id.nil?
-      redirect_to display_new_book_path(params[:id])
+      redirect_to create_new_book_path(params[:id]) and return
     end
     new_requirement = Requirement.create({:course_id => params[:id], :book_id => new_book.id, :is_required => false})
-    display_new_posing_path(new_book.id)
+    redirect_to display_new_posting_path(new_book.id) and return
   end
 
   def show_postings
     @book = Book.find_by_id(params[:book_id])
-    if @book.id.nil?
+    if @book.nil?
       redirect_to index_path and return
     end
     temp = @book.postings
     @postings = []
+    expire_days = Misc.find_by_key("expiration_time").value.to_i
     temp.each do |posting|
-      if not posting.expired?  #This doesn't work right now
+      if posting.created_at + expire_days.days > Time.now
         @postings << posting
       end
    end
