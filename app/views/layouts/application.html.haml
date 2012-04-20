@@ -1,38 +1,30 @@
 %html
+
   %head
+  
     %title TextBook Swap!
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = csrf_meta_tags
-
-
+  
   %body
   
-    #wrapper.other
+    #sign
+      = link_to image_tag('logo.png', :size =>'300x45'), '/'
 
-      #sign
-        = link_to image_tag('logo.png', :size =>'300x45'), '/'
+    #wrapper
 
-      #top 
-        %h1.title
-          #logo 
-            TextBook Swap
-        #phrase 
-          Buying and Selling TextBooks Has Never Been Easier
-    
-      #main
-        - if flash[:notice]
-          #notice.message= flash[:notice]
-        - elsif flash[:warning]
-          #warning.message= flash[:warning]
-
-        #yielding
-          = yield
+      - if flash[:notice]
+        #notice.message= flash[:notice]
+      - elsif flash[:warning]
+        #warning.message= flash[:warning]
         
-        #footer
-          Copyright © 2012 CS169SP12G15 |
-          = link_to "About Us"
-          |
-          = link_to "Contact Us"
-          |
+      = yield
+          
+      #footer
+        Copyright © 2012 CS169SP12G15 |
+        = link_to "About Us"
+        |
+        = link_to "Contact Us"
+        |
       
