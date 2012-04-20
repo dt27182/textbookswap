@@ -30,6 +30,7 @@ Textbookswap::Application.routes.draw do
   get '/course/find_course_numbers' => 'courses#find_course_numbers', :as => :find_course_numbers
   #route to find the sections of a course given a department and a number
   get '/course/find_course_sections' => 'courses#find_course_sections', :as => :find_course_sections
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

@@ -1,10 +1,10 @@
 class CoursesController < ApplicationController
   def show
-  	@transaction_type = params[:transaction_type]
+    @transaction_type = params[:transaction_type]
     temp = Course.select("department_long")
     @departments = []
     temp.each do |dept|
-    @departments << dept.department_long unless dept.department_long == "" or @departments.include?(dept.department_long)
+      @departments << dept.department_long unless dept.department_long == "" or @departments.include?(dept.department_long)
     end
     temp = Course.select("number")
     @numbers = []
@@ -29,7 +29,7 @@ class CoursesController < ApplicationController
   end
 
   def find
-  	#probably needs to be moved into db
+    #probably needs to be moved into db
     course_term = "spring"
     #probably needs to be moved into db
     course_year = 2012
@@ -62,29 +62,29 @@ class CoursesController < ApplicationController
   end
 
   #returns json for ajax request from /:transaction_type/course/show
-	def find_course_numbers
-		department = params[:department]
-		courses = Course.find_all_by_department_long(department)
-		@numbers = []
-		courses.each do |course|
-			@numbers << course.number unless course.number == "" or @numbers.include?(course.number)
-		end
-		respond_to do |format|
-			format.json { render :json => @numbers }
-		end
-	end
-	
-	#returns json for ajax request from /:transaction_type/course/show
-	def find_course_sections
-		department = params[:department]
-		number = params[:number]
-		courses = Course.find_all_by_department_long_and_number(department, number)
-		@sections = []
-		courses.each do |course|
-			@sections << course.section unless course.section == "" or @sections.include?(course.section)
-		end
-		respond_to do |format|
-			format.json { render :json => @sections }
-		end
-	end
+  def find_course_numbers
+    department = params[:department]
+    courses = Course.find_all_by_department_long(department)
+    @numbers = []
+    courses.each do |course|
+      @numbers << course.number unless course.number == "" or @numbers.include?(course.number)
+    end
+    respond_to do |format|
+      format.json { render :json => @numbers }
+    end
+  end
+
+  #returns json for ajax request from /:transaction_type/course/show
+  def find_course_sections
+    department = params[:department]
+    number = params[:number]
+    courses = Course.find_all_by_department_long_and_number(department, number)
+    @sections = []
+    courses.each do |course|
+      @sections << course.section unless course.section == "" or @sections.include?(course.section)
+    end
+    respond_to do |format|
+      format.json { render :json => @sections }
+    end
+  end
 end
