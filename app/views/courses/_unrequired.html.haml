@@ -9,9 +9,9 @@
       %li
         Title:
         - if @transaction_type == 'buy'
-          = link_to "#{book.title} (#{book.edition})", show_postings_path(book.id)
+          = link_to "#{book.title}", show_postings_path(book.id)
         - else
-          = link_to "#{book.title} (#{book.edition})", display_new_posting_path(book.id)
+          = link_to "#{book.title}", display_new_posting_path(book.id)
         
       %li
         Author:

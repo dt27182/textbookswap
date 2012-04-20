@@ -21,7 +21,7 @@ Textbookswap::Application.routes.draw do
   #page to input details of a new posting
   get '/books/:book_id/posting/new' => 'postings#display_new', :as => :display_new_posting
   #route to submit a new posting
-  post '/books/:book_id/posting/new' => 'postings#create_new', :as => :create_new_posting
+  put '/books/:book_id/posting/new' => 'postings#create_new', :as => :create_new_posting
   #page to let the buyer enter a msg and contact info
   get '/postings/:posting_id' => 'postings#show', :as => :show_posting
   #page to finalize a buy

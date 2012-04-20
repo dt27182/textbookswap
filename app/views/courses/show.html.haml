@@ -6,15 +6,15 @@
 = form_tag find_course_path("#{params[:transaction_type]}"), :method => :post do
 
   %p
-    = label :course, :department, 'Department'
+    = label :course, :department, 'Department:'
     = select :course, :department, @departments
 
   %p
-    = label :course, :number, 'Number'
+    = label :course, :number, 'Number:'
     = select :course, :number, @numbers
 
   %p
-    = label :course, :section, 'Section'
+    = label :course, :section, 'Section:'
     = select :course, :section, @sections
 
   %p
