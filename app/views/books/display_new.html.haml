@@ -1,22 +1,22 @@
 %h2 Enter in details about your book
 
-= form_tag create_new_book_path("#{@course.id}"), :method => :put do
+= form_tag create_new_book_path("#{@course.id}"), :id => "create_book_form", :method => :put, do
 
   %p
     = label :book, :title, 'Title:'
-    = text_field :book, :title
+    = text_field :book, :title, :class => "required"
 
   %p
     = label :book, :author, 'Author:'
-    = text_field :book, :author
+    = text_field :book, :author, :class => "required"
 
   %p
     = label :book, :edition, 'Edition:'
-    = text_field :book, :edition
+    = text_field :book, :edition, :class => "required"
     
   %p
     = label :book, :isbn, 'ISBN:'
-    = text_field :book, :isbn
+    = text_field :book, :isbn, :class => "required"
 
   %p
-    = submit_tag 'Done!'
+    = submit_tag 'Next'

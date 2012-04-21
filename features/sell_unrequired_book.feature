@@ -14,7 +14,7 @@ Background: User selected Computer Science 169 on the previous page
 Scenario: User wants to sell an unrequired book that has been previously posted by a user
   
   Then I should see "Armando Fox Autobiography" in "Unrequired"
-  When I follow "Armando Fox Autobiography (10th Edition)"
+  When I follow "Armando Fox Autobiography"
   Then I should be on the Sell Book Information page for the "10th Edition" edition of the book "Armando Fox Autobiography"
 
 Scenario: User wants to sell an unrequired book that has never been previously posted by a user

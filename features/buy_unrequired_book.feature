@@ -6,6 +6,7 @@ Feature: Buyer can select unlisted book that they wish to buy
 
 Background: User selected Computer Science 169 on the previous page
 
+  Given the expiration time is "20" days
   Given the "Computer Science" department is offering course number "169"
   Given the "10th Edition" edition of the book "Armando Fox Autobiography" exists
   Given the "10th Edition" edition of the book "Armando Fox Autobiography" is an unrequired book for course number "169" in the "Computer Science" department
@@ -14,5 +15,5 @@ Background: User selected Computer Science 169 on the previous page
 Scenario: User wants to select an unrequired book
 
   Then I should see "Armando Fox Autobiography" in "Unrequired"
-  When I follow "Armando Fox Autobiography (10th Edition)"
+  When I follow "Armando Fox Autobiography"
   Then I should be on the Book Postings page for the "10th Edition" edition of the book "Armando Fox Autobiography"

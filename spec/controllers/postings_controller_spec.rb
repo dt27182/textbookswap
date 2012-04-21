@@ -10,8 +10,8 @@ describe PostingsController do
 #  end
 
   before :each do
-    @fake_post = Posting.create!({:seller_email => "abc@abc.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false, :book_id => '1'})
-    @fake_book = Book.create!({:title => "Book", :author => "Professor", :edition => "1", :isbn => 9780812500482})
+    @fake_post = Posting.create!({:seller_email => "abc@gmail.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false, :book_id => '1'})
+    @fake_book = Book.create!({:title => "Book", :author => "Professor", :edition => "1", :isbn => "960-425-059-0"})
   end
 
   describe "The route" do
@@ -53,7 +53,7 @@ describe PostingsController do
       it "should make the posting variable available to the view" do
         Posting.stub(:find_by_id).and_return(@fake_post)
         get :show, {:posting_id => '1'}
-        assigns(:post).should == @fake_post
+        assigns(:posting).should == @fake_post
       end
 
       it "should make the book variable available to the view" do
@@ -86,12 +86,12 @@ describe PostingsController do
 
     before :each do
       @fake_buyer_name = "Buyer"
-      @fake_buyer_email = "def@def.com"
+      @fake_buyer_email = "def@gmail.com"
       @fake_buyer_comment = "Hello, I want to buy your book"
       @empty_buyer_name = ""
       @empty_buyer_email = ""
       @empty_buyer_comment = ""
-      @seller_email = "abc@abc.com"
+      @seller_email = "abc@gmail.com"
       @book_title = "TextBook"
       @fake_book = Book.create(:title => "Test Book", :author => "Fox", :edition => "alpha")
       @fake_post = Posting.create(:seller_email => @seller_email)
@@ -105,13 +105,13 @@ describe PostingsController do
 
       it "should send an email to the seller" do
         Posting.stub(:find_by_id).and_return(@fake_post)
-        @fake_post.should_receive(:send_seller_buyer_info).with(@fake_buyer_comment)
-        post :commit_buy, {:posting_id => '1', :email => {:body => @fake_buyer_comment}}
+        @fake_post.should_receive(:send_seller_buyer_info).with(@fake_buyer_email, @fake_buyer_comment)
+        post :commit_buy, {:posting_id => '1', :email => {:body => @fake_buyer_comment, :buyer_email => @fake_buyer_email}}
       end
 
       it "should redirect back to the home page with correct inputs" do
         @fake_post.stub(:send_seller_buyer_info)
-        post :commit_buy, {:posting_id => '1', :email => {:body => @fake_buyer_comment}}
+        post :commit_buy, {:posting_id => '1', :email => {:body => @fake_buyer_comment, :buyer_email => @fake_buyer_email}}
         response.should redirect_to(index_path())
       end
 
@@ -132,6 +132,19 @@ describe PostingsController do
         Posting.should_not_receive(:send_seller_buyer_info).with(@empty_buyer_comment)
         post :commit_buy, {:posting_id => '1', :email => {:body => @empty_buyer_comment}}
         response.should redirect_to(show_posting_path('1'))
+      end
+
+    end
+
+    describe "wrong inputs" do
+      it "should set the flash if can't find posting" do
+        post :commit_buy, {:posting_id => '6', :email => {:body => @fake_buyer_comment, :buyer_email => @fake_buyer_email}}
+        flash.now[:warning].should == "Buy request failed because the given post id does not exist"
+      end
+
+      it "should set the flash if the email isn't right" do
+        post :commit_buy, {:posting_id => '1', :email => {:body => @fake_buyer_comment, :buyer_email => "gibberish"}}
+        flash.now[:warning].should == "Please fill in the required fields"
       end
 
     end
@@ -177,12 +190,12 @@ describe PostingsController do
       end
 
       it "should call create" do
-        Posting.should_receive(:create).with("seller_email" => @fake_post.seller_email, "seller_name" => @fake_post.seller_name, "price" => @fake_post.price.to_s, "location" => @fake_post.location, "condition" => @fake_post.condition, "book_id" => '1')
+        Posting.should_receive(:create).with("seller_email" => @fake_post.seller_email, "seller_name" => @fake_post.seller_name, "price" => @fake_post.price.to_s, "location" => @fake_post.location, "condition" => @fake_post.condition, "book_id" => 1).and_return(@fake_post)
         put :create_new, {:book_id => '1', :posting => {:seller_email => @fake_post.seller_email, :seller_name => @fake_post.seller_name, :price => @fake_post.price, :location => @fake_post.location, :condition => @fake_post.condition, :book_id => '1'}}
       end
 
       it "should redirect back to the home page" do
-        Posting.stub(:create)
+        Posting.stub(:create).and_return(@fake_post)
         put :create_new, {:book_id => '1', :posting => {:seller_email => "abc@abc.com", :seller_name => "Alice", :price => "21", :location => "Berkeley"}}
         response.should redirect_to(index_path())
       end
