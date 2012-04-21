@@ -11,7 +11,12 @@ class PostingsController < ApplicationController
 
   def commit_buy
     if params[:email][:body] == ""
-      redirect_to show_posting_path('1') and return
+    	flash[:warning] = "Please fill in all the fields"
+      redirect_to show_posting_path(params[:posting_id]) and return
+    end
+    if !params[:email][:buyer_email].match(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)
+    	flash[:warning] = "Please fill in all the fields"
+    	redirect_to show_posting_path(params[:posting_id]) and
     end
     post = Posting.find_by_id(params[:posting_id])
     if post.nil?
