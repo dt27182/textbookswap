@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'mechanize'
 gem 'isbn_validation'
+gem 'valid_email'
 # Use unicorn as the web server
 # gem 'unicorn'
 
