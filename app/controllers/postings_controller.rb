@@ -16,16 +16,16 @@ class PostingsController < ApplicationController
     end
     if !params[:email][:buyer_email].match(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)
     	flash[:warning] = "Please fill in all the fields"
-    	redirect_to show_posting_path(params[:posting_id]) and
+    	redirect_to show_posting_path(params[:posting_id]) and return
     end
     post = Posting.find_by_id(params[:posting_id])
     if post.nil?
     	flash[:warning] = "Buy request failed because the given post id does not exist"
-			post.send_seller_buyer_info(params[:email][:buyer_email], params[:email][:body])
-    	flash[:notice] = "Buy request submitted! We have emailed the seller your message & contact information!"
     	redirect_to index_path and return
     else
     	flash[:warning] = "Buy request failed because the given post id does not exist"
+			post.send_seller_buyer_info(params[:email][:buyer_email], params[:email][:body])
+    	flash[:notice] = "Buy request submitted! We have emailed the seller your message & contact information!"
     	redirect_to index_path and return
     end
   end
