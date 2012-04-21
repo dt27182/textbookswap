@@ -4,7 +4,7 @@
   Contact e-mail:
   = @posting.seller_email
        
-- if not @posting.seller_name.nil?
+- if not @posting.seller_name == ""
   %p
     Contact person:
     = @posting.seller_name
