@@ -136,6 +136,19 @@ describe PostingsController do
 
     end
 
+    describe "wrong inputs" do
+      it "should set the flash if can't find posting" do
+        post :commit_buy, {:posting_id => '6', :email => {:body => @fake_buyer_comment, :buyer_email => @fake_buyer_email}}
+        flash.now[:warning].should == "Buy request failed because the given post id does not exist"
+      end
+
+      it "should set the flash if the email isn't right" do
+        post :commit_buy, {:posting_id => '1', :email => {:body => @fake_buyer_comment, :buyer_email => "gibberish"}}
+        flash.now[:warning].should == "Please fill in the required fields"
+      end
+
+    end
+
   end
 
   describe "display_new method" do
