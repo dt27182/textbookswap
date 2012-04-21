@@ -25,4 +25,4 @@ Scenario: User enters information incorrectly
   When I fill in "ISBN" with "1-84356-028-3"
   When I press "Next"
   Then I should be on the the Textbook Information page for course number "169" in the "Computer Science" department
-  Then I should see "Please fill in the required fields"
+  Then I should see "Enter in details about your posting"

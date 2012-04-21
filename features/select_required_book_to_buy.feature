@@ -10,6 +10,7 @@ Background: User selected Computer Science 169 on the previous page
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" exists
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" is a required book for course number "169" in the "Computer Science" department
   Given I am on the Buy Books page for course number "169" in the "Computer Science" department
+  Given the expiration time is "20" months
   
 Scenario: User wants to select the required book they wish to buy
 

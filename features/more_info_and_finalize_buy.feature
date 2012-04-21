@@ -6,6 +6,7 @@ Feature: Buyers can view additional information on the book they want to buy and
  
 Background: Buyer has clicked the posting they are interested in on the previous page
 
+  Given the expiration time is "20" months
   Given the "Computer Science" department is offering course number "169"
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" exists
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" is a required book for course number "169" in the "Computer Science" department
@@ -15,7 +16,7 @@ Background: Buyer has clicked the posting they are interested in on the previous
 Scenario: User wants to purchase the book offered by the posting
 
   When I fill in "Name" with "Not A Murderer"
-  When I fill in "Email" with "recently@escaped.gov"
+  When I fill in "Email" with "recentlyescaped@berkeley.edu"
   When I fill in "Message" with "Hey David, I want to buy this book of yours. Can we meet in a dark back alley downtown?"
   When I press "Finalize Purchase"
   Then I should be on the home page

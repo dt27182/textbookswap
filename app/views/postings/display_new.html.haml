@@ -11,11 +11,11 @@
     = text_field :posting, :seller_name
 
   %p
-    = label :posting, :price, 'Price:'
+    = label :posting, :price, 'Price in dollars:'
     = text_field :posting, :price
         
   %p
-    = label :posting, :condition, 'Condition of  your Book:'
+    = label :posting, :condition, 'Condition of your book:'
     = select :posting, :condition, ['Brand New', 'Used it few times', 'Notes all over']
     
   %p
@@ -23,7 +23,7 @@
     = select :posting, :location, ['North Side', 'South Side', 'West Side', 'East Side']
     
   %p
-    = label :posting, :comments, 'Miscellaneous comment:'
+    = label :posting, :comments, 'Miscellaneous comments:'
     %br
     = text_area :posting, :comments, :size => "80x5"
 

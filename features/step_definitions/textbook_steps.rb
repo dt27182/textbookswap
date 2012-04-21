@@ -61,7 +61,6 @@ Given /^somebody named "(.*)" with the e-mail "(.*)" posted the "(.*)" edition o
 end
 
 Given /^the expiration time is "(.*)" months$/ do |numStr|
-  m = Misc.find_by_key("expiration_time")
-  m.value = numStr
-  m.save
+  m = Misc.create!(:key => "expiration_time", :value => numStr)
+  m.save!
 end
