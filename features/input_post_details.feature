@@ -24,7 +24,7 @@ Scenario: User wants to create a posting for the book they want to sell
   Then I should be on the home page
   Then I should see "Book posting submitted! We will e-mail you if someone wishes to buy your book!"
   
-  When I press "buyer_button"
+  When I follow "buyer_button"
   Then I should be on the Buy Course Selection page
   When I select "Computer Science" from "course_department"
   When I select "169" from "course_number"
