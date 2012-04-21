@@ -6,7 +6,7 @@ Feature: Buyers can view details and select a posting for the book they wish to 
 
 Background: 
 
-  Given the expiration time is "20" months
+  Given the expiration time is "20" days
   Given the "Computer Science" department is offering course number "169"
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" exists
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" is a required book for course number "169" in the "Computer Science" department

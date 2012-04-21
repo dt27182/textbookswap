@@ -6,7 +6,7 @@ Feature: Buyer can select unlisted book that they wish to buy
 
 Background: User selected Computer Science 169 on the previous page
 
-  Given the expiration time is "20" months
+  Given the expiration time is "20" days
   Given the "Computer Science" department is offering course number "169"
   Given the "10th Edition" edition of the book "Armando Fox Autobiography" exists
   Given the "10th Edition" edition of the book "Armando Fox Autobiography" is an unrequired book for course number "169" in the "Computer Science" department
