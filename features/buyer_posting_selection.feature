@@ -9,8 +9,8 @@ Background:
   Given the "Computer Science" department is offering course number "169"
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" exists
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" is a required book for course number "169" in the "Computer Science" department
-  Given somebody named "David Patterson" with the e-mail "david@patterson.gov" posted the "Alpha" edition of the book "Engineering Long-Lasting Software" for "99" in "Excellent" condition at "Black Market"
-  Given somebody named "Armando Fox" with the e-mail "armando@fox.edu" posted the "Alpha" edition of the book "Engineering Long-Lasting Software" for "150" in "Poor" condition at "Morgan Hall"
+  Given somebody named "David Patterson" with the e-mail "testDoesNotExist@berkeley.edu" posted the "Alpha" edition of the book "Engineering Long-Lasting Software" for "99" in "Excellent" condition at "Black Market"
+  Given somebody named "Armando Fox" with the e-mail "testDoesNotExist2@berkeley.edu" posted the "Alpha" edition of the book "Engineering Long-Lasting Software" for "150" in "Poor" condition at "Morgan Hall"
   Given I am on the Book Postings page for the "Alpha" edition of the book "Engineering Long-Lasting Software"
 
 Scenario: 

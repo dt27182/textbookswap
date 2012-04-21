@@ -13,7 +13,7 @@ class PostingsController < ApplicationController
       redirect_to show_posting_path('1') and return
     end
     post = Posting.find_by_id(params[:posting_id])
-    post.send_seller_buyer_info(params[:email][:body])
+    post.send_seller_buyer_info(params[:email][:buyer_email], params[:email][:body])
     redirect_to index_path and return
   end
 
