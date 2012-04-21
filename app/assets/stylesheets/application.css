@@ -75,12 +75,11 @@ body {
   text-align: center;
 }
 
-/*this is a temporary color scheme for failed validation, change later*/
 .error {
     font: normal 10px arial;
     padding: 3px;
     margin: 3px;
-    background-color: #ffc;
+    background-color: #FFBABA;
     border: 1px solid #c00;
 }
 /*
