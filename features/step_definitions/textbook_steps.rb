@@ -60,8 +60,7 @@ Given /^somebody named "(.*)" with the e-mail "(.*)" posted the "(.*)" edition o
   posting.save!
 end
 
-Given /^the expiration time is "(.*)" months$/ do |numStr|
-  m = Misc.find_by_key("expiration_time")
-  m.value = numStr
-  m.save
+Given /^the expiration time is "(.*)" days$/ do |numStr|
+  m = Misc.create!(:key => "expiration_time", :value => numStr)
+  m.save!
 end

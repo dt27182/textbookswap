@@ -25,5 +25,5 @@
       = post.comments
    
     %p
-      = link_to "Interested in buying this book?", show_posting_path(post.id)
+      = link_to "Interested in buying this book?", show_posting_path(post.id), :id => "#{post.price} / #{post.condition} / #{post.location}"
     

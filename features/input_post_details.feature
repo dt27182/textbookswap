@@ -6,6 +6,7 @@ Feature: Sellers can enter details for a posting on a book they wish to sell
   
 Background: User has indicated the book they want to sell
   
+  Given the expiration time is "20" days
   Given the "Computer Science" department is offering course number "169"
   Given the "10th Edition" edition of the book "Armando Fox Autobiography" exists
   Given the "10th Edition" edition of the book "Armando Fox Autobiography" is an unrequired book for course number "169" in the "Computer Science" department
@@ -15,13 +16,13 @@ Scenario: User wants to create a posting for the book they want to sell
 
   When I fill in "Price" with "99"
   When I select "Brand New" from "Condition of your book:"
-  When I fill in "Comments" with "Only threw up on it twice"
-  When I fill in "Email" with "student@failing169.edu"
-  When I fill in "Name" with "Fyodor Dostoevsky"
-  When I fill in "Location" with "Soviet Russia"
-  When I press "Finalize Post"
+  When I fill in "posting_comments" with "Only threw up on it twice"
+  When I fill in "posting_seller_email" with "student@berkeley.edu"
+  When I fill in "posting_seller_name" with "Fyodor Dostoevsky"
+  When I select "South Side" from "posting_location"
+  When I press "Post!"
   Then I should be on the home page
-  Then I should see "Book Posting Submitted! We Will E-Mail You If Someone Wishes To Buy Your Book!"
+  Then I should see "Book posting submitted! We will e-mail you if someone wishes to buy your book!"
   
   When I press "buyer_button"
   Then I should be on the Buy Course Selection page
@@ -33,10 +34,10 @@ Scenario: User wants to create a posting for the book they want to sell
   When I follow "Armando Fox Autobiography (10th Edition)"
   Then I should be on the Book Postings page for the "10th Edition" edition of the book "Armando Fox Autobiography"
   Then I should see "99"
-  Then I should see "Excellent"
-  Then I should see "Soviet Russia"
-  When I follow "99 / Excellent / Soviet Russia"
-  Then I should be on the Buy Additional Information page for the "99" dollar "Excellent" quality "10th Edition" edition of the book "Armando Fox Autobiography" posted by "Fyodor Dostoevsky" at "student@failing169.edu" at "Soviet Russia"
+  Then I should see "Brand New"
+  Then I should see "South Side"
+  When I follow "99 / Brand New / South Side"
+  Then I should be on the Buy Additional Information page for the "99" dollar "Brand New" quality "10th Edition" edition of the book "Armando Fox Autobiography" posted by "Fyodor Dostoevsky" at "student@berkeley.edu" at "South Side"
   Then I should see "Only threw up on it twice"
-  Then I should see "student@failing169.edu"
+  Then I should see "student@berkeley.edu"
   Then I should see "Fyodor Dostoevsky"
