@@ -5,12 +5,12 @@
 #for deptartment_long entries only!
 Given /^the "(.*)" department is offering course number "(.*)"$/ do |dept, num|
 
-  Course.create!(:number => num, :department_long => dept, :section => "001", :term => "spring", :year => 2012)
+  Course.create!(:number => num, :department_long => dept, :section => "001", :term => "spring", :year => 2012, :department_short => "TEST", :teacher "Patterson", :)
 end
 
 Given /^the "(.*)" edition of the book "(.*)" exists$/ do |edi, name|
 
-  Book.create!(:title => name, :edition => edi)
+  Book.create!(:title => name, :edition => edi, :isbn => "1234567891", :author => "Armando")
 end
 
 Given /^the "(.*)" edition of the book "(.*)" is a required book for course number "(.*)" in the "(.*)" department$/ do |edi, name, num, dept|
