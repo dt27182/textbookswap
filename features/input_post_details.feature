@@ -14,7 +14,7 @@ Background: User has indicated the book they want to sell
 Scenario: User wants to create a posting for the book they want to sell
 
   When I fill in "Price" with "99"
-  When I select "Excellent" from "Condition"
+  When I select "Brand New" from "Condition of your book:"
   When I fill in "Comments" with "Only threw up on it twice"
   When I fill in "Email" with "student@failing169.edu"
   When I fill in "Name" with "Fyodor Dostoevsky"

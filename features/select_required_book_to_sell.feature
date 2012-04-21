@@ -14,7 +14,7 @@ Background: User selected Computer Science 169 on the previous page
 Scenario: User wants to select the required book they wish to sell
 
   Then I should see "Engineering Long-Lasting Software" in "Required"
-  When I follow "Engineering Long-Lasting Software (Alpha)"
+  When I follow "Engineering Long-Lasting Software"
   Then I should be on the Sell Book Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software"
 
 
