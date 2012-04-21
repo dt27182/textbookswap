@@ -20,7 +20,7 @@ Scenario: User wants to create a posting for the book they want to sell
   When I fill in "posting_seller_email" with "student@berkeley.edu"
   When I fill in "posting_seller_name" with "Fyodor Dostoevsky"
   When I select "South Side" from "posting_location"
-  When I press "commit"
+  When I press "Post!"
   Then I should be on the home page
   Then I should see "Book posting submitted! We will e-mail you if someone wishes to buy your book!"
   
