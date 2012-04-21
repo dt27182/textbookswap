@@ -49,13 +49,18 @@ class Course < ActiveRecord::Base
       form.p_title = course[:name][0..-4]
     end
     detailed_course_page = agent.submit(form)
+    puts detailed_course_page.root
     page_elements = detailed_course_page.root.css('body table tr td')
+    page_elements_content = []
+    page_elements.each do |elem|
+      page_elements_content << elem.content
+    end
     teacher_pairs = []
-    page_elements.each_cons(8) do |elements|
-      if elements[0].content =~ /Course/
-        if elements[1].content =~ /LEC|SEM/
-          teacher = elements[7].content
-          section = elements[1].content.gsub(/\s+/, "")[-6..-4]
+    page_elements_content.each_cons(8) do |elements|
+      if elements[0] =~ /Course/
+        if elements[1] =~ /LEC|SEM/
+          teacher = elements[7]
+          section = elements[1].gsub(/\s+/, "")[-6..-4]
           teacher_pairs << [teacher, section]
         end
       end
