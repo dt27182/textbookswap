@@ -3,8 +3,8 @@ require 'spec_helper'
 describe BooksController do
   before :each do
     @fake_course = mock('Course', :id => '1')
-    @fake_book = mock('Book', :id => '1', :title => 'testbook1', :author => 'bob', :edition => '1', :isbn => '0000000000000')
-    @fake_book_2 = Book.create({:title => "testbook2", :author => "alice", :edition => "2", :isbn => "00000000001"})
+    @fake_book = mock('Book', :id => '1', :title => 'testbook1', :author => 'bob', :edition => '1', :isbn => '99921-58-10-7')
+    @fake_book_2 = Book.create({:title => "testbook2", :author => "alice", :edition => "2", :isbn => "9971-5-0210-0"})
     @posting1 = Posting.create({:created_at => Time.now, :book_id => 2})
     @posting2 = Posting.create({:created_at => Time.now - 3.days, :book_id => 2})
     @postings = [@posting1, @posting2]
@@ -58,8 +58,9 @@ describe BooksController do
       it 'should redirect to the create new posting page of the newly created book' do
         Course.stub(:find_by_id).and_return(@fake_course)
         Requirement.stub(:create)
+        Book.stub(:create).and_return(@fake_book)
         put :create_new, {:id => @fake_course.id, :book => {:title => @fake_book.title, :author => @fake_book.author, :edition => @fake_book.edition, :isbn => @fake_book.isbn}}
-        response.should redirect_to(display_new_posting_path(2))
+        response.should redirect_to(display_new_posting_path(@fake_book.id))
       end
     end
     describe 'fail path' do

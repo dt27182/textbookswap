@@ -31,7 +31,7 @@ Scenario: User wants to create a posting for the book they want to sell
   When I press "Go choose a book"
   Then I should be on the Buy Books page for course number "169" in the "Computer Science" department
   Then I should see "Armando Fox Autobiography" in "Unrequired"
-  When I follow "Armando Fox Autobiography (10th Edition)"
+  When I follow "Armando Fox Autobiography"
   Then I should be on the Book Postings page for the "10th Edition" edition of the book "Armando Fox Autobiography"
   Then I should see "99"
   Then I should see "Brand New"
