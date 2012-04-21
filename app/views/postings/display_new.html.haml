@@ -1,10 +1,10 @@
 %h2 Enter in  details about your posting
 
-= form_tag create_new_posting_path("#{@book.id}"), :method => :put, :id => "createpostingform" do
+= form_tag create_new_posting_path("#{@book.id}"), :id => "create_posting_form", :method => :put do
 
   %p
     = label :posting, :seller_email, 'Your e-mail:'
-    = text_field :posting, :seller_email
+    = text_field :posting, :seller_email, :class => "required email"
 
   %p
     = label :posting, :seller_name, 'Your name:'
@@ -12,7 +12,7 @@
 
   %p
     = label :posting, :price, 'Price:'
-    = text_field :posting, :price
+    = text_field :posting, :price, :class => "required"
         
   %p
     = label :posting, :condition, 'Condition of  your Book:'

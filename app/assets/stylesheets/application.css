@@ -75,6 +75,14 @@ body {
   text-align: center;
 }
 
+/*this is a temporary color scheme for failed validation, change later*/
+.error {
+    font: normal 10px arial;
+    padding: 3px;
+    margin: 3px;
+    background-color: #ffc;
+    border: 1px solid #c00;
+}
 /*
 #top {
   background: #2C84AF url('banner.jpg') top left no-repeat;

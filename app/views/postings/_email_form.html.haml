@@ -2,16 +2,16 @@
 
 If you are interested in purchasing this book, please fill out this form and send an email to the seller.
 
-= form_tag commit_buy_posting_path("#{@posting.id}"), :method => :post do
+= form_tag commit_buy_posting_path("#{@posting.id}"), :id => "buyer_info_form", :method => :post do
 
   %p
     = label :email, :buyer_email, 'Your e-mail:'
-    = text_field :email, :buyer_email
+    = text_field :email, :buyer_email, :class => "required email"
   
   %p
     = label :email, :body, 'Message to the seller:'
     %br
-    = text_area :email, :body, :size => "80x5"
+    = text_area :email, :body, :size => "80x5", :class => "required"
     
   %p
     = submit_tag 'Send'
