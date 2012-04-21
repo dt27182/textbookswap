@@ -32,10 +32,14 @@ class PostingsController < ApplicationController
     if params[:posting][:seller_email] == ""
       redirect_to display_new_posting_path('1') and return
     end
-    new_posting = params[:posting]
-    new_posting[:book_id] = book.id
-    Posting.create(new_posting)
-    flash[:notice] = "Posting Successful"
+    new_posting_attributes = params[:posting]
+    new_posting_attributes[:book_id] = book.id
+    new_posting = Posting.create(new_posting_attributes)
+    if(new_posting.errors.empty?)
+    	flash[:notice] = "Posting Successful"
+    else
+    	flash[:warning] = "Posting Failed"
+    end
     redirect_to index_path and return
   end
 

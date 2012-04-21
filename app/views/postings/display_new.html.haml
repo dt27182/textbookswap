@@ -1,6 +1,6 @@
 %h2 Enter in  details about your posting
 
-= form_tag create_new_posting_path("#{@book.id}"), :method => :put do
+= form_tag create_new_posting_path("#{@book.id}"), :method => :put, :id => :createpostingform do
 
   %p
     = label :posting, :seller_email, 'Your e-mail:'
