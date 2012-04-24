@@ -4,19 +4,24 @@
 
   %p
     = label :book, :title, 'Title:'
+    %br
     = text_field :book, :title, :class => "required"
 
   %p
     = label :book, :author, 'Author:'
+    %br
     = text_field :book, :author, :class => "required"
 
-  %p
+  %p  
     = label :book, :edition, 'Edition:'
+    %br
     = text_field :book, :edition, :class => "required"
     
   %p
     = label :book, :isbn, 'ISBN:'
+    %br
     = text_field :book, :isbn, :class => "required"
 
-  %p
+  %p  
     = submit_tag 'Next'
+    

@@ -4,21 +4,19 @@
 
   - @required_books.each do |book|
 
-    %ul
+    - if @odd == true
+    
+      %ul.grey
+      
+        = render :partial => "courses/book", :locals => {:book => book}
+      
+      - @odd = false
+      
+    - else
+    
+      %ul
   
-      %li
-        Title:
-        - if @transaction_type == 'buy'
-          = link_to "#{book.title}", show_postings_path(book.id)
-        - else
-          = link_to "#{book.title}", display_new_posting_path(book.id)
-        
-      %li
-        Author:
-        = book.author
+        = render :partial => "courses/book", :locals => {:book => book}
+    
+      - @odd = true
       
-      %li
-        Edition:
-        = book.edition
-      
-      %br

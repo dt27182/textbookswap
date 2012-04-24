@@ -21,6 +21,7 @@ class BooksController < ApplicationController
   end
 
   def show_postings
+    @odd = true
     @book = Book.find_by_id(params[:book_id])
     if @book.nil?
     	flash[:warning] = "Cannot show postings because the given book id is invalid"
