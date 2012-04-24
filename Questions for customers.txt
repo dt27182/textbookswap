@@ -10,7 +10,13 @@ A: no for now; roll over in the middle of semester
 
 Questions for 4/23 meeting:
 Q: Back buttons on pages?
+A: Yes
 Q: Expire based on post date or update date?
 Q: Email account name/final website name?
+A: Textswap!
 Q: Isbn validation?
+A: 
+
+Requests:
+show how many posts/books on homepage
 
