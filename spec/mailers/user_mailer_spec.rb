@@ -6,7 +6,8 @@ describe UserMailer do
       @comments = "This is some user comments"
       @buyer_email = "atkaiser@berkeley.edu"
       @seller_email = "akaiser2@mac.com"
-      @mail = UserMailer.send_seller_buyer_email(@seller_email, @buyer_email, @comments)
+      @book_title = "Software Engineering"
+      @mail = UserMailer.send_seller_buyer_email(@seller_email, @buyer_email, @comments, @book_title)
     end
 
     it "should send to the right person" do

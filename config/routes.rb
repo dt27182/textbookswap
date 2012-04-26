@@ -36,6 +36,8 @@ Textbookswap::Application.routes.draw do
   get '/course/find_course_sections' => 'courses#find_course_sections', :as => :find_course_sections
   #route to display the admin page for a specific posting
   get '/postings/admin/:unique_string' => 'postings#admin', :as => :display_admin_posting
+  #delete a posting
+  get '/postings/delete/:id' => 'postings#delete', :as => :delete_posting
   #page to display admin page
   get '/admin' => 'misc#display', :as => :display_admin_page
   #route to post changes to admin settings

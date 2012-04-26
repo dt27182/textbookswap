@@ -62,5 +62,8 @@ class PostingsController < ApplicationController
   
   def admin
   end
+  
+  def delete
+  end
 
 end

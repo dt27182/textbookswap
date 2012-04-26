@@ -195,7 +195,9 @@ describe PostingsController do
       end
       
       it "should send an email to the seller" do
-        pending
+        Posting.stub(:create).and_return(@fake_post)
+        put :create_new, {:book_id => '1', :posting => {:seller_email => "abc@abc.com", :seller_name => "Alice", :price => "21", :location => "Berkeley"}}
+        ActionMailer::Base.deliveries.empty?.should_be false
       end
 
       it "should redirect back to the home page" do
@@ -231,22 +233,38 @@ describe PostingsController do
   
   describe "admin method" do
   
+    before(:each) do
+      Posting.stub(:find_by_id).and_return(@fake_post)
+    end
+  
     it "should convert the unique string to a posting id" do
-      pending
+      pending "I'm not sure how to test this yet"
     end
     
     it "should call for the posting id" do
-      pending
+      Posting.should_receive(:find_by_id).and_return(@fake_post)
+      get :admin_method, {:unique_string => "dsaf23lkj23"}
+    end
+    
+    it "should redirect to the homepage if ther is no posting with that id" do
+      Posting.stub(:find_by_id).and_return(nil)
+      get :admin_method, {:unique_string => "dsaf23lkj23"}
+      response.should redirect_to(index_path())
     end
     
     it "should make the posting available to the view" do
-      pending
+      get :admin_method, {:unique_string => "dsaf23lkj23"}
+      assigns(:post).should == @fake_post
     end
     
     it "should make the book on that posting available to the view" do
-      pending
+      get :admin_method, {:unique_string => "dsaf23lkj23"}
+      assigns(:book).should == @fake_book
     end
     
+  end
+  
+  describe "delete method" do
   end
 
 end
