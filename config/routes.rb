@@ -34,10 +34,12 @@ Textbookswap::Application.routes.draw do
   get '/course/find_course_numbers' => 'courses#find_course_numbers', :as => :find_course_numbers
   #route to find the sections of a course given a department and a number
   get '/course/find_course_sections' => 'courses#find_course_sections', :as => :find_course_sections
-	#page to display admin page
-	get '/admin' => 'misc#display', :as => :display_admin_page
-	#route to post changes to admin settings
-	post '/admin' => 'misc#commit_edit', :as => :commit_admin_page_edit
+  #route to display the admin page for a specific posting
+  get '/postings/admin/:unique_string' => 'postings#admin', :as => :display_admin_posting
+  #page to display admin page
+  get '/admin' => 'misc#display', :as => :display_admin_page
+  #route to post changes to admin settings
+  post '/admin' => 'misc#commit_edit', :as => :commit_admin_page_edit
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

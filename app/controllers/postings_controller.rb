@@ -59,5 +59,8 @@ class PostingsController < ApplicationController
     	redirect_to display_new_posting_path(params[:book_id]) and return
     end
   end
+  
+  def admin
+  end
 
 end

@@ -7,5 +7,10 @@ class UserMailer < ActionMailer::Base
     @book_title = book_title
     mail(:to => to_address, :subject => "Someone wants to buy your book", :from => "TextbookSwap")
   end
+  
+  def send_seller_admin_page(to_address, link)
+    @link = link
+    mail(:to => to_address, :subject => "Here is your posting", :from => "TextbookSwap")
+  end
 
 end

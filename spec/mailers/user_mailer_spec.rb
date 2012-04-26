@@ -24,4 +24,23 @@ describe UserMailer do
     end
 
   end
+  
+  describe "Sending mail to the seller with link to admin page" do
+    before(:each) do
+      @seller_email = "atkaiser@berkeley.edu"
+      @link = "/postings/admin/dslavj3dsl"
+      @mail = UserMailer.send_seller_admin_page(@seller_email, @link)
+    end
+  
+    it "should send to the correct person" do
+      @mail.to.should == [@seller_email]
+    end
+    
+    it "should contain the link to the posting admin page" do
+      link_regex = /\/postings\/admin\/dslavj3dsl/
+      @mail.encoded.should =~ link_regex
+    end
+        
+  end
+  
 end

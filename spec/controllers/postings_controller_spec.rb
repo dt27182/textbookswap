@@ -193,6 +193,10 @@ describe PostingsController do
         Posting.should_receive(:create).with("seller_email" => @fake_post.seller_email, "seller_name" => @fake_post.seller_name, "price" => @fake_post.price.to_s, "location" => @fake_post.location, "condition" => @fake_post.condition, "book_id" => 1).and_return(@fake_post)
         put :create_new, {:book_id => '1', :posting => {:seller_email => @fake_post.seller_email, :seller_name => @fake_post.seller_name, :price => @fake_post.price, :location => @fake_post.location, :condition => @fake_post.condition, :book_id => '1'}}
       end
+      
+      it "should send an email to the seller" do
+        pending
+      end
 
       it "should redirect back to the home page" do
         Posting.stub(:create).and_return(@fake_post)
@@ -223,6 +227,26 @@ describe PostingsController do
 
     end
 
+  end
+  
+  describe "admin method" do
+  
+    it "should convert the unique string to a posting id" do
+      pending
+    end
+    
+    it "should call for the posting id" do
+      pending
+    end
+    
+    it "should make the posting available to the view" do
+      pending
+    end
+    
+    it "should make the book on that posting available to the view" do
+      pending
+    end
+    
   end
 
 end
