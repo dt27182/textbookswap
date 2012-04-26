@@ -265,6 +265,35 @@ describe PostingsController do
   end
   
   describe "delete method" do
+  
+    before(:each) do
+      session[:user_id] = 1
+      Posting.stub(:find_by_id).and_return(@fake_post)
+    end
+  
+    it "should call for the posting by id" do
+      Posting.should_receive(:find_by_id).and_return(@fake_post)
+      get :delete
+    end
+    
+    it "should call destroy on the posting" do
+      @fake_post.should_receive(:destroy)
+      get :delete
+    end
+    
+    it "should redirect to the homepage" do
+      response.should redirect_to(index_path())
+    end
+    
+    describe "fail path" do
+    
+      it "should redirect to the posting page if not an admin or have secret key" do
+        session[:user_id] = nil
+        response.should redirect_to(show_posting(1))
+      end
+      
+    end
+  
   end
 
 end
