@@ -64,3 +64,7 @@ Given /^the expiration time is "(.*)" days$/ do |numStr|
   m = Misc.create!(:key => "expiration_time", :value => numStr)
   m.save!
 end
+
+Given /^I am an admin&/ do
+	session[:user_id] = User.create!.id
+end
