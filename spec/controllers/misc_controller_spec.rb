@@ -48,6 +48,30 @@ describe MiscController do
         post :commit_edit, {:semester => "fall", :year => "2012", :expiration_time => "24"}
         Misc.find_by_key("expiration_time").value.should == "24"
       end
+      
+      it "should set the flash message" do
+        post :commit_edit, {:semester => "fall", :year => "2012", :expiration_time => "24"}
+        flash.now[:notice].should == "Settings Saved!"
+      end
+      
+      describe "fail path" do
+      
+        before :each do
+          session[:user_id] = nil
+        end
+      
+        it "should fail if there is no one logged in" do
+          post :commit_edit, {:semester => "fall", :year => "2012", :expiration_time => "24"}
+          response.should redirect_to(index_path())
+        end
+        
+        it "should set the flash" do
+          post :commit_edit, {:semester => "fall", :year => "2012", :expiration_time => "24"}
+          flash.now[:warning].should == "You do not have privileges to update these values"
+        end
+        
+      end
+        
     end
   end
 
