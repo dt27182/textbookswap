@@ -114,6 +114,12 @@ describe PostingsController do
         post :commit_buy, {:posting_id => '1', :email => {:body => @fake_buyer_comment, :buyer_email => @fake_buyer_email}}
         response.should redirect_to(index_path())
       end
+      
+      it "should reserve the post when bought" do
+        @fake_post.stub(:send_seller_buyer_info)
+        post :commit_buy, {:posting_id => '1', :email => {:body => @fake_buyer_comment, :buyer_email => @fake_buyer_email}}
+        @fake_post.reserved.should == true
+      end
 
     end
 
@@ -196,8 +202,8 @@ describe PostingsController do
       
       it "should send an email to the seller" do
         Posting.stub(:create).and_return(@fake_post)
+        UserMailser.should_receive(:send_seller_admin_page)
         put :create_new, {:book_id => '1', :posting => {:seller_email => "abc@abc.com", :seller_name => "Alice", :price => "21", :location => "Berkeley"}}
-        ActionMailer::Base.deliveries.empty?.should_be false
       end
 
       it "should redirect back to the home page" do
@@ -234,31 +240,33 @@ describe PostingsController do
   describe "admin method" do
   
     before(:each) do
+      Posting.stub(:decrypt).and_return(1)
       Posting.stub(:find_by_id).and_return(@fake_post)
     end
   
     it "should convert the unique string to a posting id" do
-      pending "I'm not sure how to test this yet"
+      Posting.should_receive(:decrypt).with("dsaf23lkj23")
+      get :admin, {:unique_string => "dsaf23lkj23"}
     end
     
     it "should call for the posting id" do
       Posting.should_receive(:find_by_id).and_return(@fake_post)
-      get :admin_method, {:unique_string => "dsaf23lkj23"}
+      get :admin, {:unique_string => "dsaf23lkj23"}
     end
     
     it "should redirect to the homepage if ther is no posting with that id" do
       Posting.stub(:find_by_id).and_return(nil)
-      get :admin_method, {:unique_string => "dsaf23lkj23"}
+      get :admin, {:unique_string => "dsaf23lkj23"}
       response.should redirect_to(index_path())
     end
     
     it "should make the posting available to the view" do
-      get :admin_method, {:unique_string => "dsaf23lkj23"}
+      get :admin, {:unique_string => "dsaf23lkj23"}
       assigns(:post).should == @fake_post
     end
     
     it "should make the book on that posting available to the view" do
-      get :admin_method, {:unique_string => "dsaf23lkj23"}
+      get :admin, {:unique_string => "dsaf23lkj23"}
       assigns(:book).should == @fake_book
     end
     
@@ -273,27 +281,51 @@ describe PostingsController do
   
     it "should call for the posting by id" do
       Posting.should_receive(:find_by_id).and_return(@fake_post)
-      get :delete
+      delete :delete, {:unique_string => "daj2390lkafj"}
     end
     
     it "should call destroy on the posting" do
       @fake_post.should_receive(:destroy)
-      get :delete
+      delete :delete, {:unique_string => "daj2390lkafj"}
     end
     
     it "should redirect to the homepage" do
+      delete :delete, {:unique_string => "daj2390lkafj"}
       response.should redirect_to(index_path())
     end
+    
+    it "should still delete if not admin but comes from the postings page" do
+      @fake_post.should_receive(:destroy)
+      delete :delete, {:unique_string => "daj2390lkafj"}
+    end  
     
     describe "fail path" do
     
       it "should redirect to the posting page if not an admin or have secret key" do
         session[:user_id] = nil
-        response.should redirect_to(show_posting(1))
+        response.should redirect_to(show_posting_path(1))
       end
       
     end
+    
+  end
+    
+  describe "republishing" do
+    
+    before :each do
+      Posting.stub(:decrypt).and_return(1)
+    end
+    
+    it "should reset the reserved boolean for the posting to true" do
+      post :republish, {:unique_string => "random"}
+      @fake_post.reserved.should == true
+    end
   
+    it "should republish it should go to the posting page" do
+      post :republish, {:unique_string => "random"}
+      response.should redirect_to(show_posting(1))
+    end
+      
   end
 
 end

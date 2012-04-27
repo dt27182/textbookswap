@@ -10,8 +10,11 @@ Background: User has logged in as admin
   Given the "Computer Science" department is offering course number "169"
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" exists
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" is a required book for course number "169" in the "Computer Science" department
-  Given somebody named "Fake Person" with the e-mail "fake_person@berkeley.edu" posted the "Alpha" edition of the book "Engineering Long-Lasting Software" for "100000000" in "Brand New" condition at "South Side"
-  Given I am on the Buy Additional Information page for the "100000000" dollar "Brand New" quality "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Fake Person" at "fake_person@berkeley.edu" at "South Side"
+  Given the following postings exist:
+  | seller_email             | seller_name | book_name                         | book_edition | price     | location   | condition | posted_#_days_ago |
+  | fake_person@berkeley.edu | Fake Person | Engineering Long-Lasting Software | Alpha        | 100000000 | South Side | Brand New | 1                 |
+  
+  Given I am on the Buy Additional Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Fake Person" at "fake_person@berkeley.edu"
   Given I am an admin
   
 Scenario: Admin wants to delete this post

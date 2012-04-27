@@ -10,8 +10,11 @@ Background: Buyer has clicked the posting they are interested in on the previous
   Given the "Computer Science" department is offering course number "169"
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" exists
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" is a required book for course number "169" in the "Computer Science" department
-  Given somebody named "David Patterson" with the e-mail "testDoesNotExist@berkeley.edu" posted the "Alpha" edition of the book "Engineering Long-Lasting Software" for "99" in "Excellent" condition at "Black Market"
-  Given I am on the Buy Additional Information page for the "99" dollar "Excellent" quality "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "David Patterson" at "testDoesNotExist@berkeley.edu" at "Black Market"
+  Given the following postings exist:
+  | seller_email                  | seller_name     | book_name                         | book_edition | price | location     | condition      | posted_#_days_ago |
+  | testDoesNotExist@berkeley.edu | David Patterson | Engineering Long-Lasting Software | Alpha        | 99    | Black Market | Excellent      | 1                 |
+  
+  Given I am on the Buy Additional Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "David Patterson" at "testDoesNotExist@berkeley.edu"
   
 Scenario: User wants to purchase the book offered by the posting
 
@@ -26,5 +29,5 @@ Scenario: User fails to fill out forms properly
   When I fill in "email_buyer_email" with ""
   When I fill in "email_body" with "I GIVE NOBODY MY EMAIL"
   When I press "Send"
-  Then I should be on the Buy Additional Information page for the "99" dollar "Excellent" quality "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "David Patterson" at "testDoesNotExist@berkeley.edu" at "Black Market"
+  Then I should be on the Buy Additional Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "David Patterson" at "testDoesNotExist@berkeley.edu"
   Then I should see "Please fill in the required fields"

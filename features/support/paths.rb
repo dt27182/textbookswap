@@ -48,31 +48,25 @@ module NavigationHelpers
       course =  Course.find_by_number_and_department_long($1, $2)
       return display_new_book_path(course.id)
       
-    when /^the Buy Additional Information page for the "(.*)" dollar "(.*)" quality "(.*)" edition of the book "(.*)" posted by "(.*)" at "(.*)" at "(.*)"$/
-      price = $1
-      qual = $2
-      bookEdi = $3
-      bookTitle = $4
-      name = $5
-      email = $6
-      loc = $7
+    when /^the Buy Additional Information page for the "(.*)" edition of the book "(.*)" posted by "(.*)" at "(.*)"$/
+      bookEdi = $1
+      bookTitle = $2
+      name = $3
+      email = $4
       book = Book.find_by_title_and_edition(bookTitle, bookEdi)
-      posting = Posting.find_by_seller_email_and_seller_name_and_price_and_location_and_condition_and_book_id($6, $5, $1, $7, $2, book.id)
+      posting = Posting.find_by_seller_email_and_seller_name_and_book_id(email, name, book.id)
       return show_posting_path(posting.id)
  
 		when /^the admin page$/
 			return display_admin_page_path
 			
-		when /^the seller admin page for the "(.*)" dollar "(.*)" quality "(.*)" edition of the book "(.*)" posted by "(.*)" at "(.*)" at "(.*)"$/
-		  price = $1
-      qual = $2
-      bookEdi = $3
-      bookTitle = $4
-      name = $5
-      email = $6
-      loc = $7
+		when /^the seller admin page for the "(.*)" edition of the book "(.*)" posted by "(.*)" at "(.*)"$/
+      bookEdi = $1
+      bookTitle = $2
+      name = $3
+      email = $4
       book = Book.find_by_title_and_edition(bookTitle, bookEdi)
-      posting = Posting.find_by_seller_email_and_seller_name_and_price_and_location_and_condition_and_book_id($6, $5, $1, $7, $2, book.id)
+      posting = Posting.find_by_seller_email_and_seller_name_and_book_id(email, name, book.id)
 			return display_admin_posting_path(Posting.encrypt(posting.id))
 		
     else
