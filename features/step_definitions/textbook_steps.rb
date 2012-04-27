@@ -46,30 +46,16 @@ Then /^(?:|I )should see "([^"]*)" in "([^"]*)"$/ do |regexp, parent|
   end
 end
 
-Given /^somebody named "(.*)" with the e-mail "(.*)" posted the "(.*)" edition of the book "(.*)" for "(.*)" in "(.*)" condition at "(.*)"$/ do |name, email, bookEdi, bookTitle, cost, condit, loc|
-
-  book = Book.find_by_title_and_edition(bookTitle, bookEdi)
-  posting = Posting.create!(:seller_email => email, :seller_name => name, :price => cost, :location => loc, :condition => condit, :book_id => book.id)
-  posting.save!
-end
-
-Given /^somebody named "(.*)" with the e-mail "(.*)" posted the "(.*)" edition of the book "(.*)" for "(.*)" in "(.*)" condition at "(.*)" around "(.*)" months ago$/ do |name, email, bookEdi, bookTitle, cost, condit, loc, expir|
-  age = Integer(expir)
-  book = Book.find_by_title_and_edition(bookTitle, bookEdi)
-  posting = Posting.create!(:seller_email => email, :seller_name => name, :price => cost, :location => loc, :condition => condit, :book_id => book.id, :created_at => Time.now - age.months)
-  posting.save!
-end
-
-Given /^somebody named "(.*)" with the e-mail "(.*)" posted the "(.*)" edition of the book "(.*)" for "(.*)" in "(.*)" condition at "(.*)" around "(.*)" days ago$/ do |name, email, bookEdi, bookTitle, cost, condit, loc, expir|
-  age = Integer(expir)
-  book = Book.find_by_title_and_edition(bookTitle, bookEdi)
-  posting = Posting.create!(:seller_email => email, :seller_name => name, :price => cost, :location => loc, :condition => condit, :book_id => book.id, :created_at => Time.now - age.months)
-  posting.save!
-end
-
 Given /^the expiration time is "(.*)" days$/ do |numStr|
   m = Misc.create!(:key => "expiration_time", :value => numStr)
   m.save!
+end
+
+Given /the following postings exist/ do |postings_table|
+  postings_table.hashes.each do |posting|
+    # each returned element will be a hash whose key is the table header. I.E. "seller_name" "price" & "release_date"
+    Posting.create!(:seller_email => posting["seller_email"], :seller_name => posting["seller_name"], :price => posting["price"], :location => posting["location"], :condition => posting["condition"], :created_at => Time.now - Integer(posting["posted_#_days_ago"]).days, :book_id => Book.find_by_title_and_edition(posting["book_name"], posting["book_edition"]).id)
+  end
 end
 
 Given /^somebody contacted the e-mail "(.*)" for "(.*)" edition of the book "(.*)"$/ do |email, edition, bookTitle|
