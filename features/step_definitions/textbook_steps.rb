@@ -69,3 +69,8 @@ Given /^I am an admin$/ do
 	cookies[:user_id] = User.create!.id
 end
 
+Then /^I should see that the e-mail "(.*)" was added to the Admin User list $/ do |email|
+  admin = User.find_by_email(email)
+  assert not admin.nil?
+end 
+

@@ -15,4 +15,4 @@ Scenario: An admin user adds another user to be one of the admin users of the we
   Then I should see "Add new Admin user"
   When I fill in "New Admin User:" with "new_admin@berkeley.edu"
   When I press "Add new Admin user"
-  
+  Then I should see that the e-mail "new_admin@berkeley.edu" was added to the Admin User list
