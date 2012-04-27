@@ -65,4 +65,11 @@ Given /^the expiration time is "(.*)" days$/ do |numStr|
   m.save!
 end
 
-Give /^
+Given /^somebody contacted the e-mail "(.*)"for "(.*)" edition of the book "(.*)"$/ do |email, edition, bookTitle|
+  book = Book.find_by_title_and_edition(bookTitle, bookEdi)
+  posting = Posting.find_by_seller_email_and_book_id(email, book.id)
+  posting.reserved = true
+  posting.save!
+end
+
+
