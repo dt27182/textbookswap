@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120420232533) do
+ActiveRecord::Schema.define(:version => 20120427003329) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
@@ -58,6 +58,12 @@ ActiveRecord::Schema.define(:version => 20120420232533) do
     t.integer  "course_id"
     t.integer  "book_id"
     t.boolean  "is_required"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

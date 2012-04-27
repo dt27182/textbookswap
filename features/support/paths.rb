@@ -60,7 +60,8 @@ module NavigationHelpers
       posting = Posting.find_by_seller_email_and_seller_name_and_price_and_location_and_condition_and_book_id($6, $5, $1, $7, $2, book.id)
       return show_posting_path(posting.id)
  
-
+		when /^the admin page&/
+			return display_admin_page_path
     else
       begin
         page_name =~ /^the (.*) page$/
