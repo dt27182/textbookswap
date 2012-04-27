@@ -6,7 +6,7 @@ Feature: Admin user can change the current semester served by the website
 	
 Background: User has logged in as admin
 
-	Given the current semester is "Spring" "2012"
+	Given the current semester is "spring" "2012"
 	Given I am on the admin page
 	When I select "Fall" from "current_semester"
 	When I fill in "current_year" with "2013"
