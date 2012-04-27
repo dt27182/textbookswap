@@ -6,4 +6,11 @@ class Posting < ActiveRecord::Base
   def send_seller_buyer_info(buyer_email, body)
     UserMailer.send_seller_buyer_email(self.seller_email, buyer_email, body, Book.find_by_id(self.book_id).title).deliver
 	end
+	
+	def self.encrypt(posting_id)
+	end
+	
+	def self.decrypt(cyphertext)
+	end
+	
 end
