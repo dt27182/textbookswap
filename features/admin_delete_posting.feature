@@ -17,7 +17,7 @@ Background: User has logged in as admin
 Scenario: Admin wants to delete this post
   Then I should see "Admin"
   Then I should see "Delete this Post"
-  When I press ""Delete this Post"
+  When I press "Delete this Post"
   Then I should be on the home page
   Then I should see "Post Successfully Deleted!"
   When I follow "buyer_button"
