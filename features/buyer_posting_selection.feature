@@ -10,8 +10,11 @@ Background:
   Given the "Computer Science" department is offering course number "169"
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" exists
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" is a required book for course number "169" in the "Computer Science" department
-  Given somebody named "David Patterson" with the e-mail "testDoesNotExist@berkeley.edu" posted the "Alpha" edition of the book "Engineering Long-Lasting Software" for "99" in "Brand New" condition at "South Side"
-  Given somebody named "Armando Fox" with the e-mail "testDoesNotExist2@berkeley.edu" posted the "Alpha" edition of the book "Engineering Long-Lasting Software" for "150" in "Notes all over" condition at "North Side"
+  Given the following postings exist:
+  | seller_email                   | seller_name     | book_name                         | book_edition | price | location   | condition      | posted_#_days_ago |
+  | testDoesNotExist@berkeley.edu  | David Patterson | Engineering Long-Lasting Software | Alpha        | 99    | South Side | Brand New      | 1                 |
+  | testDoesNotExist2@berkeley.edu | Armando Fox     | Engineering Long-Lasting Software | Alpha        | 150   | North Side | Notes all over | 1                 |
+
   Given I am on the Book Postings page for the "Alpha" edition of the book "Engineering Long-Lasting Software"
 
 
