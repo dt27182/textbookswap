@@ -11,7 +11,7 @@ Background: Seller follows the link to the seller admin page he/she got in the e
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" is a required book for course number "169" in the "Computer Science" department
   Given somebody named "Fake Person" with the e-mail "fake_person@berkeley.edu" posted the "Alpha" edition of the book "Engineering Long-Lasting Software" for "100000000" in "Brand New" condition at "South Side"
   Given somebody contacted the e-mail "fake_person@berkeley.edu" for "Alpha" edition of the book "Engineering Long-Lasting Software"
-  Given I am on the seller admin page for for the "100000000" dollar "Brand New" quality "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Fake Person" at "fake_person@berkeley.edu" at "South Side"
+  Given I am on the seller admin page for the "100000000" dollar "Brand New" quality "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Fake Person" at "fake_person@berkeley.edu" at "South Side"
 
 Scenario: Seller wants to repost the book because he couldn't sell the book
 

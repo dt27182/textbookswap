@@ -60,19 +60,26 @@ Given /^somebody named "(.*)" with the e-mail "(.*)" posted the "(.*)" edition o
   posting.save!
 end
 
+Given /^somebody named "(.*)" with the e-mail "(.*)" posted the "(.*)" edition of the book "(.*)" for "(.*)" in "(.*)" condition at "(.*)" around "(.*)" days ago$/ do |name, email, bookEdi, bookTitle, cost, condit, loc, expir|
+  age = Integer(expir)
+  book = Book.find_by_title_and_edition(bookTitle, bookEdi)
+  posting = Posting.create!(:seller_email => email, :seller_name => name, :price => cost, :location => loc, :condition => condit, :book_id => book.id, :created_at => Time.now - age.months)
+  posting.save!
+end
+
 Given /^the expiration time is "(.*)" days$/ do |numStr|
   m = Misc.create!(:key => "expiration_time", :value => numStr)
   m.save!
 end
 
-Given /^somebody contacted the e-mail "(.*)"for "(.*)" edition of the book "(.*)"$/ do |email, edition, bookTitle|
-  book = Book.find_by_title_and_edition(bookTitle, bookEdi)
+Given /^somebody contacted the e-mail "(.*)" for "(.*)" edition of the book "(.*)"$/ do |email, edition, bookTitle|
+  book = Book.find_by_title_and_edition(bookTitle, edition)
   posting = Posting.find_by_seller_email_and_book_id(email, book.id)
   posting.reserved = true
   posting.save!
 end
 
-Given /^I am an admin&/ do
-	session[:user_id] = User.create!.id
+Given /^I am an admin$/ do
+	cookies[:user_id] = User.create!.id
 end
 
