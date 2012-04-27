@@ -202,8 +202,8 @@ describe PostingsController do
       
       it "should send an email to the seller" do
         Posting.stub(:create).and_return(@fake_post)
+        UserMailser.should_receive(:send_seller_admin_page)
         put :create_new, {:book_id => '1', :posting => {:seller_email => "abc@abc.com", :seller_name => "Alice", :price => "21", :location => "Berkeley"}}
-        ActionMailer::Base.deliveries.empty?.should == false
       end
 
       it "should redirect back to the home page" do
