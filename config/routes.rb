@@ -37,7 +37,7 @@ Textbookswap::Application.routes.draw do
   #route to republish a posting
   post '/postings/admin/republish/:unique_string' => 'postings#republish', :as => :republish_posting
   #delete a posting
-  get '/postings/delete/:id/' => 'postings#delete', :as => :delete_posting
+  delete '/postings/delete/:id/' => 'postings#delete', :as => :delete_posting
   #page to display admin page
   get '/admin' => 'misc#display', :as => :display_admin_page
   #route to post changes to admin settings
