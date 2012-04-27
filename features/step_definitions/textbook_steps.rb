@@ -46,27 +46,6 @@ Then /^(?:|I )should see "([^"]*)" in "([^"]*)"$/ do |regexp, parent|
   end
 end
 
-Given /^somebody named "(.*)" with the e-mail "(.*)" posted the "(.*)" edition of the book "(.*)" for "(.*)" in "(.*)" condition at "(.*)"$/ do |name, email, bookEdi, bookTitle, cost, condit, loc|
-
-  book = Book.find_by_title_and_edition(bookTitle, bookEdi)
-  posting = Posting.create!(:seller_email => email, :seller_name => name, :price => cost, :location => loc, :condition => condit, :book_id => book.id)
-  posting.save!
-end
-
-Given /^somebody named "(.*)" with the e-mail "(.*)" posted the "(.*)" edition of the book "(.*)" for "(.*)" in "(.*)" condition at "(.*)" around "(.*)" months ago$/ do |name, email, bookEdi, bookTitle, cost, condit, loc, expir|
-  age = Integer(expir)
-  book = Book.find_by_title_and_edition(bookTitle, bookEdi)
-  posting = Posting.create!(:seller_email => email, :seller_name => name, :price => cost, :location => loc, :condition => condit, :book_id => book.id, :created_at => Time.now - age.months)
-  posting.save!
-end
-
-Given /^somebody named "(.*)" with the e-mail "(.*)" posted the "(.*)" edition of the book "(.*)" for "(.*)" in "(.*)" condition at "(.*)" around "(.*)" days ago$/ do |name, email, bookEdi, bookTitle, cost, condit, loc, expir|
-  age = Integer(expir)
-  book = Book.find_by_title_and_edition(bookTitle, bookEdi)
-  posting = Posting.create!(:seller_email => email, :seller_name => name, :price => cost, :location => loc, :condition => condit, :book_id => book.id, :created_at => Time.now - age.days)
-  posting.save!
-end
-
 Given /^the expiration time is "(.*)" days$/ do |numStr|
   m = Misc.create!(:key => "expiration_time", :value => numStr)
   m.save!

@@ -27,4 +27,4 @@ Scenario:
   Then I should see "Notes all over"
   Then I should see "North Side"
   When I follow "99 / Brand New / South Side"
-  Then I should be on the Buy Additional Information page for the "99" dollar "Brand New" quality "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "David Patterson" at "testDoesNotExist@berkeley.edu" at "South Side"
+  Then I should be on the Buy Additional Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "David Patterson" at "testDoesNotExist@berkeley.edu"

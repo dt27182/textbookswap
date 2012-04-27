@@ -9,8 +9,11 @@ Background: Admin has already set an expiration time and old posts exist on the 
   Given the "Computer Science" department is offering course number "169"
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" exists
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" is a required book for course number "169" in the "Computer Science" department
-  Given somebody named "David Patterson" with the e-mail "testDoesNotExist@berkeley.edu" posted the "Alpha" edition of the book "Engineering Long-Lasting Software" for "1337" in "Poor" condition at "Flea Market" around "10" months ago
-  Given somebody named "Armando Fox" with the e-mail "testDoesNotExist2@berkeley.edu" posted the "Alpha" edition of the book "Engineering Long-Lasting Software" for "99" in "Excellent" condition at "Morgan Hall" around "1" months ago
+  Given the following postings exist:
+  | seller_email                   | seller_name     | book_name                         | book_edition | price | location    | condition | posted_#_days_ago |
+  | testDoesNotExist@berkeley.edu  | David Patterson | Engineering Long-Lasting Software | Alpha        | 1337  | Flea Market | Poor      | 1000              |
+  | testDoesNotExist2@berkeley.edu | Armando Fox     | Engineering Long-Lasting Software | Alpha        | 99    | Morgan Hall | Excellent | 1                 |
+  
   Given the expiration time is "100" days
   Given I am on the Book Postings page for the "Alpha" edition of the book "Engineering Long-Lasting Software"
   

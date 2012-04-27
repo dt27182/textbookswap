@@ -37,7 +37,7 @@ Scenario: User wants to create a posting for the book they want to sell
   Then I should see "Brand New"
   Then I should see "South Side"
   When I follow "99 / Brand New / South Side"
-  Then I should be on the Buy Additional Information page for the "99" dollar "Brand New" quality "10th Edition" edition of the book "Armando Fox Autobiography" posted by "Fyodor Dostoevsky" at "student@berkeley.edu" at "South Side"
+  Then I should be on the Buy Additional Information page for the "10th Edition" edition of the book "Armando Fox Autobiography" posted by "Fyodor Dostoevsky" at "student@berkeley.edu"
   Then I should see "Only threw up on it twice"
   Then I should see "student@berkeley.edu"
   Then I should see "Fyodor Dostoevsky"
