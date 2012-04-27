@@ -4,14 +4,17 @@
 
   %p
     = label :posting, :seller_email, 'Your e-mail:'
+    %br
     = text_field :posting, :seller_email, :class => "required email"
 
   %p
     = label :posting, :seller_name, 'Your name:'
+    %br
     = text_field :posting, :seller_name
 
   %p
     = label :posting, :price, 'Price in dollars:'
+    %br
     = text_field :posting, :price, :class => "required integer_price"
         
   %p

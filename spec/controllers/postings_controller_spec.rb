@@ -193,6 +193,12 @@ describe PostingsController do
         Posting.should_receive(:create).with("seller_email" => @fake_post.seller_email, "seller_name" => @fake_post.seller_name, "price" => @fake_post.price.to_s, "location" => @fake_post.location, "condition" => @fake_post.condition, "book_id" => 1).and_return(@fake_post)
         put :create_new, {:book_id => '1', :posting => {:seller_email => @fake_post.seller_email, :seller_name => @fake_post.seller_name, :price => @fake_post.price, :location => @fake_post.location, :condition => @fake_post.condition, :book_id => '1'}}
       end
+      
+      it "should send an email to the seller" do
+        Posting.stub(:create).and_return(@fake_post)
+        put :create_new, {:book_id => '1', :posting => {:seller_email => "abc@abc.com", :seller_name => "Alice", :price => "21", :location => "Berkeley"}}
+        ActionMailer::Base.deliveries.empty?.should_be false
+      end
 
       it "should redirect back to the home page" do
         Posting.stub(:create).and_return(@fake_post)
@@ -223,6 +229,71 @@ describe PostingsController do
 
     end
 
+  end
+  
+  describe "admin method" do
+  
+    before(:each) do
+      Posting.stub(:find_by_id).and_return(@fake_post)
+    end
+  
+    it "should convert the unique string to a posting id" do
+      pending "I'm not sure how to test this yet"
+    end
+    
+    it "should call for the posting id" do
+      Posting.should_receive(:find_by_id).and_return(@fake_post)
+      get :admin_method, {:unique_string => "dsaf23lkj23"}
+    end
+    
+    it "should redirect to the homepage if ther is no posting with that id" do
+      Posting.stub(:find_by_id).and_return(nil)
+      get :admin_method, {:unique_string => "dsaf23lkj23"}
+      response.should redirect_to(index_path())
+    end
+    
+    it "should make the posting available to the view" do
+      get :admin_method, {:unique_string => "dsaf23lkj23"}
+      assigns(:post).should == @fake_post
+    end
+    
+    it "should make the book on that posting available to the view" do
+      get :admin_method, {:unique_string => "dsaf23lkj23"}
+      assigns(:book).should == @fake_book
+    end
+    
+  end
+  
+  describe "delete method" do
+  
+    before(:each) do
+      session[:user_id] = 1
+      Posting.stub(:find_by_id).and_return(@fake_post)
+    end
+  
+    it "should call for the posting by id" do
+      Posting.should_receive(:find_by_id).and_return(@fake_post)
+      get :delete
+    end
+    
+    it "should call destroy on the posting" do
+      @fake_post.should_receive(:destroy)
+      get :delete
+    end
+    
+    it "should redirect to the homepage" do
+      response.should redirect_to(index_path())
+    end
+    
+    describe "fail path" do
+    
+      it "should redirect to the posting page if not an admin or have secret key" do
+        session[:user_id] = nil
+        response.should redirect_to(show_posting(1))
+      end
+      
+    end
+  
   end
 
 end

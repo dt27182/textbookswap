@@ -60,7 +60,21 @@ module NavigationHelpers
       posting = Posting.find_by_seller_email_and_seller_name_and_price_and_location_and_condition_and_book_id($6, $5, $1, $7, $2, book.id)
       return show_posting_path(posting.id)
  
-
+		when /^the admin page$/
+			return display_admin_page_path
+			
+		when /^the seller admin page for the "(.*)" dollar "(.*)" quality "(.*)" edition of the book "(.*)" posted by "(.*)" at "(.*)" at "(.*)"$/
+		  price = $1
+      qual = $2
+      bookEdi = $3
+      bookTitle = $4
+      name = $5
+      email = $6
+      loc = $7
+      book = Book.find_by_title_and_edition(bookTitle, bookEdi)
+      posting = Posting.find_by_seller_email_and_seller_name_and_price_and_location_and_condition_and_book_id($6, $5, $1, $7, $2, book.id)
+			return display_admin_posting_path(Posting.encrypt(posting.id))
+		
     else
       begin
         page_name =~ /^the (.*) page$/

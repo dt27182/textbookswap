@@ -1,0 +1,22 @@
+%li
+  Price:
+  = post.price
+      
+%li
+  Condition:
+  = post.condition
+    
+%li
+  Posted on:
+  = post.created_at
+    
+%li
+  Best Location:
+  = post.location
+    
+%li
+  Comment:
+  = post.comments
+   
+%p
+  = link_to "Interested in buying this book?", show_posting_path(post.id), :id => "#{post.price} / #{post.condition} / #{post.location}"

@@ -50,6 +50,7 @@ class CoursesController < ApplicationController
   end
 
   def show_books
+    @odd = true
     @course = Course.find_by_id(params[:id])
     @transaction_type = params[:transaction_type]
 
