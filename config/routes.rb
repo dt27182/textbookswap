@@ -4,7 +4,7 @@ Textbookswap::Application.routes.draw do
 
   #homepage
   match '/' => 'index#index', :as => :index
-  #page to input courses into db
+  #page to input courses into db(remeber to delete later)
   get '/admin/courses/input/:term/:year' => 'courses#input', :as => :course_input
   #page to select a course
   get '/:transaction_type/course/show' => 'courses#show', :as => :show_courses
@@ -34,12 +34,16 @@ Textbookswap::Application.routes.draw do
   get '/postings/admin/:unique_string' => 'postings#admin', :as => :display_admin_posting
   #route to post form data for the admin page for a specific posting
   post '/postings/admin/:unique_string' => 'postings#commit_edit', :as => :commit_admin_posting
+  #route to republish a posting
+  post '/postings/admin/republish/:unique_string' => 'postings#republish', :as => :republish_posting
   #delete a posting
-  get '/postings/delete/:id/' => 'postings#delete', :as => :delete_posting
+  delete '/postings/delete/:id/' => 'postings#delete', :as => :delete_posting
   #page to display admin page
   get '/admin' => 'misc#display', :as => :display_admin_page
   #route to post changes to admin settings
   post '/admin' => 'misc#commit_edit', :as => :commit_admin_page_edit
+  #route to add new admin user
+  put '/admin/addnew' => 'users#new', :as => :new_user
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

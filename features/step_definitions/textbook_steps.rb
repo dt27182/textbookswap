@@ -72,4 +72,7 @@ Given /^somebody contacted the e-mail "(.*)"for "(.*)" edition of the book "(.*)
   posting.save!
 end
 
+Given /^I am an admin&/ do
+	session[:user_id] = User.create!.id
+end
 
