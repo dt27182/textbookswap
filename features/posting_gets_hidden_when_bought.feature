@@ -12,7 +12,8 @@ Feature: Posting is hidden on the site when someone buys it
   Given I am on the Buy Additional Information page for the "99" dollar "Excellent" quality "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "David Patterson" at "testDoesNotExist@berkeley.edu" at "Black Market"
   
 Senario: User successfully buys a posting
-	When I fill in "email_buyer_email" with "recentlyescaped@berkeley.edu"
+	Given I fill in "email_buyer_email" with "recentlyescaped@berkeley.edu"
   When I fill in "email_body" with "Hey David, I want to buy this book of yours. Can we meet in a dark back alley downtown?"
   When I press "Send"
+  
   
