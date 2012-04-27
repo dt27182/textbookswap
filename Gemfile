@@ -30,6 +30,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'ZenTest'
   gem 'minitest', "~> 2.11.4"
+  gem 'email_spec'
 end
 
 group :production do
