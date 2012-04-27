@@ -65,5 +65,8 @@ class PostingsController < ApplicationController
   
   def delete
   end
+  
+  def republish
+  end
 
 end

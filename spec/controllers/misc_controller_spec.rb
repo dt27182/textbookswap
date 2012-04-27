@@ -5,9 +5,9 @@ describe MiscController do
   describe 'the admin page' do
     describe 'viewing the admin page' do
       before(:each) do
-        @semester = Misc.find_by_key("semester").value
-        @year = Misc.find_by_key("year").value
-        @expiration_period = Misc.find_by_key("expiration_time").value
+        @semester = Misc.create!(:key => "semester", :value => "spring").value
+        @year = Misc.create!(:key => "year", :value => "2012").value
+        @expiration_period = Misc.create!(:key => "expiration_time", :value => "90").value
         session[:user_id] = 1
       end
     
