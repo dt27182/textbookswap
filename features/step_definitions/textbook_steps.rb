@@ -65,4 +65,5 @@ Given /^the expiration time is "(.*)" days$/ do |numStr|
   m.save!
 end
 
-Give /^
+Give /^the current semester is "(.*)" "(.*)""&/ do |semester, year|
+end
