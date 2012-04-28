@@ -9,6 +9,8 @@ class UserMailer < ActionMailer::Base
   end
   
   def send_seller_admin_page(to_address, link)
+    @link = link
+    mail(:to => to_address, :subject => "Important information about your posting on Textbook Swap")
   end
 
 end

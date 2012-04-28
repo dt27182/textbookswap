@@ -7,7 +7,7 @@ describe MiscController do
       before(:each) do
         @semester = Misc.create!(:key => "semester", :value => "spring").value
         @year = Misc.create!(:key => "year", :value => "2012").value
-        @expiration_period = Misc.create!(:key => "expiration_time", :value => "90").value
+        @expiration_time = Misc.create!(:key => "expiration_time", :value => "90").value
         session[:user_id] = 1
       end
     
