@@ -8,9 +8,11 @@ class Posting < ActiveRecord::Base
 	end
 	
 	def self.encrypt(posting_id)
+	  ((posting_id+10)**16).to_s(36)
 	end
 	
 	def self.decrypt(cyphertext)
+	  ((cyphertext.to_i(36)**(1.0/16))-10).to_i
 	end
 	
 end
