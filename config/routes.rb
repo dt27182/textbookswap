@@ -44,6 +44,11 @@ Textbookswap::Application.routes.draw do
   post '/admin' => 'misc#commit_edit', :as => :commit_admin_page_edit
   #route to add new admin user
   put '/admin/addnew' => 'users#new', :as => :new_user
+  #routes for logging in
+  match '/auth/:provider/callback', :to => 'sessions#create', :as => :login
+  match '/auth/failure', :to => 'sessions#failure'
+  get '/logout', :to => 'sessions#destroy', :as => :logout
+  
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

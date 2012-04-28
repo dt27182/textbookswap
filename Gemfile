@@ -10,6 +10,7 @@ gem 'haml'
 gem 'mechanize'
 gem 'isbn_validation'
 gem 'valid_email'
+gem 'omniauth-facebook'
 # Use unicorn as the web server
 # gem 'unicorn'
 

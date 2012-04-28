@@ -43,24 +43,5 @@ describe UsersController do
     end
         
   end
-  
-  describe "login" do
-  
-    it "should set the session to user id" do
-      UsersController.login
-      session[:user_id].nil?.should == false
-    end
-
-    it "should return true if login succeeds" do
-      request.stub(:env).and_return({:email => "atkaiser@berkeley.edu"})
-      UserController.login.should == true
-    end
-    
-    it "should return false if login fails" do
-      request.stub(:env).and_return({})
-      UserController.login.should == false
-    end
-  
-  end
 
 end
