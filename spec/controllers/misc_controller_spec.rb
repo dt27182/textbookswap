@@ -14,7 +14,7 @@ describe MiscController do
       it 'should redirect to the index page if no one is not logged in' do
         session[:user_id] = nil
         get :display
-        response.should redirect_to(index_path())
+        response.should redirect_to("/auth/facebook")
       end
       
       it 'should make the current semester available to the view' do
@@ -29,7 +29,7 @@ describe MiscController do
       
       it 'should make the current expiration period available to the view' do
         get :display
-        assings(:expiration_time).should == @expiration_period
+        assigns(:expiration_time).should == @expiration_time
       end
     end
     
