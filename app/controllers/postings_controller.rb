@@ -57,6 +57,8 @@ class PostingsController < ApplicationController
     new_posting_attributes = params[:posting]
     new_posting_attributes[:book_id] = book.id
     new_posting = Posting.create(new_posting_attributes)
+    new_posting.book_id = book.id
+    new_posting.save
     if(new_posting.errors.empty?)
     	UserMailer.send_seller_admin_page(new_posting.seller_email, display_admin_posting_path(Posting.encrypt(new_posting.id)))
     	flash[:notice] = "Book posting submitted! We will e-mail you if someone wishes to buy your book!"
@@ -78,13 +80,42 @@ class PostingsController < ApplicationController
   end
   
   def commit_edit
-  	
+  	posting_id = Posting.decrypt(params[:unique_string])
+  	posting = Posting.find_by_id(posting_id)
+  	if posting.nil?
+  		flash[:warning] = "The requested posting does not exist"
+  		redirect_to index_path and return
+  	end
+  	posting.update_attributes(params[:new_post])
+  	if(posting.errors.empty?)
+			flash[:notice] = "Your post has been successfully updated"
+			redirect_to show_posting_path(posting_id)
+  	else
+  		flash[:warning] = "The update failed because some form fields are invalid"
+  		redirect_to display_admin_posting_path(params[:unique_string])
+  	end
   end
   
   def delete
+  	posting_id = Posting.decrypt(params[:unique_string])
+  	posting = Posting.find_by_id(posting_id)
+  	if posting.nil?
+  		flash[:warning] = "The requested posting does not exist"
+  	end
+  	posting.destroy
+  	flash[:notice] = "Your posting has been successfully deleted"
+  	redirect_to index_path
   end
   
   def republish
+  	posting_id = Posting.decrypt(params[:unique_string])
+  	posting = Posting.find_by_id(posting_id)
+  	if posting.nil?
+  		flash[:warning] = "The requested posting does not exist"
+  	end
+  	posting.reserved = false
+  	posting.save!
+  	redirect_to show_posting_path(posting_id)
   end
 
 end
