@@ -80,13 +80,42 @@ class PostingsController < ApplicationController
   end
   
   def commit_edit
-  	
+  	posting_id = Posting.decrypt(params[:unique_string])
+  	posting = Posting.find_by_id(posting_id)
+  	if posting.nil?
+  		flash[:warning] = "The requested posting does not exist"
+  		redirect_to index_path and return
+  	end
+  	posting.update_attributes(params[:new_post])
+  	if(posting.errors.empty?)
+			flash[:notice] = "Your post has been successfully updated"
+			redirect_to show_posting_path(posting_id)
+  	else
+  		flash[:warning] = "The update failed because some form fields are invalid"
+  		redirect_to display_admin_posting_path(params[:unique_string])
+  	end
   end
   
   def delete
+  	posting_id = Posting.decrypt(params[:unique_string])
+  	posting = Posting.find_by_id(posting_id)
+  	if posting.nil?
+  		flash[:warning] = "The requested posting does not exist"
+  	end
+  	posting.destroy
+  	flash[:notice] = "Your posting has been successfully deleted"
+  	redirect_to index_path
   end
   
   def republish
+  	posting_id = Posting.decrypt(params[:unique_string])
+  	posting = Posting.find_by_id(posting_id)
+  	if posting.nil?
+  		flash[:warning] = "The requested posting does not exist"
+  	end
+  	posting.reserved = false
+  	posting.save!
+  	redirect_to show_posting_path(posting_id)
   end
 
 end
