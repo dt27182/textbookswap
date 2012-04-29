@@ -3,13 +3,15 @@ require 'spec_helper'
 describe MiscController do
 
   describe 'the admin page' do
+  
+    before(:each) do
+      @semester = Misc.create!(:key => "semester", :value => "spring").value
+      @year = Misc.create!(:key => "year", :value => "2012").value
+      @expiration_time = Misc.create!(:key => "expiration_time", :value => "90").value
+      session[:user_id] = 1
+    end
+      
     describe 'viewing the admin page' do
-      before(:each) do
-        @semester = Misc.create!(:key => "semester", :value => "spring").value
-        @year = Misc.create!(:key => "year", :value => "2012").value
-        @expiration_time = Misc.create!(:key => "expiration_time", :value => "90").value
-        session[:user_id] = 1
-      end
     
       it 'should redirect to the index page if no one is not logged in' do
         session[:user_id] = nil
@@ -34,23 +36,28 @@ describe MiscController do
     end
     
     describe 'updating the values' do
+    
+      before :each do
+        Course.stub(:get_courses_for)
+      end
+      
       it 'should update the current semester' do
-        post :commit_edit, {:semester => "fall", :year => "2012", :expiration_time => "24"}
+        post :commit_edit, {:misc => {:semester => "fall", :year => "2012", :expiration_time => "24"}}
         Misc.find_by_key("semester").value.should == "fall"
       end
       
       it 'should update the current year' do
-        post :commit_edit, {:semester => "fall", :year => "2012", :expiration_time => "24"}
-        Misc.find_by_key("year").value.should == 2012
+        post :commit_edit, {:misc => {:semester => "fall", :year => "2012", :expiration_time => "24"}}
+        Misc.find_by_key("year").value.should == "2012"
       end
       
       it 'should update the expiration period' do
-        post :commit_edit, {:semester => "fall", :year => "2012", :expiration_time => "24"}
+        post :commit_edit, {:misc => {:semester => "fall", :year => "2012", :expiration_time => "24"}}
         Misc.find_by_key("expiration_time").value.should == "24"
       end
       
       it "should set the flash message" do
-        post :commit_edit, {:semester => "fall", :year => "2012", :expiration_time => "24"}
+        post :commit_edit, {:misc => {:semester => "fall", :year => "2012", :expiration_time => "24"}}
         flash.now[:notice].should == "Settings Saved!"
       end
       
@@ -61,12 +68,12 @@ describe MiscController do
         end
       
         it "should fail if there is no one logged in" do
-          post :commit_edit, {:semester => "fall", :year => "2012", :expiration_time => "24"}
+          post :commit_edit, {:misc => {:semester => "fall", :year => "2012", :expiration_time => "24"}}
           response.should redirect_to(index_path())
         end
         
         it "should set the flash" do
-          post :commit_edit, {:semester => "fall", :year => "2012", :expiration_time => "24"}
+          post :commit_edit, {:misc => {:semester => "fall", :year => "2012", :expiration_time => "24"}}
           flash.now[:warning].should == "You do not have privileges to update these values."
         end
         

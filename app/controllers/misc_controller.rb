@@ -16,12 +16,13 @@ class MiscController < ApplicationController
     end
     if params[:misc][:expiration_time] =~ /^\d+$/
       expiration = Misc.find_by_key("expiration_time")
-      expiration.value = params[:misc][:expiration_time]
+      expiration.value = params[:misc][:expiration_time].to_s
+      expiration.save
     end
     new_semester = params[:misc][:semester]
     new_year = params[:misc][:year]
     old_semester = Misc.find_by_key("semester").value
-    old_semester = Misc.find_by_key("year").value
+    old_year = Misc.find_by_key("year").value
     if new_semester != old_semester or new_year != old_year
       if new_semester != old_semester
         misc = Misc.find_by_key("semester")
@@ -30,12 +31,13 @@ class MiscController < ApplicationController
       end
       if new_year != old_year and new_year.to_i > 2011
         misc = Misc.find_by_year("year")
-        misc.value = new_year.to_i
+        misc.value = new_year.to_s
         misc.save
       end
-      Course.delay.get_courses_for(Misc.find_by_key("semester").value, Misc.find_by_key("year").value)
+      Course.get_courses_for(Misc.find_by_key("semester").value, Misc.find_by_key("year").value)
     end
     flash[:notice] = "Settings Saved!"
+    redirect_to display_admin_page_path()
   end
   
 end
