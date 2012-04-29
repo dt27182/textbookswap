@@ -54,7 +54,10 @@ end
 Given /the following postings exist/ do |postings_table|
   postings_table.hashes.each do |posting|
     # each returned element will be a hash whose key is the table header. I.E. "seller_name" "price" & "release_date"
-    Posting.create!(:seller_email => posting["seller_email"], :seller_name => posting["seller_name"], :price => posting["price"], :location => posting["location"], :condition => posting["condition"], :created_at => Time.now - Integer(posting["posted_#_days_ago"]).days, :book_id => Book.find_by_title_and_edition(posting["book_name"], posting["book_edition"]).id)
+    post = Posting.create!(:seller_email => posting["seller_email"], :seller_name => posting["seller_name"], :price => posting["price"], :location => posting["location"], :condition => posting["condition"])
+    post.book_id = Book.find_by_title_and_edition(posting["book_name"], posting["book_edition"]).id
+    post.updated_at = Time.now - Integer(posting["posted_#_days_ago"]).days
+    post.save!
   end
 end
 

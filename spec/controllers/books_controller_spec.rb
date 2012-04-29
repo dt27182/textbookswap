@@ -6,15 +6,19 @@ describe BooksController do
     @fake_book = mock('Book', :id => '1', :title => 'testbook1', :author => 'bob', :edition => '1', :isbn => '99921-58-10-7')
     @fake_book_2 = Book.create({:title => "testbook2", :author => "alice", :edition => "2", :isbn => "9971-5-0210-0"})
     @posting1 = Posting.create!({:seller_email => "abc@gmail.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false})
-    @posting1.created_at = Time.now
+    @posting1.updated_at = Time.now
     @posting1.book_id = 2
     @posting1.save!
     @posting2 = Posting.create!({:seller_email => "abc@gmail.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false})
-    @posting2.created_at = Time.now - 3.days
+    @posting2.updated_at = Time.now - 3.days
     @posting2.book_id = 2
 		@posting2.save!
-    @postings = [@posting1, @posting2]
-    @non_expired_postings = [@posting1]
+		@posting3 = Posting.create!({:seller_email => "abc@gmail.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false})
+		@posting3.book_id = 2
+		@posting3.reserved = true
+		@posting3.save!
+    @postings = [@posting1, @posting2, @posting3]
+    @valid_postings = [@posting1]
     Misc.create({:key => "expiration_time", :value => "2"})
   end
 
@@ -113,11 +117,11 @@ describe BooksController do
         Book.should_receive(:find_by_id).with(@fake_book_2.id.to_s).and_return(@fake_book_2)
         get :show_postings, {:book_id => @fake_book_2.id}
       end
-      it "should make the list of this book's non-expired postings available to the view in the @postings variable" do
+      it "should make the list of this book's non-expired and non-reserved postings available to the view in the @postings variable" do
         Book.stub(:find_by_id).and_return(@fake_book_2)
         @fake_book_2.should_receive(:postings).and_return(@postings)
         get :show_postings, {:book_id => @fake_book_2.id}
-        assigns(:postings).should == @non_expired_postings
+        assigns(:postings).should == @valid_postings
       end
       it "should make the book available to the view in the @book variable" do
         Book.stub(:find_by_id).and_return(@fake_book_2)

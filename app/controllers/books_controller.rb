@@ -31,7 +31,7 @@ class BooksController < ApplicationController
     @postings = []
     expire_days = Misc.find_by_key("expiration_time").value.to_i
     temp.each do |posting|
-      if posting.created_at + expire_days.days > Time.now
+      if (posting.updated_at + expire_days.days > Time.now && !posting.reserved)
         @postings << posting
       end
    end
