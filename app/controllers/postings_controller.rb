@@ -79,7 +79,7 @@ class PostingsController < ApplicationController
   	@book = @posting.book
   end
   
-  def commit_edit
+  def commit_edit_and_republish
   	posting_id = Posting.decrypt(params[:unique_string])
   	posting = Posting.find_by_id(posting_id)
   	if posting.nil?
@@ -88,7 +88,9 @@ class PostingsController < ApplicationController
   	end
   	posting.update_attributes(params[:new_post])
   	if(posting.errors.empty?)
-			flash[:notice] = "Your post has been successfully updated"
+  		posting.reserved = false
+  		posting.save!
+			flash[:notice] = "Your updated post has been republished!"
 			redirect_to show_posting_path(posting_id)
   	else
   		flash[:warning] = "The update failed because some form fields are invalid"

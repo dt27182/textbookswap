@@ -5,8 +5,14 @@ describe BooksController do
     @fake_course = mock('Course', :id => '1')
     @fake_book = mock('Book', :id => '1', :title => 'testbook1', :author => 'bob', :edition => '1', :isbn => '99921-58-10-7')
     @fake_book_2 = Book.create({:title => "testbook2", :author => "alice", :edition => "2", :isbn => "9971-5-0210-0"})
-    @posting1 = Posting.create({:created_at => Time.now, :book_id => 2})
-    @posting2 = Posting.create({:created_at => Time.now - 3.days, :book_id => 2})
+    @posting1 = Posting.create!({:seller_email => "abc@gmail.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false})
+    @posting1.created_at = Time.now
+    @posting1.book_id = 2
+    @posting1.save!
+    @posting2 = Posting.create!({:seller_email => "abc@gmail.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false})
+    @posting2.created_at = Time.now - 3.days
+    @posting2.book_id = 2
+		@posting2.save!
     @postings = [@posting1, @posting2]
     @non_expired_postings = [@posting1]
     Misc.create({:key => "expiration_time", :value => "2"})

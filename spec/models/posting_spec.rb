@@ -5,7 +5,9 @@ describe Posting do
   describe "sending seller the buyer's info" do
   
     it "should call the Usermailer method" do
-      @fake_post = Posting.create!({:seller_email => "abc@gmail.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false, :book_id => '1'})
+      @fake_post = Posting.create!({:seller_email => "abc@gmail.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false})
+      @fake_post.book_id = '1'
+      @fake_post.save!
       @fake_book = Book.create!({:title => "Book", :author => "Professor", :edition => "1", :isbn => "960-425-059-0"})
       @fake_mail = ""
       @fake_mail.stub(:deliver).and_return(true)
