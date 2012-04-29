@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(:version => 20120427003329) do
     t.integer  "suggested_price"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "course_id"
   end
 
   create_table "courses", :force => true do |t|
