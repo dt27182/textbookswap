@@ -283,6 +283,9 @@ describe PostingsController do
       post :commit_edit, {:unique_string => "dsaf23lkj23"}
       response.should redirect_to(index_path())
     end
+    it "should call the update_attributes method in the posting model" do
+    end
+    
   end
   describe "delete method" do
   
