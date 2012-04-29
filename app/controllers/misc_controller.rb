@@ -16,7 +16,8 @@ class MiscController < ApplicationController
     end
     if params[:misc][:expiration_time] =~ /^\d+$/
       expiration = Misc.find_by_key("expiration_time")
-      expiration.value = params[:misc][:expiration_time]
+      expiration.value = params[:misc][:expiration_time].to_s
+      expiration.save
     end
     new_semester = params[:misc][:semester]
     new_year = params[:misc][:year]
@@ -30,7 +31,7 @@ class MiscController < ApplicationController
       end
       if new_year != old_year and new_year.to_i > 2011
         misc = Misc.find_by_year("year")
-        misc.value = new_year.to_i
+        misc.value = new_year.to_s
         misc.save
       end
       Course.get_courses_for(Misc.find_by_key("semester").value, Misc.find_by_key("year").value)

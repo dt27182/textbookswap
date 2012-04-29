@@ -48,7 +48,7 @@ describe MiscController do
       
       it 'should update the current year' do
         post :commit_edit, {:misc => {:semester => "fall", :year => "2012", :expiration_time => "24"}}
-        Misc.find_by_key("year").value.should == 2012
+        Misc.find_by_key("year").value.should == "2012"
       end
       
       it 'should update the expiration period' do
