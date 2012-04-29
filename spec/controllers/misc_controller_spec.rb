@@ -67,7 +67,7 @@ describe MiscController do
         
         it "should set the flash" do
           post :commit_edit, {:semester => "fall", :year => "2012", :expiration_time => "24"}
-          flash.now[:warning].should == "You do not have privileges to update these values"
+          flash.now[:warning].should == "You do not have privileges to update these values."
         end
         
       end
