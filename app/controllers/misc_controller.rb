@@ -33,7 +33,7 @@ class MiscController < ApplicationController
         misc.value = new_year.to_i
         misc.save
       end
-      Course.delay.get_courses_for(Misc.find_by_key("semester").value, Misc.find_by_key("year").value)
+      Course.get_courses_for(Misc.find_by_key("semester").value, Misc.find_by_key("year").value)
     end
     flash[:notice] = "Settings Saved!"
   end
