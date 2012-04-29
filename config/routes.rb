@@ -33,9 +33,7 @@ Textbookswap::Application.routes.draw do
   #route to display the admin page for a specific posting
   get '/postings/admin/:unique_string' => 'postings#admin', :as => :display_admin_posting
   #route to post form data for the admin page for a specific posting
-  post '/postings/admin/:unique_string' => 'postings#commit_edit', :as => :commit_admin_posting
-  #route to republish a posting
-  post '/postings/admin/republish/:unique_string' => 'postings#republish', :as => :republish_posting
+  post '/postings/admin/:unique_string' => 'postings#commit_edit_and_republish', :as => :commit_admin_posting
   #delete a posting
   delete '/postings/delete/:unique_string' => 'postings#delete', :as => :delete_posting
   #page to display admin page
