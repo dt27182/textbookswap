@@ -21,12 +21,12 @@ Scenario: Seller wants to repost the book because he couldn't sell the book
   Then I should see "Fake Person"
   Then I should see "fake_person@berkeley.edu"
   Then I should see "100000000"
-  When I press "Repost"
+  When I press "Update and Re-Publish"
   Then I should be on the Buy Additional Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Fake Person" at "fake_person@berkeley.edu"
   Then I should see "Fake Person"
   Then I should see "fake_person@berkeley.edu"
   Then I should see "100000000"
-  Then I should see "Reposting Successful!"
+  Then I should see "Your Updated Post Has Been Republished!"
 
 Scenario: Seller wants to update the info of the post
 
@@ -38,9 +38,14 @@ Scenario: Seller wants to update the info of the post
   When I fill in "posting_seller_email" with "real_person@berkeley.edu"
   When I fill in "posting_seller_name" with "Real Person"
   When I select "North Side" from "posting_location"
-  When I press "Update"
+  When I press "Update and Re-Publish"
   Then I should be on the Buy Additional Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Real Person" at "real_person@berkeley.edu"
-  Then I should see "Update Successful!"
+  Then I should see "Real Person"
+  Then I should see "real_person@berkeley.edu"
+  Then I should see "30"
+  Then I should see "Used it few times"
+  Then I should see "North Side"
+  Then I should see "Your Updated Post Has Been Republished!"
   
 Scenario: Seller wants to delete the post of the book because he sold the book
   
