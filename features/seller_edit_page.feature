@@ -26,7 +26,7 @@ Scenario: Seller wants to repost the book because he couldn't sell the book
   Then I should see "Fake Person"
   Then I should see "fake_person@berkeley.edu"
   Then I should see "100000000"
-  Then I should see "Your Updated Post Has Been Republished!"
+  Then I should see "Your updated post has been republished!"
 
 Scenario: Seller wants to update the info of the post
 
@@ -45,7 +45,7 @@ Scenario: Seller wants to update the info of the post
   Then I should see "30"
   Then I should see "Used it few times"
   Then I should see "North Side"
-  Then I should see "Your Updated Post Has Been Republished!"
+  Then I should see "Your updated post has been republished!"
   
 Scenario: Seller wants to delete the post of the book because he sold the book
   

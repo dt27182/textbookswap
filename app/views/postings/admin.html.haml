@@ -3,35 +3,36 @@
 = form_tag commit_admin_posting_path("#{Posting.encrypt(@posting.id)}"), :id => "edit_posting_form", :method => :post do
 
   %p
-    = label :posting, :seller_email, 'Your e-mail:'
+    = label :new_post, :seller_email, 'Your e-mail:'
     %br
-    = text_field :posting, :seller_email, :class => "required email", :value => "#{@posting.seller_email}
+    = text_field :new_post, :seller_email, :class => "required email", :value => "#{@posting.seller_email}"
 
   %p
-    = label :posting, :seller_name, 'Your name:'
+    = label :new_post, :seller_name, 'Your name:'
     %br
-    = text_field :posting, :seller_name, :value => "#{@posting.seller_name}
+    = text_field :new_post, :seller_name, :value => "#{@posting.seller_name}"
 
   %p
-    = label :posting, :price, 'Price in dollars:'
+    = label :new_post, :price, 'Price in dollars:'
     %br
-    = text_field :posting, :price, :class => "required integer_price", :value => "#{@posting.price}
+    = text_field :new_post, :price, :class => "required integer_price", :value => "#{@posting.price}"
         
   %p
-    = label :posting, :condition, 'Condition of your book:'
-    = select :posting, :condition, ['Brand New', 'Used it few times', 'Notes all over'], :value => "#{@posting.condition}
+    = label :new_post, :condition, 'Condition of your book:'
+    = select :new_post, :condition, ['Brand New', 'Used it few times', 'Notes all over'], :value => "#{@posting.condition}"
     
   %p
-    = label :posting, :location, 'Where you want to meet to sell your book:'
-    = select :posting, :location, ['North Side', 'South Side', 'West Side', 'East Side'], :value => "#{@posting.location}
+    = label :new_post, :location, 'Where you want to meet to sell your book:'
+    = select :new_post, :location, ['North Side', 'South Side', 'West Side', 'East Side'], :value => "#{@posting.location}"
     
   %p
-    = label :posting, :comments, 'Miscellaneous comments:'
+    = label :new_post, :comments, 'Miscellaneous comments:'
     %br
-    = text_area :posting, :comments, :size => "80x5", :value => "#{@posting.comments}
+    = text_area :new_post, :comments, :size => "80x5", :value => "#{@posting.comments}"
 
   %p  
     = submit_tag 'Update and Re-Publish'
 
-%p
-  = link_to "Delete Post", delete_posting_path("#{Posting.encrypt(@posting.id)}"), :id => "Delete Post"
+
+= button_to "Delete Post", delete_posting_path("#{Posting.encrypt(@posting.id)}"), :method => :delete, :id => "Delete Post", :confirm => 'Are you sure?'
+
