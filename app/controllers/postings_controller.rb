@@ -57,6 +57,8 @@ class PostingsController < ApplicationController
     new_posting_attributes = params[:posting]
     new_posting_attributes[:book_id] = book.id
     new_posting = Posting.create(new_posting_attributes)
+    new_posting.book_id = book.id
+    new_posting.save
     if(new_posting.errors.empty?)
     	UserMailer.send_seller_admin_page(new_posting.seller_email, display_admin_posting_path(Posting.encrypt(new_posting.id)))
     	flash[:notice] = "Book posting submitted! We will e-mail you if someone wishes to buy your book!"

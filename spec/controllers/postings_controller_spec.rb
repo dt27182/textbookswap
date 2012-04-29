@@ -11,6 +11,8 @@ describe PostingsController do
 
   before :each do
     @fake_post = Posting.create!({:seller_email => "abc@gmail.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false, :book_id => '1'})
+    @fake_post.book_id = '1'
+    @fake_post.save!
     @fake_book = Book.create!({:title => "Book", :author => "Professor", :edition => "1", :isbn => "960-425-059-0"})
   end
 
@@ -269,6 +271,7 @@ describe PostingsController do
   	before(:each) do
       Posting.stub(:decrypt).and_return(1)
       Posting.stub(:find_by_id).and_return(@fake_post)
+      @new_post_info = {:seller_email => "cba@gmail.com", :seller_name => "Epic Seller", :price => 40, :location => "North Side", :condition => "Destroyed", :comments => "I love this book"}
     end
     it "should convert the unique string to a posting id" do
       Posting.should_receive(:decrypt).with("dsaf23lkj23")
@@ -278,12 +281,18 @@ describe PostingsController do
       Posting.should_receive(:find_by_id).and_return(@fake_post)
       post :commit_edit, {:unique_string => "dsaf23lkj23"}
     end
-    it "should redirect to the homepage if ther is no posting with that id" do
+    it "should redirect to the homepage if there is no posting with that id" do
       Posting.stub(:find_by_id).and_return(nil)
       post :commit_edit, {:unique_string => "dsaf23lkj23"}
       response.should redirect_to(index_path())
     end
     it "should call the update_attributes method in the posting model" do
+    	Posting.should_receive(:update_attributes).with(@new_post_info)
+    	post :commit_edit, {:unique_string => "dsaf23lkj23", :new_post => @new_post_info}
+    end
+    it "should redirect to the homepage if the update fails" do
+    end
+    it "should redirect to the show posting page if the update succeeds"do
     end
     
   end
