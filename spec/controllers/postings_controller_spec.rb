@@ -11,6 +11,8 @@ describe PostingsController do
 
   before :each do
     @fake_post = Posting.create!({:seller_email => "abc@gmail.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false, :book_id => '1'})
+    @fake_post.book_id = '1'
+    @fake_post.save!
     @fake_book = Book.create!({:title => "Book", :author => "Professor", :edition => "1", :isbn => "960-425-059-0"})
   end
 
@@ -269,21 +271,45 @@ describe PostingsController do
   	before(:each) do
       Posting.stub(:decrypt).and_return(1)
       Posting.stub(:find_by_id).and_return(@fake_post)
+      @new_post_info = {:seller_email => "cba@gmail.com", :seller_name => "Epic Seller", :price => 40, :location => "North Side", :condition => "Destroyed", :comments => "I love this book"}
+      @invalid_new_post_info = {:seller_email => "cba@g", :seller_name => "Epic Seller", :price => 40.5, :location => "North Side", :condition => "Destroyed", :comments => "I love this book"}
     end
-    it "should convert the unique string to a posting id" do
-      Posting.should_receive(:decrypt).with("dsaf23lkj23")
-      post :commit_edit, {:unique_string => "dsaf23lkj23"}
+    describe "success path" do
+    	it "should convert the unique string to a posting id" do
+      	Posting.should_receive(:decrypt).with("dsaf23lkj23")
+      	post :commit_edit, {:unique_string => "dsaf23lkj23"}
+    	end
+    	it "should call for the posting id" do
+      	Posting.should_receive(:find_by_id).and_return(@fake_post)
+      	post :commit_edit, {:unique_string => "dsaf23lkj23"}
+    	end
+		  it "should change the values of the post to the values in @new_post_info" do
+		  	post :commit_edit, {:unique_string => "dsaf23lkj23", :new_post => @new_post_info}
+		  	@fake_post.seller_email.should == @new_post_info[:seller_email]
+		  	@fake_post.seller_name.should == @new_post_info[:seller_name]
+		  	@fake_post.price.should == @new_post_info[:price]
+		  	@fake_post.location.should == @new_post_info[:location]
+		  	@fake_post.condition.should == @new_post_info[:condition]
+		  	@fake_post.comments.should == @new_post_info[:comments] 
+		  end
+			it "should redirect to the show posting page if the update succeeds"do
+		  	post :commit_edit, {:unique_string => "dsaf23lkj23", :new_post => @new_post_info}
+		  	response.should redirect_to(show_posting_path(1))
+		  end
     end
-    it "should call for the posting id" do
-      Posting.should_receive(:find_by_id).and_return(@fake_post)
-      post :commit_edit, {:unique_string => "dsaf23lkj23"}
-    end
-    it "should redirect to the homepage if ther is no posting with that id" do
-      Posting.stub(:find_by_id).and_return(nil)
-      post :commit_edit, {:unique_string => "dsaf23lkj23"}
-      response.should redirect_to(index_path())
-    end
+    describe "fail path" do
+		  it "should redirect to the homepage if there is no posting with that id" do
+		    Posting.stub(:find_by_id).and_return(nil)
+		    post :commit_edit, {:unique_string => "dsaf23lkj23"}
+		    response.should redirect_to(index_path())
+		  end
+			it "should redirect to the display_admin_page if the update fails due to invalid field values" do
+		  	post :commit_edit, {:unique_string => "dsaf23lkj23", :new_post => @invalid_new_post_info}
+		  	response.should redirect_to(display_admin_posting_path("dsaf23lkj23"))
+		  end
+    end    
   end
+  
   describe "delete method" do
   
     before(:each) do
@@ -304,22 +330,7 @@ describe PostingsController do
     it "should redirect to the homepage" do
       delete :delete, {:unique_string => "daj2390lkafj"}
       response.should redirect_to(index_path())
-    end
-    
-    it "should still delete if not admin but comes from the postings page" do
-      @fake_post.should_receive(:destroy)
-      delete :delete, {:unique_string => "daj2390lkafj"}
-    end  
-    
-    describe "fail path" do
-    
-      it "should redirect to the posting page if not an admin or have secret key" do
-        session[:user_id] = nil
-        response.should redirect_to(show_posting_path(1))
-      end
-      
-    end
-    
+    end    
   end
     
   describe "republishing" do
@@ -328,14 +339,14 @@ describe PostingsController do
       Posting.stub(:decrypt).and_return(1)
     end
     
-    it "should reset the reserved boolean for the posting to true" do
+    it "should reset the reserved boolean for the posting to false" do
       post :republish, {:unique_string => "random"}
-      @fake_post.reserved.should == true
+      @fake_post.reserved.should == false
     end
   
     it "should republish it should go to the posting page" do
       post :republish, {:unique_string => "random"}
-      response.should redirect_to(show_posting(1))
+      response.should redirect_to(show_posting_path(1))
     end
       
   end
