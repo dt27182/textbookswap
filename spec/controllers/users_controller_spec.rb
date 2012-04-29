@@ -6,7 +6,7 @@ describe UsersController do
   
     before :each do
       @new_email = "atkaiser@berkeley.edu"
-      session[:user_id] = nil
+      session[:user_id] = 1
     end
   
     it "should call create on the User model" do
@@ -21,7 +21,7 @@ describe UsersController do
     
     it "should set the flash message" do
       put :new, {:email => @new_email}
-      flash.now[:warning].should == "User added"
+      flash.now[:notice].should == "User added"
     end
     
     describe "fail path" do
@@ -37,7 +37,7 @@ describe UsersController do
       
       it "should set the flash message" do
         put :new, {:email => @new_email}
-        flash.now[:warning].should == "You do not have the privilege to add a new user"
+        flash.now[:warning].should == "You do not have the privilege to add a new user."
       end
     
     end
