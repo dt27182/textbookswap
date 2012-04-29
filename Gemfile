@@ -11,7 +11,6 @@ gem 'mechanize'
 gem 'isbn_validation'
 gem 'valid_email'
 gem 'omniauth-facebook'
-gem 'delayed_job_active_record'
 # Use unicorn as the web server
 # gem 'unicorn'
 
