@@ -21,7 +21,7 @@ class MiscController < ApplicationController
     new_semester = params[:misc][:semester]
     new_year = params[:misc][:year]
     old_semester = Misc.find_by_key("semester").value
-    old_semester = Misc.find_by_key("year").value
+    old_year = Misc.find_by_key("year").value
     if new_semester != old_semester or new_year != old_year
       if new_semester != old_semester
         misc = Misc.find_by_key("semester")
@@ -36,6 +36,7 @@ class MiscController < ApplicationController
       Course.get_courses_for(Misc.find_by_key("semester").value, Misc.find_by_key("year").value)
     end
     flash[:notice] = "Settings Saved!"
+    redirect_to display_admin_page_path()
   end
   
 end
