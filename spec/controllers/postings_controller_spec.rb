@@ -37,12 +37,6 @@ describe PostingsController do
         get :show, {:posting_id => '1'}
       end
 
-      it "should call find_by_id to find the Book" do
-        Posting.stub(:find_by_id).and_return(@fake_post)
-        Book.should_receive(:find_by_id).with(@fake_post.book_id).and_return(@fake_book)
-        get :show, {:posting_id => '1'}
-      end
-
       it "book_id of Posting and the input book_id should match" do
         Posting.stub(:find_by_id).and_return(@fake_post)
         Book.stub(:find_by_id).and_return(@fake_book)
@@ -92,9 +86,6 @@ describe PostingsController do
       @empty_buyer_email = ""
       @empty_buyer_comment = ""
       @seller_email = "abc@gmail.com"
-      @book_title = "TextBook"
-      @fake_book = Book.create(:title => "Test Book", :author => "Fox", :edition => "alpha")
-      @fake_post = Posting.create(:seller_email => @seller_email)
     end
 
     describe "correct inputs" do
@@ -110,12 +101,14 @@ describe PostingsController do
       end
 
       it "should redirect back to the home page with correct inputs" do
+      	Posting.stub(:find_by_id).and_return(@fake_post)
         @fake_post.stub(:send_seller_buyer_info)
         post :commit_buy, {:posting_id => '1', :email => {:body => @fake_buyer_comment, :buyer_email => @fake_buyer_email}}
         response.should redirect_to(index_path())
       end
       
       it "should reserve the post when bought" do
+      	Posting.stub(:find_by_id).and_return(@fake_post)
         @fake_post.stub(:send_seller_buyer_info)
         post :commit_buy, {:posting_id => '1', :email => {:body => @fake_buyer_comment, :buyer_email => @fake_buyer_email}}
         @fake_post.reserved.should == true
@@ -202,7 +195,7 @@ describe PostingsController do
       
       it "should send an email to the seller" do
         Posting.stub(:create).and_return(@fake_post)
-        UserMailser.should_receive(:send_seller_admin_page)
+        UserMailer.should_receive(:send_seller_admin_page)
         put :create_new, {:book_id => '1', :posting => {:seller_email => "abc@abc.com", :seller_name => "Alice", :price => "21", :location => "Berkeley"}}
       end
 
@@ -262,7 +255,7 @@ describe PostingsController do
     
     it "should make the posting available to the view" do
       get :admin, {:unique_string => "dsaf23lkj23"}
-      assigns(:post).should == @fake_post
+      assigns(:posting).should == @fake_post
     end
     
     it "should make the book on that posting available to the view" do
@@ -272,6 +265,25 @@ describe PostingsController do
     
   end
   
+  describe "commit_edit method" do
+  	before(:each) do
+      Posting.stub(:decrypt).and_return(1)
+      Posting.stub(:find_by_id).and_return(@fake_post)
+    end
+    it "should convert the unique string to a posting id" do
+      Posting.should_receive(:decrypt).with("dsaf23lkj23")
+      post :commit_edit, {:unique_string => "dsaf23lkj23"}
+    end
+    it "should call for the posting id" do
+      Posting.should_receive(:find_by_id).and_return(@fake_post)
+      post :commit_edit, {:unique_string => "dsaf23lkj23"}
+    end
+    it "should redirect to the homepage if ther is no posting with that id" do
+      Posting.stub(:find_by_id).and_return(nil)
+      post :commit_edit, {:unique_string => "dsaf23lkj23"}
+      response.should redirect_to(index_path())
+    end
+  end
   describe "delete method" do
   
     before(:each) do
