@@ -11,7 +11,7 @@ describe Posting do
       @fake_book = Book.create!({:title => "Book", :author => "Professor", :edition => "1", :isbn => "960-425-059-0"})
       @fake_mail = ""
       @fake_mail.stub(:deliver).and_return(true)
-      UserMailer.should_receive(:send_seller_buyer_email).with("abc@gmail.com", "xyz@gmail.com", "Only used this book before my exams", "Book").and_return(@fake_mail)
+      UserMailer.should_receive(:send_seller_buyer_email).with("abc@gmail.com", "xyz@gmail.com", "Only used this book before my exams", "Book", Posting.encrypt(@fake_post.id)).and_return(@fake_mail)
       @fake_post.send_seller_buyer_info("xyz@gmail.com", "Only used this book before my exams")
     end
     

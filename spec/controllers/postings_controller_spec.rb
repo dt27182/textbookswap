@@ -197,7 +197,7 @@ describe PostingsController do
       
       it "should send an email to the seller" do
         Posting.stub(:create).and_return(@fake_post)
-        UserMailer.should_receive(:send_seller_admin_page)
+        UserMailer.should_receive(:send_seller_admin_page).and_return(mock(:UserMailer, :deliver => nil))
         put :create_new, {:book_id => '1', :posting => {:seller_email => "abc@abc.com", :seller_name => "Alice", :price => "21", :location => "Berkeley"}}
       end
 

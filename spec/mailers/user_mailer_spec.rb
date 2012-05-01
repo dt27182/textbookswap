@@ -7,7 +7,8 @@ describe UserMailer do
       @buyer_email = "atkaiser@berkeley.edu"
       @seller_email = "akaiser2@mac.com"
       @book_title = "Software Engineering"
-      @mail = UserMailer.send_seller_buyer_email(@seller_email, @buyer_email, @comments, @book_title)
+      @link = "/postings/admin/dslavj3dsl"
+      @mail = UserMailer.send_seller_buyer_email(@seller_email, @buyer_email, @comments, @book_title, @link)
     end
 
     it "should send to the right person" do
@@ -23,6 +24,11 @@ describe UserMailer do
       comment_regex = /This is some user comments/
       @mail.encoded.should =~ comment_regex
     end
+    
+    it "should contain the link to the posting admin page" do
+      link_regex = /\/postings\/admin\/dslavj3dsl/
+      @mail.encoded.should =~ link_regex
+    end
 
   end
   
@@ -30,7 +36,7 @@ describe UserMailer do
     before(:each) do
       @seller_email = "atkaiser@berkeley.edu"
       @link = "/postings/admin/dslavj3dsl"
-      @mail = UserMailer.send_seller_admin_page(@seller_email, @link)
+      @mail = UserMailer.send_seller_admin_page(@seller_email, @link, @book_title)
     end
   
     it "should send to the correct person" do

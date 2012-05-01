@@ -2,10 +2,10 @@ class Posting < ActiveRecord::Base
 	attr_accessible :seller_email, :seller_name, :price, :location, :condition, :comments
   belongs_to :book
   validates :seller_email, :price, :condition, :presence => true
-	validates :seller_email, :email => {:mx => true, :message => I18n.t('validations.errors.models.user.invalid_email')}
+	validates :seller_email, :email => true
 	
   def send_seller_buyer_info(buyer_email, body)
-    UserMailer.send_seller_buyer_email(self.seller_email, buyer_email, body, Book.find_by_id(self.book_id).title).deliver
+    UserMailer.send_seller_buyer_email(self.seller_email, buyer_email, body, Book.find_by_id(self.book_id).title, Posting.encrypt(self.id)).deliver
 	end
 	
 	def self.encrypt(posting_id)
