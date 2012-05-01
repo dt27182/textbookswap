@@ -17,10 +17,6 @@ Background: Seller follows the link to the seller admin page he/she got in the e
   Given I am on the seller admin page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Fake Person" at "fake_person@berkeley.edu"
 
 Scenario: Seller wants to repost the book because he couldn't sell the book
-
-  Then I should see "Fake Person"
-  Then I should see "fake_person@berkeley.edu"
-  Then I should see "100000000"
   When I press "Update and Re-Publish"
   Then I should be on the Buy Additional Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Fake Person" at "fake_person@berkeley.edu"
   Then I should see "Fake Person"
@@ -29,10 +25,6 @@ Scenario: Seller wants to repost the book because he couldn't sell the book
   Then I should see "Your updated post has been republished!"
 
 Scenario: Seller wants to update the info of the post
-
-  Then I should see "Fake Person"
-  Then I should see "fake_person@berkeley.edu"
-  Then I should see "100000000"
   When I fill in "Price in dollars:" with "30"
   When I select "Used it few times" from "Condition of your book:"
   When I fill in "posting_seller_email" with "real_person@berkeley.edu"
@@ -48,10 +40,6 @@ Scenario: Seller wants to update the info of the post
   Then I should see "Your updated post has been republished!"
   
 Scenario: Seller wants to delete the post of the book because he sold the book
-  
-  Then I should see "Fake Person"
-  Then I should see "fake_person@berkeley.edu"
-  Then I should see "100000000"
   When I press "Delete Post"
   Then I should be on the home page
   Then I should see "Posting Deleted!"
