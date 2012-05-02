@@ -2,21 +2,21 @@
 
 - @postings.each do |post|
 
-  - if @odd == true
-    
-    %ul.grey
-  
-      = render :partial => "books/post", :locals => {:post => post}
-    
-    - @odd = false
-
-  - else
-  
-    %ul
-  
-      = render :partial => "books/post", :locals => {:post => post}
-  
-    - @odd = true
+	- if @odd == true
+	
+		%div.list.grey
+		
+			= render :partial => "books/post", :locals => {:post => post}
+			
+		- @odd = false
+		
+	- else
+	
+		%div.list.darkgrey
+		
+			= render :partial => "books/post", :locals => {:post => post}
+			
+		- @odd = true
     
 
     

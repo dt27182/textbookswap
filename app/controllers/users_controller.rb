@@ -5,9 +5,13 @@ class UsersController < ApplicationController
       flash[:warning] = "You do not have the privilege to add a new user."
       redirect_to index_path() and return
     end
-    User.create({:email => params[:user][:email]})
-    flash[:notice] = "User added"
-    redirect_to display_admin_page_path() and return
+    new_user = User.create({:email => params[:user][:email]})
+    if new_user.id.nil?
+    	flash[:warning] = "This Admin e-mail already exists"
+    else
+	    flash[:notice] = "User added"
+  	end
+  	redirect_to display_admin_page_path() and return
   end
   
   def fake_login

@@ -2,21 +2,21 @@
 
 #Unrequired
 
-  - @unrequired_books.each do |book|
-
-    - if @odd == true
-    
-      %ul.grey
-  
-        = render :partial => "courses/book", :locals => {:book => book}
-      
-      - @odd = false
-      
-    - else
-    
-      %ul
-  
-        = render :partial => "courses/book", :locals => {:book => book}
-    
-      - @odd = true
+	- @unrequired_books.each do |book|
+	
+		- if @odd == true
+			
+			%div.list.grey
+			
+				= render :partial => "courses/book", :locals => {:book => book}
+				
+			- @odd = false
+			
+		- else
+		
+			%div.list.darkgrey
+			
+				= render :partial => "courses/book", :locals => {:book => book}
+				
+			- @odd = true
       

@@ -2,10 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-ul {
-
+div.list {
+	padding: 10px 10px 10px 10px;
 }
 
-ul.grey {
+div.list.grey {
   background-color: LightGrey;
+}
+
+div.list.darkgrey {
+  background-color: DarkGrey;
 }
