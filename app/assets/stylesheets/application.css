@@ -21,6 +21,14 @@ html {
   margin-bottom: 5px;
 }
 
+#admin {
+  float: right;
+  color: white;
+  padding-right: 110px;
+  padding-top: 13px;
+  font-size: 20px;
+}
+
 body {
 	position: relative;
 	margin: 5px auto 10em auto;

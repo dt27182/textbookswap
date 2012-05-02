@@ -9,9 +9,13 @@
   
   %body
   
+    - if not session[:user_id].nil?
+      #admin
+        Logged in as Admin
+  
     #sign
       = link_to image_tag('logo.png', :size =>'300x45'), '/'
-
+        
     #wrapper
 
       - if flash[:notice]
