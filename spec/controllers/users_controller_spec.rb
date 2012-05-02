@@ -31,17 +31,32 @@ describe UsersController do
       end
       
       it "should redirect to the index page" do
-        put :new, {:email => @new_email}
+     		put :new, {:user => {:email => @new_email}}
         response.should redirect_to(index_path())
       end
       
       it "should set the flash message" do
-        put :new, {:email => @new_email}
+      	put :new, {:user => {:email => @new_email}}
         flash.now[:warning].should == "You do not have the privilege to add a new user."
       end
     
     end
         
+  end
+  
+  describe "adding a new user" do
+  
+  	before :each do
+      @new_email = "atkaiser@berkeley.edu"
+      session[:user_id] = 1
+      User.create!(:email => "atkaiser@berkeley.edu")
+   	end
+    
+    it 'should not add the user one more time' do
+      put :new, {:user => {:email => @new_email}}
+      flash.now[:warning].should == "This Admin e-mail already exists"
+    end
+    
   end
 
 end

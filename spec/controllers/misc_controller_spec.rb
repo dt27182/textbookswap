@@ -39,6 +39,8 @@ describe MiscController do
     
       before :each do
         Course.stub(:get_courses_for)
+        time = Time.new
+        @next_year = (time.year.to_i + 1.year.to_i).to_s
       end
       
       it 'should update the current semester' do
@@ -47,8 +49,8 @@ describe MiscController do
       end
       
       it 'should update the current year' do
-        post :commit_edit, {:misc => {:semester => "fall", :year => "2012", :expiration_time => "24"}}
-        Misc.find_by_key("year").value.should == "2012"
+        post :commit_edit, {:misc => {:semester => "fall", :year => @next_year.to_s, :expiration_time => "24"}}
+        Misc.find_by_key("year").value.should == @next_year.to_s
       end
       
       it 'should update the expiration period' do

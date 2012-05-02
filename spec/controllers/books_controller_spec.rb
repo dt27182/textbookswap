@@ -5,6 +5,7 @@ describe BooksController do
     @fake_course = mock('Course', :id => '1')
     @fake_book = mock('Book', :id => '1', :title => 'testbook1', :author => 'bob', :edition => '1', :isbn => '99921-58-10-7')
     @fake_book_2 = Book.create({:title => "testbook2", :author => "alice", :edition => "2", :isbn => "9971-5-0210-0"})
+    @no_id_book = mock('Book', :id => nil, :title => 'no_id_book', :author => 'bob', :edition => '1', :isbn => '111', :errors => {:isbn => ['111']})
     @posting1 = Posting.create!({:seller_email => "abc@gmail.com", :seller_name => "Seller", :price => 30, :location => "South Side", :condition => "New", :comments => "Only used this book before my exams", :reserved => false})
     @posting1.updated_at = Time.now
     @posting1.book_id = 2
@@ -41,6 +42,15 @@ describe BooksController do
         response.should redirect_to(index_path)
       end
     end
+    describe 'should not work if ISBN is not set' do
+    	it 'should work and redirect to the same page' do
+	    	session[:failed_new_book] = 1
+  	  	Course.stub(:find_by_id).and_return(@fake_course)
+  	  	get :display_new, {:id => @fake_course.id}
+  	  	response.should render_template("display_new")
+  	  end
+    end
+    
   end
 
   describe 'create_new' do
@@ -132,6 +142,15 @@ describe BooksController do
           response.should redirect_to(display_new_book_path(@fake_course.id))
         end
       end
+      describe 'the isbn is formatted incorrectly' do
+
+      	it 'should go back to the same page' do
+      		Course.stub(:find_by_id).and_return(@fake_course)
+      		Book.stub(:create).and_return(@no_id_book)
+      		put :create_new, {:id => @fake_course.id, :book => {:title => "no_id_book", :author => "bob", :edition => "1", :isbn => "111"}}
+      		flash.now[:warning].should == "Book creation failed. Your isbn is not formated correctly. Please include the '-'s and make sure the isbn is either 10 or 13 digits long."
+      	end
+     	end
     end
   end
 

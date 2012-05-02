@@ -26,3 +26,17 @@ Scenario: User enters information incorrectly
   When I press "Next"
   Then I should be on the Textbook Information page for course number "169" in the "Computer Science" department
   Then I should see "Enter in details about your book"
+  
+Scenario: User enters in a wrong ISBN
+	When I fill in "Title" with "Armando Fox Autobiography"
+  When I fill in "Author" with "David Patterson"
+  When I fill in "Edition" with "10th Edition"
+  When I fill in "ISBN" with "11"
+  When I press "Next"
+  Then I should be on the Textbook Information page for course number "169" in the "Computer Science" department
+  Then I should see "Enter in details about your book"
+  Then the "book_title" field should contain "Armando Fox Autobiography"
+  Then the "book_author" field should contain "David Patterson"
+  Then the "book_edition" field should contain "10th Edition"
+  Then the "book_isbn" field should contain ""
+  
