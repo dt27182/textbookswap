@@ -36,9 +36,7 @@ class Course < ActiveRecord::Base
     return term_acronyms[term]
   end
 
-#This is a method used to load course info into the database, its not actually a part of the app
-=begin Comment
-=end
+#This is a method used to load course info into the database
   def self.get_teacher(course_page, course)
     agent = Mechanize.new
     form = course_page.form
