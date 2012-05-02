@@ -24,20 +24,7 @@ Scenario: User wants to create a posting for the book they want to sell
   Then I should be on the home page
   Then I should see "Book posting submitted! We will e-mail you if someone wishes to buy your book!"
   
-  When I follow "buyer_button"
-  Then I should be on the Buy Course Selection page
-  When I select "Computer Science" from "course_department"
-  When I select "169" from "course_number"
-  When I press "Go choose a book"
-  Then I should be on the Buy Books page for course number "169" in the "Computer Science" department
-  Then I should see "Armando Fox Autobiography" in "Unrequired"
-  When I follow "Armando Fox Autobiography"
-  Then I should be on the Book Postings page for the "10th Edition" edition of the book "Armando Fox Autobiography"
-  Then I should see "99"
-  Then I should see "Brand New"
-  Then I should see "South Side"
+  When I navigate to the Book Postings page for CS169 for the "10th Edition" edition of the book "Armando Fox Autobiography" from the homepage
   When I follow "99 / Brand New / South Side"
   Then I should be on the Buy Additional Information page for the "10th Edition" edition of the book "Armando Fox Autobiography" posted by "Fyodor Dostoevsky" at "student@berkeley.edu"
-  Then I should see "Only threw up on it twice"
-  Then I should see "student@berkeley.edu"
-  Then I should see "Fyodor Dostoevsky"
+  Then I should see the posting information for "Armando Fox Autobiography" made by "Fyodor Dostoevsky"
