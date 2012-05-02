@@ -1,36 +1,38 @@
+%div
+	- if not session[:user_id].nil?
+		#admin_delete
+			= button_to "Delete This Post", delete_posting_path("#{Posting.encrypt(@posting.id)}"), :method => :delete, :id => "Delete This Post", :confirm => 'Are you sure?'
+
 %h2 Posting Info for #{@book.title}
 
-
-
 %p
-  Contact e-mail:
-  = @posting.seller_email
+	Contact e-mail:
+	= @posting.seller_email
        
 - if not @posting.seller_name == ""
-  %p
-    Contact name:
-    = @posting.seller_name
+	%p
+		Contact name:
+		= @posting.seller_name
     
 %p
-  Price:
-  = @posting.price
+	Price:
+	= @posting.price
   
 %p
-  Condition:
-  = @posting.condition   
+	Condition:
+	= @posting.condition   
 
 %p
-  Posted on:
-  = @posting.created_at
+	Posted on:
+	= @posting.created_at
   
 %p
-  Best Location:
-  = @posting.location
+	Best Location:
+	= @posting.location
 
 %p
-  Comment:
-  = @posting.comments
+	Comment:
+	= @posting.comments
    
 = render :partial => "postings/email_form"
-
 

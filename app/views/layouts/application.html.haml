@@ -1,32 +1,34 @@
 %html
 
-  %head
-  
-    %title TextBook Swap!
-    = stylesheet_link_tag 'application'
-    = javascript_include_tag 'application'
-    = csrf_meta_tags
-  
-  %body
-  
-    #sign
-      = link_to image_tag('logo.png', :size =>'300x45'), '/'
-
-    #wrapper
-
-      - if flash[:notice]
-        #notice.message= flash[:notice]
-      - elsif flash[:warning]
-        #warning.message= flash[:warning]
-        
-      = yield
-          
-      #footer
-        Copyright © 2012 CS169SP12G15 |
-        = link_to "Admin", display_admin_page_path()
-        |
-        = link_to "About Us"
-        |
-        = link_to "Contact Us"
-        |
-        
+	%head
+	
+		%title TextBook Swap!
+		= stylesheet_link_tag 'application'
+		= javascript_include_tag 'application'
+		= csrf_meta_tags
+	
+	%body
+	
+		- if not session[:user_id].nil?
+			#admin
+				Logged in as Admin
+				
+		#sign
+			= link_to image_tag('logo.png', :size =>'300x45'), '/'
+			
+		#wrapper
+		
+			- if flash[:notice]
+				#notice.message= flash[:notice]
+			- elsif flash[:warning]
+				#warning.message= flash[:warning]
+				
+			= yield
+			
+			#footer
+				Copyright © 2012 CS169SP12G15 
+				|
+				- if not session[:user_id].nil?
+					= link_to "Admin Page", display_admin_page_path()
+				- else
+					= link_to "Admin Login", display_admin_page_path()

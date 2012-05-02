@@ -19,4 +19,18 @@
     
 	%p
 		= submit_tag "Update"
+		
+%br
+		
+= form_tag new_user_path, :method => :put do
+
+	= label :user, :email, "New Admin User (Facebook e-mail):"
+	%br
+	= text_field :user, :email
+	%br  
+	= submit_tag "Add new Admin user"
+
+%br
+
+= button_to "Log Out", logout_path(), :method => :get
 

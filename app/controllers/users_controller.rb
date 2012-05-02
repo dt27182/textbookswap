@@ -5,7 +5,7 @@ class UsersController < ApplicationController
       flash[:warning] = "You do not have the privilege to add a new user."
       redirect_to index_path() and return
     end
-    User.create({:email => params[:email]})
+    User.create({:email => params[:user][:email]})
     flash[:notice] = "User added"
     redirect_to display_admin_page_path() and return
   end

@@ -42,7 +42,7 @@ Scenario: Seller wants to update the info of the post
 Scenario: Seller wants to delete the post of the book because he sold the book
   When I press "Delete Post"
   Then I should be on the home page
-  Then I should see "Posting Deleted!"
+  Then I should see "Post Successfully Deleted!"
   When I follow "buyer_button"
   Then I should be on the Buy Course Selection page
   When I select "Computer Science" from "course_department"
