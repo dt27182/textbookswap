@@ -3,7 +3,16 @@ class BooksController < ApplicationController
     if Course.find_by_id(params[:id]).nil?
       redirect_to index_path and return
     end
-    @course= Course.find_by_id(params[:id])
+    @course = Course.find_by_id(params[:id])
+    @refill_book_fields = true
+    @failed_book = nil
+    if session[:failed_new_book].nil?
+    	@refill_book_fields = false
+    	@failed_book = session[:failed_new_book]
+    else
+    	@refill_book_fields = true
+    	@failed_book = nil
+    end
   end
 
   def create_new
@@ -11,13 +20,24 @@ class BooksController < ApplicationController
     	flash[:warning] = "The course you requested does not exist"
       redirect_to index_path and return
     end
-    new_book = Book.create(params[:book])
-    if new_book.id.nil?
-    	flash[:warning] = "Book creation failed. Please fill in all the fields"
-      redirect_to create_new_book_path(params[:id]) and return
+    existing_book = Book.find(:first, :conditions => ["title = :title AND author = :author AND edition = :edition AND isbn = :isbn", params[:book]])
+    if existing_book.nil?
+    	new_book = Book.create(params[:book])
+    	if new_book.id.nil?
+    		if new_book.errors[:isbn].empty?
+    			flash[:warning] = "Book creation failed. Please fill in all the fields"
+    		else
+    			flash[:warning] = "Book creation failed. Your isbn is not formated correctly. Please include the '-'s and make sure the isbn is either 10 or 13 digits long."
+    		end
+    		session[:failed_new_book] = params[:book]
+      	redirect_to create_new_book_path(params[:id]) and return
+    	end
+    	new_requirement = Requirement.create({:course_id => params[:id], :book_id => new_book.id, :is_required => false})
+    	redirect_to display_new_posting_path(new_book.id) and return
+    else
+    	new_requirement = Requirement.create({:course_id => params[:id], :book_id => existing_book.id, :is_required => false})
+    	redirect_to display_new_posting_path(existing_book.id) and return
     end
-    new_requirement = Requirement.create({:course_id => params[:id], :book_id => new_book.id, :is_required => false})
-    redirect_to display_new_posting_path(new_book.id) and return
   end
 
   def show_postings
