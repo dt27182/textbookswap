@@ -16,13 +16,12 @@ Background: User has logged in as admin
   | seller_email             | seller_name | book_name                         | book_edition | price     | location   | condition | posted_#_days_ago |
   | fake_person@berkeley.edu | Fake Person | Engineering Long-Lasting Software | Alpha        | 100000000 | South Side | Brand New | 1                 |
   
-  Given I am on the Buy Additional Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Fake Person" at "fake_person@berkeley.edu"
   Given I am an admin
+  Given I am on the Buy Additional Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Fake Person" at "fake_person@berkeley.edu"
   
 Scenario: Admin wants to delete this post
-  Then I should see "Admin"
-  Then I should see "Delete this Post"
-  When I press "Delete this Post"
+  Then I should see "Logged in as Admin"
+  When I press "Delete This Post"
   Then I should be on the home page
   Then I should see "Post Successfully Deleted!"
   When I follow "buyer_button"

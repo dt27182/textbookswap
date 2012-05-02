@@ -11,16 +11,16 @@ describe UsersController do
   
     it "should call create on the User model" do
       User.should_receive(:create).with({:email => @new_email})
-      put :new, {:email => @new_email}
+      put :new, {:user => {:email => @new_email}}
     end
     
     it "should redirect to the admin page" do
-      put :new, {:email => @new_email}
+      put :new, {:user => {:email => @new_email}}
       response.should redirect_to(display_admin_page_path())
     end
     
     it "should set the flash message" do
-      put :new, {:email => @new_email}
+      put :new, {:user => {:email => @new_email}}
       flash.now[:notice].should == "User added"
     end
     

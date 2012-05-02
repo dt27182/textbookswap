@@ -105,7 +105,7 @@ class PostingsController < ApplicationController
   		flash[:warning] = "The requested posting does not exist"
   	end
   	posting.destroy
-  	flash[:notice] = "Posting Deleted!"
+  	flash[:notice] = "Post Successfully Deleted!"
   	redirect_to index_path
   end
   
