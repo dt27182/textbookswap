@@ -47,6 +47,8 @@ Textbookswap::Application.routes.draw do
   match '/auth/failure', :to => 'sessions#failure'
   get '/logout', :to => 'sessions#destroy', :as => :logout
   
+  #testing route
+  get '/admin/fake_login' => 'users#fake_login', :as => :fake_login
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

@@ -69,7 +69,7 @@ Given /^somebody contacted the e-mail "(.*)" for "(.*)" edition of the book "(.*
 end
 
 Given /^I am an admin$/ do
-	cookies[:user_id] = User.create!.id
+	visit path_to("fake login")
 end
 
 Then /^I should see that the e-mail "(.*)" was added to the Admin User list$/ do |email|
@@ -77,4 +77,12 @@ Then /^I should see that the e-mail "(.*)" was added to the Admin User list$/ do
   bool = admin.nil?
   assert(!bool)
 end 
+
+Given /^the semester is "(.*)"$/ do |semester|
+	Misc.create!(:key => "semester", :value => semester)
+end
+
+Given /^the year is "(.*)"$/ do |year|
+	Misc.create!(:key => "year", :value => year)
+end
 

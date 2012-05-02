@@ -7,6 +7,8 @@ Feature: Admin user can change the time period for expiration
 Background: User has logged in as admin
 
   Given the expiration time is "20" days
+  Given the semester is "spring"
+  Given the year is "2012"
   Given the "Computer Science" department is offering course number "169"
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" exists
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" is a required book for course number "169" in the "Computer Science" department
@@ -21,10 +23,11 @@ Background: User has logged in as admin
 Scenario: Admin changes expiration date and book postings before the expiration date should not be shown
 
   Then I should see "Admin"
-  When I fill in "expiration_date" with "5"
+  When I fill in "expiration_time" with "5"
 	When I press "Update"
-  Then I should be on the home page
+  Then I should be on the admin page
   Then I should see "Settings Saved!"
+  Given I am on the home page
   When I follow "buyer_button"
   Then I should be on the Buy Course Selection page
   When I select "Computer Science" from "course_department"
@@ -37,9 +40,7 @@ Scenario: Admin changes expiration date and book postings before the expiration 
   Then I should not see "1337"
   Then I should not see "david@berkeley.edu"
   Then I should not see "South Side"
-  Then I should see "99"
-  Then I should see "armando@berkeley.edu"
-  Then I should see "North Side"
+
   
   
   

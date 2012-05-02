@@ -1,5 +1,22 @@
 %h2 Admin page
 
-%p
-  = "#{@semester}"
+= form_tag commit_admin_page_edit_path, :method => :post do
+
+	%p
+		= label :misc, :expiration_time, "Posting Expiration Time"
+		%br
+		= text_field :misc, :expiration_time, :value => "#{@expiration_time}", :id => "expiration_time"
+	
+	%p
+		= label :misc, :year, "Current Year"
+		%br
+		= text_field :misc, :year, :value => "#{@year}", :id => "year"
+		
+	%p
+		= label :misc, :semester, "Current Semester"
+		%br
+		= select :misc, :semester, ['spring', 'fall', 'summer'], :value => "#{@semester}" 
     
+	%p
+		= submit_tag "Update"
+
