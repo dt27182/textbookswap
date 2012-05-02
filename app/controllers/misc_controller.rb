@@ -23,6 +23,10 @@ class MiscController < ApplicationController
     new_year = params[:misc][:year]
     old_semester = Misc.find_by_key("semester").value
     old_year = Misc.find_by_key("year").value
+    puts old_semester
+    puts new_semester
+    puts old_year
+    puts new_year
     if new_semester != old_semester or new_year != old_year
       if new_semester != old_semester
         misc = Misc.find_by_key("semester")

@@ -5,12 +5,12 @@
   %p
     = label :new_post, :seller_email, 'Your e-mail:'
     %br
-    = text_field :new_post, :seller_email, :class => "required email", :value => "#{@posting.seller_email}"
+    = text_field :new_post, :seller_email, :class => "required email", :value => "#{@posting.seller_email}", :id => "posting_seller_email"
 
   %p
     = label :new_post, :seller_name, 'Your name:'
     %br
-    = text_field :new_post, :seller_name, :value => "#{@posting.seller_name}"
+    = text_field :new_post, :seller_name, :value => "#{@posting.seller_name}", :id => "posting_seller_name"
 
   %p
     = label :new_post, :price, 'Price in dollars:'

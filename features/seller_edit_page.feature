@@ -5,7 +5,7 @@ Feature: Seller can republish, update, and delete his posting
   I should be able to republish, update, and delete my posting on the posting admin page
 
 Background: Seller follows the link to the seller admin page he/she got in the email
-
+  Given the expiration time is "20" days
   Given the "Computer Science" department is offering course number "169"
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" exists
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" is a required book for course number "169" in the "Computer Science" department
@@ -29,7 +29,7 @@ Scenario: Seller wants to update the info of the post
   When I select "Used it few times" from "Condition of your book:"
   When I fill in "posting_seller_email" with "real_person@berkeley.edu"
   When I fill in "posting_seller_name" with "Real Person"
-  When I select "North Side" from "posting_location"
+  When I select "North Side" from "new_post_location"
   When I press "Update and Re-Publish"
   Then I should be on the Buy Additional Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Real Person" at "real_person@berkeley.edu"
   Then I should see "Real Person"

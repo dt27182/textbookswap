@@ -10,4 +10,10 @@ class UsersController < ApplicationController
     redirect_to display_admin_page_path() and return
   end
   
+  def fake_login
+  	if Rails.env.test?
+  		session[:user_id] = User.create!.id
+  	end
+  	redirect_to index_path
+  end
 end

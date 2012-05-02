@@ -56,7 +56,10 @@ module NavigationHelpers
       book = Book.find_by_title_and_edition(bookTitle, bookEdi)
       posting = Posting.find_by_seller_email_and_seller_name_and_book_id(email, name, book.id)
       return show_posting_path(posting.id)
- 
+      
+ 		when /^fake login$/
+ 			return fake_login_path
+ 			
 		when /^the admin page$/
 			return display_admin_page_path
 			
