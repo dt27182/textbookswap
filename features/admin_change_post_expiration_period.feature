@@ -21,8 +21,6 @@ Background: User has logged in as admin
   Given I am on the admin page
 		
 Scenario: Admin changes expiration date and book postings before the expiration date should not be shown
-
-  Then I should see "Admin"
   When I fill in "expiration_time" with "5"
 	When I press "Update"
   Then I should be on the admin page

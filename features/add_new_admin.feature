@@ -6,6 +6,9 @@ Feature: Admin user can add other admins
   
 Background: User has logged in as admin
 
+	Given the expiration time is "20" days
+  Given the semester is "spring"
+  Given the year is "2012"
   Given I am an admin
   Given I am on the admin page
   
