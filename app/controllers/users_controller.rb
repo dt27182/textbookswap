@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   
   def fake_login
   	if Rails.env.test?
-  		session[:user_id] = User.create!.id
+  		session[:user_id] = User.create!(:email => "abc@gmail.com").id
   	end
   	redirect_to index_path
   end

@@ -108,16 +108,4 @@ class PostingsController < ApplicationController
   	flash[:notice] = "Post Successfully Deleted!"
   	redirect_to index_path
   end
-  
-  def republish
-  	posting_id = Posting.decrypt(params[:unique_string])
-  	posting = Posting.find_by_id(posting_id)
-  	if posting.nil?
-  		flash[:warning] = "The requested posting does not exist"
-  	end
-  	posting.reserved = false
-  	posting.save!
-  	redirect_to show_posting_path(posting_id)
-  end
-
 end
