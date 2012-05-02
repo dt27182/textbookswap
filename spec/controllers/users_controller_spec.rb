@@ -8,9 +8,9 @@ describe UsersController do
       @new_email = "atkaiser@berkeley.edu"
       session[:user_id] = 1
     end
-  
+  	
     it "should call create on the User model" do
-      User.should_receive(:create).with({:email => @new_email})
+      User.should_receive(:create).with({:email => @new_email}).and_return(mock(:User, :id => 3))
       put :new, {:user => {:email => @new_email}}
     end
     

@@ -1,16 +1,16 @@
 %h2 Admin page
 
-= form_tag commit_admin_page_edit_path, :method => :post do
+= form_tag commit_admin_page_edit_path, :method => :post, :id => "admin_control_form" do
 
 	%p
 		= label :misc, :expiration_time, "Posting Expiration Time"
 		%br
-		= text_field :misc, :expiration_time, :value => "#{@expiration_time}", :id => "expiration_time"
+		= text_field :misc, :expiration_time, :value => "#{@expiration_time}", :id => "expiration_time", :class => "required integer_field"
 	
 	%p
 		= label :misc, :year, "Current Year"
 		%br
-		= text_field :misc, :year, :value => "#{@year}", :id => "year"
+		= text_field :misc, :year, :value => "#{@year}", :id => "year", :class => "required integer_field"
 		
 	%p
 		= label :misc, :semester, "Current Semester"
@@ -22,11 +22,11 @@
 		
 %br
 		
-= form_tag new_user_path, :method => :put do
+= form_tag new_user_path, :method => :put, :id => "add_admin_form" do
 
 	= label :user, :email, "New Admin User (Facebook e-mail):"
 	%br
-	= text_field :user, :email
+	= text_field :user, :email, :class => "required email"
 	%br  
 	= submit_tag "Add new Admin user"
 

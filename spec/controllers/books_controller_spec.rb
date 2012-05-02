@@ -44,35 +44,59 @@ describe BooksController do
   end
 
   describe 'create_new' do
-    it 'should check if the given course exists' do
-      Course.should_receive(:find_by_id).with(@fake_course.id)
-      Book.stub(:find_by_isbn).and_return(@fake_book)
-      Requirement.stub(:create)
-      put :create_new, {:id => @fake_course.id, :book => {:title => @fake_book.title, :author => @fake_book.author, :edition => @fake_book.edition, :isbn => @fake_book.isbn}}
+    it 'should check if the book already exists in the database' do
+    		Course.stub(:find_by_id).and_return(@fake_course)
+    		Book.should_receive(:find).with(:first, :conditions => ["title = :title AND author = :author AND edition = :edition AND isbn = :isbn", {"title" => @fake_book.title, "author" => @fake_book.author, "edition" => @fake_book.edition, "isbn" => @fake_book.isbn}])
+    		Requirement.stub(:create)
+		    put :create_new, {:id => @fake_course.id, :book => {:title => @fake_book.title, :author => @fake_book.author, :edition => @fake_book.edition, :isbn => @fake_book.isbn}}
     end
     describe 'success path' do
-      it 'should call the create method in the Book model' do
-        Course.stub(:find_by_id).and_return(@fake_course)
-        Book.should_receive(:create).with({"title" => @fake_book.title, "author" => @fake_book.author, "edition" => @fake_book.edition, "isbn" => @fake_book.isbn}).and_return(@fake_book)
-        Book.stub(:find_by_isbn).and_return(@fake_book)
-        Requirement.stub(:create)
-        put :create_new, {:id => @fake_course.id, :book => {:title => @fake_book.title, :author => @fake_book.author, :edition => @fake_book.edition, :isbn => @fake_book.isbn}}
-      end
-      it 'should create a new requirement object to make the newly created book an unrequired book of the given course' do
-        Course.stub(:find_by_id).and_return(@fake_course)
-        Book.stub(:create).and_return(@fake_book)
-        Book.stub(:find_by_isbn).and_return(@fake_book)
-        Requirement.should_receive(:create).with(:course_id => @fake_course.id, :book_id => @fake_book.id, :is_required => false)
-        put :create_new, {:id => @fake_course.id, :book => {:title => @fake_book.title, :author => @fake_book.author, :edition => @fake_book.edition, :isbn => @fake_book.isbn}}
-      end
-      it 'should redirect to the create new posting page of the newly created book' do
-        Course.stub(:find_by_id).and_return(@fake_course)
-        Requirement.stub(:create)
-        Book.stub(:create).and_return(@fake_book)
-        put :create_new, {:id => @fake_course.id, :book => {:title => @fake_book.title, :author => @fake_book.author, :edition => @fake_book.edition, :isbn => @fake_book.isbn}}
-        response.should redirect_to(display_new_posting_path(@fake_book.id))
-      end
-    end
+    	describe "book doesn't already exist in the database" do
+		    it 'should call the create method in the Book model' do
+		      Course.stub(:find_by_id).and_return(@fake_course)
+		      Book.should_receive(:create).with({"title" => @fake_book.title, "author" => @fake_book.author, "edition" => @fake_book.edition, "isbn" => @fake_book.isbn}).and_return(@fake_book)
+		      Book.stub(:find).and_return(nil)
+		      Requirement.stub(:create)
+		      put :create_new, {:id => @fake_course.id, :book => {:title => @fake_book.title, :author => @fake_book.author, :edition => @fake_book.edition, :isbn => @fake_book.isbn}}
+		    end
+		    it 'should create a new requirement object to make the newly created book an unrequired book of the given course' do
+		      Course.stub(:find_by_id).and_return(@fake_course)
+		      Book.stub(:create).and_return(@fake_book)
+		      Book.stub(:find).and_return(nil)
+		      Requirement.should_receive(:create).with(:course_id => @fake_course.id, :book_id => @fake_book.id, :is_required => false)
+		      put :create_new, {:id => @fake_course.id, :book => {:title => @fake_book.title, :author => @fake_book.author, :edition => @fake_book.edition, :isbn => @fake_book.isbn}}
+		    end
+		    it 'should redirect to the create new posting page of the newly created book' do
+		      Course.stub(:find_by_id).and_return(@fake_course)
+		      Requirement.stub(:create)
+		      Book.stub(:find).and_return(nil)
+		      Book.stub(:create).and_return(@fake_book)
+		      put :create_new, {:id => @fake_course.id, :book => {:title => @fake_book.title, :author => @fake_book.author, :edition => @fake_book.edition, :isbn => @fake_book.isbn}}
+		      response.should redirect_to(display_new_posting_path(@fake_book.id))
+		    end
+		  end
+		  describe "book already exists in the database" do
+		  	it 'should not create a new book' do
+		  		Course.stub(:find_by_id).and_return(@fake_course)
+		      Book.stub(:find).and_return(@fake_book)
+		      Book.should_not_receive(:create)
+		      put :create_new, {:id => @fake_course.id, :book => {:title => @fake_book.title, :author => @fake_book.author, :edition => @fake_book.edition, :isbn => @fake_book.isbn}}
+		  	end
+		  	it 'should create a new requirement object to make the already created book an unrequired book of the given course' do
+		      Course.stub(:find_by_id).and_return(@fake_course)
+		      Book.stub(:find).and_return(@fake_book)
+		      Requirement.should_receive(:create).with(:course_id => @fake_course.id, :book_id => @fake_book.id, :is_required => false)
+		      put :create_new, {:id => @fake_course.id, :book => {:title => @fake_book.title, :author => @fake_book.author, :edition => @fake_book.edition, :isbn => @fake_book.isbn}}
+		    end
+		    it 'should redirect to the create new posting page of the already created book' do
+		      Course.stub(:find_by_id).and_return(@fake_course)
+		      Requirement.stub(:create)
+		      Book.stub(:find).and_return(@fake_book)
+		      put :create_new, {:id => @fake_course.id, :book => {:title => @fake_book.title, :author => @fake_book.author, :edition => @fake_book.edition, :isbn => @fake_book.isbn}}
+		      response.should redirect_to(display_new_posting_path(@fake_book.id))
+		    end
+		  end
+		end
     describe 'fail path' do
       describe 'the given course is not an existing course' do
         it 'should not call the create method or the find_by_isbn method in the Book model and should not call the create method in the Requirment model' do

@@ -5,22 +5,22 @@
   %p
     = label :book, :title, 'Title:'
     %br
-    = text_field :book, :title, :class => "required"
+    = text_field :book, :title, :class => "required", :value => "#{@failed_book[:title]}"
 
   %p
     = label :book, :author, 'Author:'
     %br
-    = text_field :book, :author, :class => "required"
+    = text_field :book, :author, :class => "required", :value => "#{@failed_book[:author]}"
 
   %p  
     = label :book, :edition, 'Edition:'
     %br
-    = text_field :book, :edition, :class => "required"
+    = text_field :book, :edition, :class => "required", :value => "#{@failed_book[:edition]}"
     
   %p
     = label :book, :isbn, 'ISBN:'
     %br
-    = text_field :book, :isbn, :class => "required"
+    = text_field :book, :isbn, :class => "required", :value => "#{@failed_book[:isbn]}"
 
   %p  
     = submit_tag 'Next'
