@@ -4,14 +4,12 @@ class BooksController < ApplicationController
       redirect_to index_path and return
     end
     @course = Course.find_by_id(params[:id])
-    @refill_book_fields = true
+    @refill_book_fields = nil
     @failed_book = nil
-    if session[:failed_new_book].nil?
-    	@refill_book_fields = false
+    if !session[:failed_new_book].nil?
     	@failed_book = session[:failed_new_book]
     else
-    	@refill_book_fields = true
-    	@failed_book = nil
+    	@failed_book = {:title => "", :author => "", :edition => "", :isbn => ""}
     end
   end
 
