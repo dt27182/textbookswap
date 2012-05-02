@@ -86,3 +86,26 @@ Given /^the year is "(.*)"$/ do |year|
 	Misc.create!(:key => "year", :value => year)
 end
 
+Then /^I should see the posting information for "(.*)" made by "(.*)"$/ do |bookTitle, sellerName|
+  book = Book.find_by_title(bookTitle)
+  posting = Posting.find_by_seller_name_and_book_id(sellerName, book.id)
+  step %{I should see "#{posting.seller_name}"}
+  step %{I should see "#{posting.seller_email}"}
+  step %{I should see "#{posting.price}"}
+  step %{I should see "#{posting.condition}"}
+  step %{I should see "#{posting.location}"}
+  step %{I should see "#{posting.comments}"}
+end
+
+When /^I navigate to the Book Postings page for CS169 for the "(.*)" edition of the book "(.*)" from the homepage$/ do |bookEdi, bookTitle|
+  book = Book.find_by_title_and_edition(bookTitle, bookEdi)
+  step %{I follow "buyer_button"}
+  step %{I should be on the Buy Course Selection page}
+  step %{I select "Computer Science" from "course_department"}
+  step %{I select "169" from "course_number"}
+  step %{I press "Go choose a book"}
+  step %{I should be on the Buy Books page for course number "169" in the "Computer Science" department}
+  step %{I follow "#{book.title}"}
+  step %{I should be on the Book Postings page for the "#{bookEdi}" edition of the book "#{bookTitle}"}
+end
+
