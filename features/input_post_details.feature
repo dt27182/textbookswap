@@ -7,6 +7,8 @@ Feature: Sellers can enter details for a posting on a book they wish to sell
 Background: User has indicated the book they want to sell
   
   Given the expiration time is "20" days
+  Given the semester is "spring"
+  Given the year is "2012"
   Given the "Computer Science" department is offering course number "169"
   Given the "10th Edition" edition of the book "Armando Fox Autobiography" exists
   Given the "10th Edition" edition of the book "Armando Fox Autobiography" is an unrequired book for course number "169" in the "Computer Science" department

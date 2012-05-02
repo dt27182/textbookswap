@@ -39,6 +39,7 @@ describe MiscController do
     
       before :each do
         Course.stub(:get_courses_for)
+        Book.stub(:get_books)
         time = Time.new
         @next_year = (time.year.to_i + 1.year.to_i).to_s
       end

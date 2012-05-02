@@ -5,7 +5,10 @@ Feature: Seller can republish, update, and delete his posting
   I should be able to republish, update, and delete my posting on the posting admin page
 
 Background: Seller follows the link to the seller admin page he/she got in the email
+
   Given the expiration time is "20" days
+  Given the semester is "spring"
+  Given the year is "2012"
   Given the "Computer Science" department is offering course number "169"
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" exists
   Given the "Alpha" edition of the book "Engineering Long-Lasting Software" is a required book for course number "169" in the "Computer Science" department

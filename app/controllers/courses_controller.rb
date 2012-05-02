@@ -29,10 +29,8 @@ class CoursesController < ApplicationController
   end
 
   def find
-    #probably needs to be moved into db
-    course_term = "spring"
-    #probably needs to be moved into db
-    course_year = 2012
+    course_term = Misc.find_by_key("semester").value
+    course_year = Misc.find_by_key("year").value.to_i
     if params[:course].nil?
       flash[:warning] = "No course was selected"
       redirect_to show_courses_path(params[:transaction_type]) and return

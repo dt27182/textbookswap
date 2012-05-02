@@ -6,6 +6,8 @@ Feature: Sellers can select the class of the textbook they wish to post
     
 Background: User has pressed Sell on the previous page
 
+  Given the semester is "spring"
+  Given the year is "2012"
   Given the "Computer Science" department is offering course number "169"
   Given I am on the Sell Course Selection page
   

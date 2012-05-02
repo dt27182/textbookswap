@@ -23,19 +23,20 @@ class MiscController < ApplicationController
     new_year = params[:misc][:year]
     old_semester = Misc.find_by_key("semester").value
     old_year = Misc.find_by_key("year").value
-    if new_semester != old_semester or new_year != old_year
+    time = Time.new
+    if new_semester != old_semester or (new_year != old_year and new_year.to_i >= time.year and new_year.to_i <= time.year + 1.year)
       if new_semester != old_semester
         misc = Misc.find_by_key("semester")
         misc.value = new_semester
         misc.save
       end
-      time = Time.new
       if new_year != old_year and new_year.to_i >= time.year and new_year.to_i <= time.year + 1.year
         misc = Misc.find_by_key("year")
         misc.value = new_year.to_s
         misc.save
       end
       Course.get_courses_for(Misc.find_by_key("semester").value, Misc.find_by_key("year").value)
+      Book.get_books()
     end
     flash[:notice] = "Settings Saved!"
     redirect_to display_admin_page_path()

@@ -6,6 +6,8 @@ Feature: Buyers can select the course of the textbook they wish to purchase
   
 Background: User has pressed Buy on the previous page
 
+  Given the semester is "spring"
+  Given the year is "2012"
   Given the "Computer Science" department is offering course number "169"
   Given I am on the Buy Course Selection page
   

@@ -23,8 +23,8 @@ class Book < ActiveRecord::Base
   def self.set_semester_and_year(agent, semester, year)
     login_page = agent.get("http://ninjacourses.com/profiles/")
     login_form = login_page.form
-    login_form.username("textbookswap@berkeley.edu")
-    login_form.password("goodbooks")
+    login_form.username = "textbookswap@berkeley.edu"
+    login_form.password = "goodbooks"
     profile_page = agent.submit(login_form)
     options = profile_page.parser.xpath('/html/body/div/div/form/div').to_html
     if options =~ /(.{3})\">#{semester.camelize} #{year.to_s}<\/option/

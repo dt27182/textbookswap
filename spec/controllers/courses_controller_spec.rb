@@ -15,6 +15,8 @@ describe CoursesController do
     @answer_one = ['Computer Science']
     @answer_two = ['169']
     @answer_three = ['001']
+    Misc.create!(:key => "semester", :value => "spring")
+    Misc.create!(:key => "year", :value => "2012")
 
   end
 
