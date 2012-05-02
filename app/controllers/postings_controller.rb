@@ -103,6 +103,7 @@ class PostingsController < ApplicationController
   	posting = Posting.find_by_id(posting_id)
   	if posting.nil?
   		flash[:warning] = "The requested posting does not exist"
+  		redirect_to index_path and return
   	end
   	posting.destroy
   	flash[:notice] = "Post Successfully Deleted!"

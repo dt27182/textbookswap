@@ -88,6 +88,7 @@ describe PostingsController do
       @empty_buyer_email = ""
       @empty_buyer_comment = ""
       @seller_email = "abc@gmail.com"
+      @post = Posting.create!({:seller_email => "def@gmail.com", :seller_name => "Buyer", :price => 30, :location => "South Side", :condition => "New", :comments => "Hello, I want to buy your book", :reserved => false})
     end
 
     describe "correct inputs" do
@@ -148,6 +149,19 @@ describe PostingsController do
         flash.now[:warning].should == "Please fill in the required fields"
       end
 
+    end
+    
+    describe "database does not save that the post is reserved" do
+    	
+    	it "should go back to the homepage" do
+    		Posting.stub(:find_by_id).with("1").and_return(@post)
+    		@post.stub(:send_seller_buyer_info)
+    		@post.stub(:reserved)
+    		@post.stub(:save!).and_return(false)
+        post :commit_buy, {:posting_id => '1', :email => {:body => @fake_buyer_comment, :buyer_email => @fake_buyer_email}}
+        response.should redirect_to(index_path())
+    	end
+    	
     end
 
   end
@@ -322,6 +336,7 @@ describe PostingsController do
   describe "delete method" do
   
     before(:each) do
+    	@nil = nil
       session[:user_id] = 1
       Posting.stub(:find_by_id).and_return(@fake_post)
     end
@@ -339,6 +354,13 @@ describe PostingsController do
     it "should redirect to the homepage" do
       delete :delete, {:unique_string => "daj2390lkafj"}
       response.should redirect_to(index_path())
-    end    
+    end
+    
+    it "should not delete if the posting id does not exist" do
+    	Posting.stub(:find_by_id).and_return(nil);
+    	Posting.should_not_receive(:destroy)
+    	delete :delete, {:unique_string => "daj2390lkafj"}
+    	response.should redirect_to(index_path())
+    end 
   end
 end

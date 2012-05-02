@@ -29,8 +29,9 @@ class MiscController < ApplicationController
         misc.value = new_semester
         misc.save
       end
-      if new_year != old_year and new_year.to_i > 2011
-        misc = Misc.find_by_year("year")
+      time = Time.new
+      if new_year != old_year and new_year.to_i >= time.year and new_year.to_i <= time.year + 1.year
+        misc = Misc.find_by_key("year")
         misc.value = new_year.to_s
         misc.save
       end
