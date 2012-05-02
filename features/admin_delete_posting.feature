@@ -24,15 +24,7 @@ Scenario: Admin wants to delete this post
   When I press "Delete This Post"
   Then I should be on the home page
   Then I should see "Post Successfully Deleted!"
-  When I follow "buyer_button"
-  Then I should be on the Buy Course Selection page
-  When I select "Computer Science" from "course_department"
-  When I select "169" from "course_number"
-  When I press "Go choose a book"
-  Then I should be on the Buy Books page for course number "169" in the "Computer Science" department
-  Then I should see "Engineering Long-Lasting Software" in "Required"
-  When I follow "Engineering Long-Lasting Software"
-  Then I should be on the Book Postings page for the "Alpha" edition of the book "Engineering Long-Lasting Software"
+  When I navigate to the Book Postings page for CS169 for the "Alpha" edition of the book "Engineering Long-Lasting Software" from the homepage
   Then I should not see "100000000"
   Then I should not see "fake_person@berkeley.edu"
   Then I should not see "South Side"

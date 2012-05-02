@@ -19,9 +19,7 @@ Background: Seller follows the link to the seller admin page he/she got in the e
 Scenario: Seller wants to repost the book because he couldn't sell the book
   When I press "Update and Re-Publish"
   Then I should be on the Buy Additional Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Fake Person" at "fake_person@berkeley.edu"
-  Then I should see "Fake Person"
-  Then I should see "fake_person@berkeley.edu"
-  Then I should see "100000000"
+  Then I should see the posting information for "Engineering Long-Lasting Software" made by "Fake Person"
   Then I should see "Your updated post has been republished!"
 
 Scenario: Seller wants to update the info of the post
@@ -32,26 +30,14 @@ Scenario: Seller wants to update the info of the post
   When I select "North Side" from "new_post_location"
   When I press "Update and Re-Publish"
   Then I should be on the Buy Additional Information page for the "Alpha" edition of the book "Engineering Long-Lasting Software" posted by "Real Person" at "real_person@berkeley.edu"
-  Then I should see "Real Person"
-  Then I should see "real_person@berkeley.edu"
-  Then I should see "30"
-  Then I should see "Used it few times"
-  Then I should see "North Side"
+  Then I should see the posting information for "Engineering Long-Lasting Software" made by "Real Person"
   Then I should see "Your updated post has been republished!"
   
 Scenario: Seller wants to delete the post of the book because he sold the book
   When I press "Delete Post"
   Then I should be on the home page
   Then I should see "Post Successfully Deleted!"
-  When I follow "buyer_button"
-  Then I should be on the Buy Course Selection page
-  When I select "Computer Science" from "course_department"
-  When I select "169" from "course_number"
-  When I press "Go choose a book"
-  Then I should be on the Buy Books page for course number "169" in the "Computer Science" department
-  Then I should see "Engineering Long-Lasting Software" in "Required"
-  When I follow "Engineering Long-Lasting Software"
-  Then I should be on the Book Postings page for the "Alpha" edition of the book "Engineering Long-Lasting Software"
+  When I navigate to the Book Postings page for CS169 for the "Alpha" edition of the book "Engineering Long-Lasting Software" from the homepage
   Then I should not see "100000000"
   Then I should not see "fake_person@berkeley.edu"
   Then I should not see "South Side"

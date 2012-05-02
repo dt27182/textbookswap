@@ -18,11 +18,3 @@ Scenario: User wants to select the course they will be taking
   When I press "Go choose a book"
   Then I should be on the Buy Books page for course number "169" in the "Computer Science" department 
   
-#Scenario: User tries to select a course that is not offered
-#
-#  Then I should see "Department"
-#  Then I should see "Number"
-#  When I select "Computer Science" from "course_department"
-#  When I select "999" from "course_number"
-#  When I press "Go choose a book"
-#  Then I should see "The course you selected is not offered"
