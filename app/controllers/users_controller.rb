@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   	redirect_to display_admin_page_path() and return
   end
   
+  #this method is only used to fake login for cucumber tests, so it does not have test coverage
   def fake_login
   	if Rails.env.test?
   		session[:user_id] = User.create!(:email => "abc@gmail.com").id

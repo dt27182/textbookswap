@@ -60,7 +60,8 @@ class PostingsController < ApplicationController
     new_posting.book_id = book.id
     new_posting.save
     if(new_posting.errors.empty?)
-    	UserMailer.send_seller_admin_page(new_posting.seller_email, display_admin_posting_path(Posting.encrypt(new_posting.id)), new_posting.book.title).deliver
+    	domain_name = "http://localhost:3000"
+    	UserMailer.send_seller_admin_page(new_posting.seller_email, domain_name + display_admin_posting_path(Posting.encrypt(new_posting.id)), new_posting.book.title).deliver
     	flash[:notice] = "Book posting submitted! We will e-mail you if someone wishes to buy your book!"
     	redirect_to index_path and return
     else
