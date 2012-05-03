@@ -48,12 +48,18 @@ class Book < ActiveRecord::Base
         titles.each do |title|
           book = {}
           book[:title] = title.content
-          book[:author] = other_info[i].content
-          if other_info[i+1].content =~ /ISBN-13: (\d{13})\s/
-            book[:isbn] = $1
+          if not other_info[i].nil?
+            book[:author] = other_info[i].content
           end
-          if other_info[i+1].content =~ /Edition: (.*)\s/
-            book[:edition] = $1
+          if not other_info[i+1].nil?
+            if other_info[i+1].content =~ /ISBN-13: (\d{13})\s/
+              book[:isbn] = $1
+            end
+            if other_info[i+1].content =~ /Edition: (.*)\s/
+              book[:edition] = $1
+            else
+              book[:edition] = "1st"
+            end
           else
             book[:edition] = "1st"
           end
