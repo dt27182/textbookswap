@@ -23,7 +23,7 @@ class PostingsController < ApplicationController
     	flash[:warning] = "Buy request failed because the given post id does not exist"
     	redirect_to index_path and return
     else
-			post.send_seller_buyer_info(params[:email][:buyer_email], params[:email][:body])
+			post.send_seller_buyer_info(params[:email][:buyer_email], params[:email][:body], "textbookswap.herokuapp.com" + display_admin_posting_path(Posting.encrypt(post.id)))
 			post.reserved = true
 			post_reserved_success = post.save!
 			if(post_reserved_success)
